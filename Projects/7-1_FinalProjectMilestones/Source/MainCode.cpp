@@ -80,6 +80,18 @@ int main(int argc, char* argv[])
 	g_SceneManager = new SceneManager(g_ShaderManager);
 	g_SceneManager->PrepareScene();
 
+#ifdef _DEBUG
+	// set up and wire up the transformation manager that allows the `ViewManager` to capture
+	// keypresses and send scale, translation, and rotation adjustments to the `SceneManager`
+	LiveTransformationManager ltm;
+
+	// choose which object is selected. String names are specified in SceneManager.cpp
+	ltm.setSelectedObject("cone");
+
+	g_ViewManager->ltm = &ltm;    // needs reference to change adj amounts based on keypresses
+	g_SceneManager->ltm = &ltm;   // needs reference to access current adjustment amounts
+#endif
+
 	// loop will keep running until the application is closed 
 	// or until an error has occurred
 	while (!glfwWindowShouldClose(g_Window))
