@@ -16,6 +16,8 @@
 
 #include <glm/gtx/transform.hpp>
 
+#include <functional>
+
 // declaration of global variables
 namespace
 {
@@ -396,6 +398,11 @@ void SceneManager::PrepareScene()
  ***********************************************************/
 void SceneManager::RenderScene()
 {
+	RenderBackdrop();
+}
+
+void SceneManager::RenderBackdrop()
+{
 	// declare the variables for the transformations
 	glm::vec3 scaleXYZ;
 	float XrotationDegrees = 0.0f;
@@ -431,4 +438,62 @@ void SceneManager::RenderScene()
 	// draw the mesh with transformation values
 	m_basicMeshes->DrawPlaneMesh();
 	/****************************************************************/
+}
+
+/***********************************************************
+ *  TransformAndRender()
+ *
+ *  This method is used for rendering a single Shape with given
+ *  scale, rotation, translation, and color data.
+ *  It takes the draw function that should be called to draw the object.
+ *  If the draw func is a member method, it must be properly bound by std::bind.
+ ***********************************************************/
+void SceneManager::TransformAndRender(
+	std::string objName,
+	std::function<void()> ShapeDrawFunc,
+	float scaleX, float scaleY, float scaleZ,
+	float rotX,   float rotY,   float rotZ,
+	float posX,   float posY,   float posZ,
+	float colorR, float colorG, float colorB)
+{
+
+
+
+	/******************************************************************/
+	/*** Set needed transformations before drawing the basic mesh.  ***/
+	/*** This same ordering of code should be used for transforming ***/
+	/*** and drawing all the basic 3D shapes.						***/
+	/******************************************************************/
+
+	// declare the variables for the transformations
+	glm::vec3 scaleXYZ;
+	float XrotationDegrees = 0.0f;
+	float YrotationDegrees = 0.0f;
+	float ZrotationDegrees = 0.0f;
+	glm::vec3 positionXYZ;
+
+	// set the XYZ scale for the mesh
+	scaleXYZ = glm::vec3(scaleX, scaleY, scaleZ);
+
+	// set the XYZ rotation for the mesh
+	XrotationDegrees = rotX;
+	YrotationDegrees = rotY;
+	ZrotationDegrees = rotZ;
+
+	// set the XYZ position for the mesh
+	positionXYZ = glm::vec3(posX, posY, posZ);
+
+	// set the transformations into memory to be used on the drawn meshes
+	SetTransformations(
+		scaleXYZ,
+		XrotationDegrees,
+		YrotationDegrees,
+		ZrotationDegrees,
+		positionXYZ);
+
+	// set the color values into the shader
+	SetShaderColor(colorR, colorG, colorB, 1);
+
+	// draw the mesh with transformation values
+	ShapeDrawFunc();
 }
