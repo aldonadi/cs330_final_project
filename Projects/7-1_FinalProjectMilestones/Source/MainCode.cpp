@@ -86,7 +86,7 @@ int main(int argc, char* argv[])
 	LiveTransformationManager ltm;
 
 	// choose which object is selected. String names are specified in SceneManager.cpp
-	ltm.setSelectedObject("open-book-left");
+	ltm.setSelectedObject("open-book-right");
 
 	g_ViewManager->ltm = &ltm;    // needs reference to change adj amounts based on keypresses
 	g_SceneManager->ltm = &ltm;   // needs reference to access current adjustment amounts
