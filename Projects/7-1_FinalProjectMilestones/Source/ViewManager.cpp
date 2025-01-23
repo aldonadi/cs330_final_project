@@ -8,7 +8,10 @@
 ///////////////////////////////////////////////////////////////////////////////
 
 #include "ViewManager.h"
+
+#ifdef _DEBUG
 #include "LiveTransformationManager.h"
+#endif
 
 // GLM Math Header inclusions
 #include <glm/glm.hpp>

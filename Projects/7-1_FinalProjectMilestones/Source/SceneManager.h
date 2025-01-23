@@ -15,7 +15,10 @@
 #include <string>
 #include <vector>
 #include <functional>
+
+#ifdef _DEBUG
 #include "LiveTransformationManager.h"
+#endif
 
 /***********************************************************
  *  SceneManager

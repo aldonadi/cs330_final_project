@@ -10,8 +10,11 @@
 #pragma once
 
 #include "ShaderManager.h"
-#include "LiveTransformationManager.h"
 #include "camera.h"
+
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
 
 // GLFW library
 #include "GLFW/glfw3.h" 

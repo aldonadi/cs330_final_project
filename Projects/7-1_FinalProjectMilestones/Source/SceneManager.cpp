@@ -9,6 +9,10 @@
 
 #include "SceneManager.h"
 
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
+
 #ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"

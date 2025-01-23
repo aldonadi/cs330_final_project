@@ -14,6 +14,10 @@
 #include "ShapeMeshes.h"
 #include "ShaderManager.h"
 
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
+
 // Namespace for declaring global variables
 namespace
 {
