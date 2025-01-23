@@ -433,6 +433,8 @@ void SceneManager::RenderOpenBook()
 		0.82,      0.17,      0.07     // color   (deep reddish)
 	);
 	
+	// TODO: add texture on open pages
+
 	/****** The Open Book Page (Left Side) *******/
 	TransformAndRender(
 		"open-book-page-left",
