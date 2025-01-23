@@ -409,9 +409,9 @@ void SceneManager::RenderScene()
 
 void SceneManager::RenderOpenBook()
 {
-		/****** The Open Book (Left Side) *******/
+		/****** The Open Book Cover (Left Side) *******/
 	TransformAndRender(
-		"open-book-left",
+		"open-book-cover-left",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
 		// x        y          z
 		 2.15f,      0.2f,     2.7f,   // scale
@@ -421,9 +421,9 @@ void SceneManager::RenderOpenBook()
 		0.82,      0.17,      0.07     // color   (deep reddish)
 	);
 
-	/****** The Open Book (Right Side) *******/
+	/****** The Open Book Cover (Right Side) *******/
 	TransformAndRender(
-		"open-book-right",
+		"open-book-cover-right",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
 		// x        y          z
 		2.0f,      0.2f,      2.7f,    // scale
@@ -431,6 +431,30 @@ void SceneManager::RenderOpenBook()
 		0.95f,     2.4f,      8.26f,   // position
 		// R        G          B
 		0.82,      0.17,      0.07     // color   (deep reddish)
+	);
+	
+	/****** The Open Book Page (Left Side) *******/
+	TransformAndRender(
+		"open-book-page-left",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		// x        y          z
+		0.912f,     1.34f,     1.22f,   // scale
+		90.5f,     0.75f,   -43.0f,     // rotation
+		-0.5f,     2.4f,      8.445f,   // position
+		// R        G          B
+		   1,       1,         1        // color   (white)
+	);
+
+	/****** The Open Book Page (Right Side) *******/
+	TransformAndRender(
+		"open-book-page-right",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		// x        y          z
+		 0.912f,   1.34f,     1.22f,   // scale
+		90.0f,     0.27f,  -141.0,     // rotation
+		 0.855f,   2.4f,      8.34f,   // position
+		// R        G          B
+	       1,       1,         1       // color   (white)
 	);
 }
 
