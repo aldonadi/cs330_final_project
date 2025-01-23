@@ -49,6 +49,6 @@ public:
 
 #ifdef _DEBUG
 	void DbgProcessTransformationKeyboardEvents();
-	LiveTransformationManager* ltm;
+	LiveTransformationManager* ltm = nullptr;
 #endif
 };

@@ -127,7 +127,7 @@ public:
 #ifdef _DEBUG
 	/*** Allows adjusting the scale, rotation, and position ***/
 	/*** of a selected object while app is running          ***/
-	LiveTransformationManager* ltm;
+	LiveTransformationManager* ltm = nullptr;
 #endif // DEBUG
 
 };
