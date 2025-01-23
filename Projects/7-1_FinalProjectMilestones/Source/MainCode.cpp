@@ -14,6 +14,10 @@
 #include "ShapeMeshes.h"
 #include "ShaderManager.h"
 
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
+
 // Namespace for declaring global variables
 namespace
 {
@@ -75,6 +79,18 @@ int main(int argc, char* argv[])
 	// try to create a new scene manager object and prepare the 3D scene
 	g_SceneManager = new SceneManager(g_ShaderManager);
 	g_SceneManager->PrepareScene();
+
+#ifdef _DEBUG
+	// set up and wire up the transformation manager that allows the `ViewManager` to capture
+	// keypresses and send scale, translation, and rotation adjustments to the `SceneManager`
+	LiveTransformationManager ltm;
+
+	// choose which object is selected. String names are specified in SceneManager.cpp
+	ltm.setSelectedObject("open-book-page-right");
+
+	g_ViewManager->ltm = &ltm;    // needs reference to change adj amounts based on keypresses
+	g_SceneManager->ltm = &ltm;   // needs reference to access current adjustment amounts
+#endif
 
 	// loop will keep running until the application is closed 
 	// or until an error has occurred

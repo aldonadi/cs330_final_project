@@ -9,12 +9,18 @@
 
 #include "SceneManager.h"
 
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
+
 #ifndef STB_IMAGE_IMPLEMENTATION
 #define STB_IMAGE_IMPLEMENTATION
 #include "stb_image.h"
 #endif
 
 #include <glm/gtx/transform.hpp>
+
+#include <functional>
 
 // declaration of global variables
 namespace
@@ -385,7 +391,8 @@ void SceneManager::PrepareScene()
 	// loaded in memory no matter how many times it is drawn
 	// in the rendered 3D scene
 
-	m_basicMeshes->LoadPlaneMesh();
+	m_basicMeshes->LoadPlaneMesh();    // floor, pages
+	m_basicMeshes->LoadBoxMesh();      // books
 }
 
 /***********************************************************
@@ -396,6 +403,129 @@ void SceneManager::PrepareScene()
  ***********************************************************/
 void SceneManager::RenderScene()
 {
+	RenderBackdrop();
+	RenderOpenBook();
+}
+
+void SceneManager::RenderOpenBook()
+{
+		/****** The Open Book Cover (Left Side) *******/
+	TransformAndRender(
+		"open-book-cover-left",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+		// x        y          z
+		 2.15f,      0.2f,     2.7f,   // scale
+		90.5f,      0.75f,  -43.0f,    // rotation
+		-0.5f,     2.4f,     8.3f,     // position
+		// R        G          B
+		0.82,      0.17,      0.07     // color   (deep reddish)
+	);
+
+	/****** The Open Book Cover (Right Side) *******/
+	TransformAndRender(
+		"open-book-cover-right",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+		// x        y          z
+		2.0f,      0.2f,      2.7f,    // scale
+		90.0f,     0.27f,  -141.0,     // rotation
+		0.95f,     2.4f,      8.26f,   // position
+		// R        G          B
+		0.82,      0.17,      0.07     // color   (deep reddish)
+	);
+	
+	// TODO: add texture on open pages
+
+	/****** The Open Book Page (Left Side) *******/
+	TransformAndRender(
+		"open-book-page-left",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		// x        y          z
+		0.912f,     1.34f,     1.22f,   // scale
+		90.5f,     0.75f,   -43.0f,     // rotation
+		-0.5f,     2.4f,      8.445f,   // position
+		// R        G          B
+		   1,       1,         1        // color   (white)
+	);
+
+	/****** The Open Book Page (Right Side) *******/
+	TransformAndRender(
+		"open-book-page-right",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		// x        y          z
+		 0.912f,   1.34f,     1.22f,   // scale
+		90.0f,     0.27f,  -141.0,     // rotation
+		 0.855f,   2.4f,      8.34f,   // position
+		// R        G          B
+	       1,       1,         1       // color   (white)
+	);
+}
+
+void SceneManager::RenderBackdrop()
+{
+	/****** The Floor *******/
+	TransformAndRender(
+		"floor",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		// x        y        z
+		20.0f,     1.0f,   10.0f,    // scale
+		0.0f,      0.0f,   0.0f,    // rotation
+		0.0f,      0.0f,   0.0f,   // position
+		// R        G        B
+		0.68,      0.41,    0.17     // color   ("wood-floor brown")
+	);
+	
+}
+
+/***********************************************************
+ *  TransformAndRender()
+ *
+ *  This method is used for rendering a single Shape with given
+ *  scale, rotation, translation, and color data.
+ *  It takes the draw function that should be called to draw the object.
+ *  If the draw func is a member method, it must be properly bound by std::bind.
+ ***********************************************************/
+void SceneManager::TransformAndRender(
+	std::string objName,
+	std::function<void()> ShapeDrawFunc,
+	float scaleX, float scaleY, float scaleZ,
+	float rotX,   float rotY,   float rotZ,
+	float posX,   float posY,   float posZ,
+	float colorR, float colorG, float colorB)
+{
+
+#ifdef _DEBUG
+	/******************************************************************/
+	/*** If compiled in the Debug configuration, enable the         ***/
+	/*** keyboard-operated "live transformations" system to adjust  ***/
+	/*** scale, rotation, and position data while app is running.   ***/
+	/******************************************************************/
+	if (ltm->getSelectedObject() == objName) {
+		scaleX += ltm->XscaleAdj;
+		scaleY += ltm->YscaleAdj;
+		scaleZ += ltm->ZscaleAdj;
+
+		rotX += ltm->XrotationAdj;
+		rotY += ltm->YrotationAdj;
+		rotZ += ltm->ZrotationAdj;
+
+		posX += ltm->XpositionAdj;
+		posY += ltm->YpositionAdj;
+		posZ += ltm->ZpositionAdj;
+
+		// print out the current positions, etc
+		std::cout << ltm->getSelectedObject() << ": "
+			"scale(" << scaleX << ", " << scaleY << ", " << scaleZ << ") | "
+			"rot(" << rotX << ", " << rotY << ", " << rotZ << ") | "
+			"pos(" << posX << ", " << posY << ", " << posZ << ")" << std::endl;
+	}
+#endif
+
+	/******************************************************************/
+	/*** Set needed transformations before drawing the basic mesh.  ***/
+	/*** This same ordering of code should be used for transforming ***/
+	/*** and drawing all the basic 3D shapes.						***/
+	/******************************************************************/
+
 	// declare the variables for the transformations
 	glm::vec3 scaleXYZ;
 	float XrotationDegrees = 0.0f;
@@ -403,20 +533,16 @@ void SceneManager::RenderScene()
 	float ZrotationDegrees = 0.0f;
 	glm::vec3 positionXYZ;
 
-	/*** Set needed transformations before drawing the basic mesh.  ***/
-	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
-	/******************************************************************/
 	// set the XYZ scale for the mesh
-	scaleXYZ = glm::vec3(20.0f, 1.0f, 10.0f);
+	scaleXYZ = glm::vec3(scaleX, scaleY, scaleZ);
 
 	// set the XYZ rotation for the mesh
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
+	XrotationDegrees = rotX;
+	YrotationDegrees = rotY;
+	ZrotationDegrees = rotZ;
 
 	// set the XYZ position for the mesh
-	positionXYZ = glm::vec3(0.0f, 0.0f, 0.0f);
+	positionXYZ = glm::vec3(posX, posY, posZ);
 
 	// set the transformations into memory to be used on the drawn meshes
 	SetTransformations(
@@ -426,9 +552,9 @@ void SceneManager::RenderScene()
 		ZrotationDegrees,
 		positionXYZ);
 
-	SetShaderColor(1, 1, 1, 1);
+	// set the color values into the shader
+	SetShaderColor(colorR, colorG, colorB, 1);
 
 	// draw the mesh with transformation values
-	m_basicMeshes->DrawPlaneMesh();
-	/****************************************************************/
+	ShapeDrawFunc();
 }

@@ -9,6 +9,10 @@
 
 #include "ViewManager.h"
 
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
+
 // GLM Math Header inclusions
 #include <glm/glm.hpp>
 #include <glm/gtx/transform.hpp>
@@ -138,6 +142,10 @@ void ViewManager::ProcessKeyboardEvents()
 	{
 		glfwSetWindowShouldClose(m_pWindow, true);
 	}
+
+#ifdef _DEBUG
+	DbgProcessTransformationKeyboardEvents();
+#endif
 }
 
 /***********************************************************
@@ -178,3 +186,38 @@ void ViewManager::PrepareSceneView()
 		m_pShaderManager->setVec3Value("viewPosition", g_pCamera->Position);
 	}
 }
+
+#ifdef _DEBUG
+void ViewManager::DbgProcessTransformationKeyboardEvents() {
+	bool shiftHeld = (glfwGetKey(m_pWindow, GLFW_KEY_LEFT_SHIFT) == GLFW_PRESS);
+
+	bool coarseAdj = shiftHeld;
+
+	// reset
+	if (glfwGetKey(m_pWindow, GLFW_KEY_P) == GLFW_PRESS) { ltm->reset(); }
+
+	// adjust scale
+	if (glfwGetKey(m_pWindow, GLFW_KEY_Q) == GLFW_PRESS) { ltm->decScaleAdjX(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_W) == GLFW_PRESS) { ltm->incScaleAdjX(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_A) == GLFW_PRESS) { ltm->decScaleAdjY(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_S) == GLFW_PRESS) { ltm->incScaleAdjY(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_Z) == GLFW_PRESS) { ltm->decScaleAdjZ(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_X) == GLFW_PRESS) { ltm->incScaleAdjZ(coarseAdj); }
+
+	// adjust rotation
+	if (glfwGetKey(m_pWindow, GLFW_KEY_E) == GLFW_PRESS) { ltm->decRotationX(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_R) == GLFW_PRESS) { ltm->incRotationX(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_D) == GLFW_PRESS) { ltm->decRotationY(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_F) == GLFW_PRESS) { ltm->incRotationY(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_C) == GLFW_PRESS) { ltm->decRotationZ(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_V) == GLFW_PRESS) { ltm->incRotationZ(coarseAdj); }
+
+	// adjust position
+	if (glfwGetKey(m_pWindow, GLFW_KEY_T) == GLFW_PRESS) { ltm->decPositionX(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_Y) == GLFW_PRESS) { ltm->incPositionX(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_G) == GLFW_PRESS) { ltm->decPositionY(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_H) == GLFW_PRESS) { ltm->incPositionY(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_B) == GLFW_PRESS) { ltm->decPositionZ(coarseAdj); }
+	if (glfwGetKey(m_pWindow, GLFW_KEY_N) == GLFW_PRESS) { ltm->incPositionZ(coarseAdj); }
+}
+#endif

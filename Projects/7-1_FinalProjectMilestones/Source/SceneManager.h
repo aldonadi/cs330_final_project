@@ -14,6 +14,11 @@
 
 #include <string>
 #include <vector>
+#include <functional>
+
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
 
 /***********************************************************
  *  SceneManager
@@ -103,5 +108,26 @@ public:
 	// customize for their own 3D scene
 	void PrepareScene();
 	void RenderScene();
+
+	void RenderBackdrop();
+	void RenderOpenBook();
+
+	// draw the specified shape with given scale, rotation, position, and color
+	void TransformAndRender(
+		std::string objName,
+		std::function<void()> ShapeDrawFunc,
+		float scaleX, float scaleY, float scaleZ,
+		float rotX,   float rotY,   float rotZ,
+		float posX,   float posY,   float posZ,
+		float colorR, float colorG, float colorB
+	);
+
+	
+
+#ifdef _DEBUG
+	/*** Allows adjusting the scale, rotation, and position ***/
+	/*** of a selected object while app is running          ***/
+	LiveTransformationManager* ltm = nullptr;
+#endif // DEBUG
 
 };

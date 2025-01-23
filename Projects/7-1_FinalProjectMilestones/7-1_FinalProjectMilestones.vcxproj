@@ -13,11 +13,13 @@
   <ItemGroup>
     <ClCompile Include="..\..\3DShapes\ShapeMeshes.cpp" />
     <ClCompile Include="..\..\Utilities\ShaderManager.cpp" />
+    <ClCompile Include="Source\LiveTransformationManager.cpp" />
     <ClCompile Include="Source\MainCode.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\ViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Source\LiveTransformationManager.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\ViewManager.h" />
   </ItemGroup>

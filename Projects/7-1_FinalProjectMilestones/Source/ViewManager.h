@@ -12,6 +12,10 @@
 #include "ShaderManager.h"
 #include "camera.h"
 
+#ifdef _DEBUG
+#include "LiveTransformationManager.h"
+#endif
+
 // GLFW library
 #include "GLFW/glfw3.h" 
 
@@ -42,4 +46,9 @@ public:
 	
 	// prepare the conversion from 3D object display to 2D scene display
 	void PrepareSceneView();
+
+#ifdef _DEBUG
+	void DbgProcessTransformationKeyboardEvents();
+	LiveTransformationManager* ltm = nullptr;
+#endif
 };
