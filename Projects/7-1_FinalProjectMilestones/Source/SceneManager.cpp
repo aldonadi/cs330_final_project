@@ -391,7 +391,8 @@ void SceneManager::PrepareScene()
 	// loaded in memory no matter how many times it is drawn
 	// in the rendered 3D scene
 
-	m_basicMeshes->LoadPlaneMesh();
+	m_basicMeshes->LoadPlaneMesh();    // floor, pages
+	m_basicMeshes->LoadBoxMesh();      // books
 }
 
 /***********************************************************
@@ -403,6 +404,22 @@ void SceneManager::PrepareScene()
 void SceneManager::RenderScene()
 {
 	RenderBackdrop();
+	RenderOpenBook();
+}
+
+void SceneManager::RenderOpenBook()
+{
+		/****** The Open Book (Left Side) *******/
+	TransformAndRender(
+		"open-book-left",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+		// x        y        z
+		20.0f,     1.0f,   10.0f,    // scale
+		0.0f,      0.0f,   0.0f,    // rotation
+		0.0f,      0.0f,   0.0f,   // position
+		// R        G        B
+		0.82,      0.17,    0.07     // color   (deep reddish)
+	);
 }
 
 void SceneManager::RenderBackdrop()

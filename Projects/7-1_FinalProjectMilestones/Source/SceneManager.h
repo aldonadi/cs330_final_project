@@ -109,6 +109,9 @@ public:
 	void PrepareScene();
 	void RenderScene();
 
+	void RenderBackdrop();
+	void RenderOpenBook();
+
 	// draw the specified shape with given scale, rotation, position, and color
 	void TransformAndRender(
 		std::string objName,
@@ -119,7 +122,7 @@ public:
 		float colorR, float colorG, float colorB
 	);
 
-	void RenderBackdrop();
+	
 
 #ifdef _DEBUG
 	/*** Allows adjusting the scale, rotation, and position ***/
