@@ -15,6 +15,7 @@
 #include <string>
 #include <vector>
 #include <functional>
+#include "LiveTransformationManager.h"
 
 /***********************************************************
  *  SceneManager
@@ -116,5 +117,11 @@ public:
 	);
 
 	void RenderBackdrop();
+
+#ifdef _DEBUG
+	/*** Allows adjusting the scale, rotation, and position ***/
+	/*** of a selected object while app is running          ***/
+	LiveTransformationManager* ltm;
+#endif // DEBUG
 
 };

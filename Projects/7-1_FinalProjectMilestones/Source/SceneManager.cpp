@@ -457,7 +457,32 @@ void SceneManager::TransformAndRender(
 	float colorR, float colorG, float colorB)
 {
 
+#ifdef _DEBUG
+	/******************************************************************/
+	/*** If compiled in the Debug configuration, enable the         ***/
+	/*** keyboard-operated "live transformations" system to adjust  ***/
+	/*** scale, rotation, and position data while app is running.   ***/
+	/******************************************************************/
+	if (ltm->getSelectedObject() == objName) {
+		scaleX += ltm->XscaleAdj;
+		scaleY += ltm->YscaleAdj;
+		scaleZ += ltm->ZscaleAdj;
 
+		rotX += ltm->XrotationAdj;
+		rotY += ltm->YrotationAdj;
+		rotZ += ltm->ZrotationAdj;
+
+		posX += ltm->XpositionAdj;
+		posY += ltm->YpositionAdj;
+		posZ += ltm->ZpositionAdj;
+
+		// print out the current positions, etc
+		std::cout << ltm->getSelectedObject() << ": "
+			"scale(" << scaleX << ", " << scaleY << ", " << scaleZ << ") | "
+			"rot(" << rotX << ", " << rotY << ", " << rotZ << ") | "
+			"pos(" << posX << ", " << posY << ", " << posZ << ")" << std::endl;
+	}
+#endif
 
 	/******************************************************************/
 	/*** Set needed transformations before drawing the basic mesh.  ***/
