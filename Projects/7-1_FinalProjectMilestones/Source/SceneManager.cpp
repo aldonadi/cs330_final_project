@@ -407,41 +407,18 @@ void SceneManager::RenderScene()
 
 void SceneManager::RenderBackdrop()
 {
-	// declare the variables for the transformations
-	glm::vec3 scaleXYZ;
-	float XrotationDegrees = 0.0f;
-	float YrotationDegrees = 0.0f;
-	float ZrotationDegrees = 0.0f;
-	glm::vec3 positionXYZ;
-
-	/*** Set needed transformations before drawing the basic mesh.  ***/
-	/*** This same ordering of code should be used for transforming ***/
-	/*** and drawing all the basic 3D shapes.						***/
-	/******************************************************************/
-	// set the XYZ scale for the mesh
-	scaleXYZ = glm::vec3(20.0f, 1.0f, 10.0f);
-
-	// set the XYZ rotation for the mesh
-	XrotationDegrees = 0.0f;
-	YrotationDegrees = 0.0f;
-	ZrotationDegrees = 0.0f;
-
-	// set the XYZ position for the mesh
-	positionXYZ = glm::vec3(0.0f, 0.0f, 0.0f);
-
-	// set the transformations into memory to be used on the drawn meshes
-	SetTransformations(
-		scaleXYZ,
-		XrotationDegrees,
-		YrotationDegrees,
-		ZrotationDegrees,
-		positionXYZ);
-
-	SetShaderColor(1, 1, 1, 1);
-
-	// draw the mesh with transformation values
-	m_basicMeshes->DrawPlaneMesh();
-	/****************************************************************/
+	/****** The Floor *******/
+	TransformAndRender(
+		"floor",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		// x        y        z
+		20.0f,     1.0f,   10.0f,    // scale
+		0.0f,      0.0f,   0.0f,    // rotation
+		0.0f,      0.0f,   0.0f,   // position
+		// R        G        B
+		0.68,      0.41,    0.17     // color   ("wood-floor brown")
+	);
+	
 }
 
 /***********************************************************
