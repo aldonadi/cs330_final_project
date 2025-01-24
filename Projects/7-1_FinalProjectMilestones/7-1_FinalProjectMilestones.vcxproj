@@ -13,12 +13,15 @@
   <ItemGroup>
     <ClCompile Include="..\..\3DShapes\ShapeMeshes.cpp" />
     <ClCompile Include="..\..\Utilities\ShaderManager.cpp" />
+    <ClCompile Include="LiveTranformationUi.cpp" />
+    <ClCompile Include="LiveTransformationUi.cpp" />
     <ClCompile Include="Source\LiveTransformationManager.cpp" />
     <ClCompile Include="Source\MainCode.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\ViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="LiveTransformationUi.h" />
     <ClInclude Include="Source\LiveTransformationManager.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\ViewManager.h" />
@@ -80,7 +83,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;..\..\Libraries\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
