@@ -4,12 +4,15 @@
 
 class LiveTransformationManager {
 private:
-	std::string selectedObject;
+	std::string selectedObject = "";
 
 public:
 
 	void setSelectedObject(std::string objectName);
 	std::string getSelectedObject();
+
+	// todo: find a better way to get the effective vertex data printout to the UI
+	std::string effectiveTransformationDataString = "";
 
 	float XscaleAdj = 0.0f;
 	float YscaleAdj = 0.0f;
