@@ -13,6 +13,12 @@
     <Filter Include="Source Files\Utilities">
       <UniqueIdentifier>{2bd92ddb-2463-4375-9ba8-a99db50a459d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\imgui">
+      <UniqueIdentifier>{26fc3ab5-4ca3-4908-8c81-451898ac0fce}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\imgui\backends">
+      <UniqueIdentifier>{42012d1b-10a1-49ef-8405-1ae7e1e501f2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\3DShapes\ShapeMeshes.cpp">
@@ -39,6 +45,75 @@
     <ClCompile Include="LiveTransformationUi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\imgui\imgui.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\imgui_demo.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\imgui_draw.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\imgui_tables.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\imgui_widgets.cpp">
+      <Filter>Source Files\imgui</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_allegro5.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_android.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_dx9.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_dx10.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_dx11.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_dx12.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_glfw.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_glut.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_opengl2.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_opengl3.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_sdl2.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_sdl3.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_sdlgpu3.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_sdlrenderer2.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_sdlrenderer3.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_vulkan.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_wgpu.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\imgui\backends\imgui_impl_win32.cpp">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SceneManager.h">
@@ -53,5 +128,97 @@
     <ClInclude Include="LiveTransformationUi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Source\imgui\imconfig.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\imgui.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\imgui_internal.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\imstb_rectpack.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\imstb_textedit.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\imstb_truetype.h">
+      <Filter>Source Files\imgui</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_allegro5.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_android.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_dx9.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_dx10.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_dx11.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_dx12.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_glfw.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_glut.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_metal.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_opengl2.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3_loader.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_osx.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_sdl2.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_sdl3.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlgpu3.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlgpu3_shaders.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlrenderer2.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlrenderer3.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_vulkan.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_wgpu.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\imgui\backends\imgui_impl_win32.h">
+      <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Source\imgui\backends\imgui_impl_metal.mm">
+      <Filter>Source Files\imgui\backends</Filter>
+    </None>
+    <None Include="Source\imgui\backends\imgui_impl_osx.mm">
+      <Filter>Source Files\imgui\backends</Filter>
+    </None>
   </ItemGroup>
 </Project>
