@@ -13,6 +13,8 @@ private:
 
 	ImGuiIO io;
 
+	bool show_demo_window = true;
+
 public:
 	LiveTranslationUi(GLFWwindow* window, LiveTranslationUi* ltm);
 
