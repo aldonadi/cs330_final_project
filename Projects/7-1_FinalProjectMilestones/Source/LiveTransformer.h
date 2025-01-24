@@ -24,7 +24,7 @@ public:
 	// todo: find a better way to get the effective vertex data printout to the UI
 	std::string effectiveTransformationDataString = "";
 
-	// SAVED VALUES
+	// SAVED VALUES, for resetting back to orig
 	float XscaleSaved;
 	float YscaleSaved;
 	float ZscaleSaved;
@@ -54,6 +54,10 @@ public:
 	float YpositionAdjusted = 0.0f;
 	float ZpositionAdjusted = 0.0f;
 
+	float RcolorAdjusted;
+	float GcolorAdjusted;
+	float BcolorAdjusted;
+
 	float scaleAdjIncrement = 0.003f;
 	float rotationAdjIncrement = 0.04f;
 	float positionAdjIncrement = 0.005f;
@@ -65,28 +69,28 @@ public:
 	void reset();
 
 	// incrementing
-	void incScaleAdjX(bool coarseAdj);
-	void incScaleAdjY(bool coarseAdj);
-	void incScaleAdjZ(bool coarseAdj);
+	void incScaleAdjX(float increment);
+	void incScaleAdjY(float increment);
+	void incScaleAdjZ(float increment);
 
-	void incRotationX(bool coarseAdj);
-	void incRotationY(bool coarseAdj);
-	void incRotationZ(bool coarseAdj);
+	void incRotationX(float increment);
+	void incRotationY(float increment);
+	void incRotationZ(float increment);
 
-	void incPositionX(bool coarseAdj);
-	void incPositionY(bool coarseAdj);
-	void incPositionZ(bool coarseAdj);
+	void incPositionX(float increment);
+	void incPositionY(float increment);
+	void incPositionZ(float increment);
 
 	// decrementing
-	void decScaleAdjX(bool coarseAdj);
-	void decScaleAdjY(bool coarseAdj);
-	void decScaleAdjZ(bool coarseAdj);
+	void decScaleAdjX(float increment);
+	void decScaleAdjY(float increment);
+	void decScaleAdjZ(float increment);
 		 
-	void decRotationX(bool coarseAdj);
-	void decRotationY(bool coarseAdj);
-	void decRotationZ(bool coarseAdj);
+	void decRotationX(float increment);
+	void decRotationY(float increment);
+	void decRotationZ(float increment);
 		 
-	void decPositionX(bool coarseAdj);
-	void decPositionY(bool coarseAdj);
-	void decPositionZ(bool coarseAdj);
+	void decPositionX(float increment);
+	void decPositionY(float increment);
+	void decPositionZ(float increment);
 };

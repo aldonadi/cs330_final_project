@@ -2,109 +2,112 @@
 
 #include <string>
 
-void LiveTransformer::setSelectedObject(std::string objectName)
-{
-	this->selectedObject = objectName;
-}
-
-std::string LiveTransformer::getSelectedObject()
-{
-	return this->selectedObject;
-}
 
 void LiveTransformer::reset()
 {
-	XscaleAdj    = YscaleAdj    = ZscaleAdj    = 0.0f;
-	XrotationAdj = YrotationAdj = ZrotationAdj = 0.0f;
-	XpositionAdj = YpositionAdj = ZpositionAdj = 0.0f;
+	XscaleAdjusted = XscaleSaved;
+	XscaleAdjusted = XscaleSaved;
+	XscaleAdjusted = XscaleSaved;
+
+	XrotationAdjusted = XrotationSaved;
+	XrotationAdjusted = XrotationSaved;
+	XrotationAdjusted = XrotationSaved;
+
+	XpositionAdjusted = XpositionSaved;
+	XpositionAdjusted = XpositionSaved;
+	XpositionAdjusted = XpositionSaved;
+
+	RcolorAdjusted = RcolorSaved;
+	GcolorAdjusted = GcolorSaved;
+	BcolorAdjusted = BcolorSaved;
 }
 
-void LiveTransformer::incScaleAdjX(bool coarseAdj)
+void LiveTransformer::incScaleAdjX(float increment)
 {
-	XscaleAdj += (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
+	XscaleAdjusted += increment;
 }
 
-void LiveTransformer::incScaleAdjY(bool coarseAdj)
+void LiveTransformer::incScaleAdjY(float increment)
 {
-	YscaleAdj += (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
+	YscaleAdjusted += increment;
 }
 
-void LiveTransformer::incScaleAdjZ(bool coarseAdj)
+void LiveTransformer::incScaleAdjZ(float increment)
 {
-	ZscaleAdj += (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
+	ZscaleAdjusted += increment;
 }
 
-void LiveTransformer::incRotationX(bool coarseAdj)
+void LiveTransformer::incRotationX(float increment)
 {
-	XrotationAdj += (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
+	XrotationAdjusted += increment;
 }
 
-void LiveTransformer::incRotationY(bool coarseAdj)
+void LiveTransformer::incRotationY(float increment)
 {
-	YrotationAdj += (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
+	YrotationAdjusted += increment;
 }
 
-void LiveTransformer::incRotationZ(bool coarseAdj)
+void LiveTransformer::incRotationZ(float increment)
 {
-	ZrotationAdj += (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
+	ZrotationAdjusted += increment;
 }
 
-void LiveTransformer::incPositionX(bool coarseAdj)
+void LiveTransformer::incPositionX(float increment)
 {
-	XpositionAdj += (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
+	XpositionAdjusted += increment;
 }
 
-void LiveTransformer::incPositionY(bool coarseAdj)
+void LiveTransformer::incPositionY(float increment)
 {
-    YpositionAdj += (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
+    YpositionAdjusted += increment;
 }
 
-void LiveTransformer::incPositionZ(bool coarseAdj)
+void LiveTransformer::incPositionZ(float increment)
 {
-	ZpositionAdj += (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
+	ZpositionAdjusted += increment;
 }
 
-void LiveTransformer::decScaleAdjX(bool coarseAdj)
+void LiveTransformer::decScaleAdjX(float increment)
 {
-	XscaleAdj -= (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
+	XscaleAdjusted -= increment;
 }
 
-void LiveTransformer::decScaleAdjY(bool coarseAdj)
+void LiveTransformer::decScaleAdjY(float increment)
 {
-	YscaleAdj -= (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
+	YscaleAdjusted -= increment;
 }
 
-void LiveTransformer::decScaleAdjZ(bool coarseAdj)
+void LiveTransformer::decScaleAdjZ(float increment)
 {
-	ZscaleAdj -= (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
+	ZscaleAdjusted -= increment;
 }
 
-void LiveTransformer::decRotationX(bool coarseAdj)
+void LiveTransformer::decRotationX(float increment)
 {
-	XrotationAdj -= (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
+	XrotationAdjusted -= increment;
 }
 
-void LiveTransformer::decRotationY(bool coarseAdj)
+void LiveTransformer::decRotationY(float increment)
 {
-	YrotationAdj -= (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
+	YrotationAdjusted -= increment;
 }
 
-void LiveTransformer::decRotationZ(bool coarseAdj)
+void LiveTransformer::decRotationZ(float increment)
 {
-	ZrotationAdj -= (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
+	ZrotationAdjusted -= increment;
 }
 
-void LiveTransformer::decPositionX(bool coarseAdj)
+void LiveTransformer::decPositionX(float increment)
 {
-	XpositionAdj -= (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
+	XpositionAdjusted -= increment;
 }
 
-void LiveTransformer::decPositionY(bool coarseAdj)
+void LiveTransformer::decPositionY(float increment)
 {
-	YpositionAdj -= (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
+	YpositionAdjusted -= increment;
 }
 
-void LiveTransformer::decPositionZ(bool coarseAdj)
+void LiveTransformer::decPositionZ(float increment)
 {
-	ZpositionAdj -= (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
+	ZpositionAdjusted -= increment;
 }
