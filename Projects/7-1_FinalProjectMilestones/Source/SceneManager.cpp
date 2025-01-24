@@ -513,10 +513,13 @@ void SceneManager::TransformAndRender(
 		posZ += ltm->ZpositionAdj;
 
 		// print out the current positions, etc
-		std::cout << ltm->getSelectedObject() << ": "
+		std::stringstream oss;
+		oss << ltm->getSelectedObject() << ": "
 			"scale(" << scaleX << ", " << scaleY << ", " << scaleZ << ") | "
 			"rot(" << rotX << ", " << rotY << ", " << rotZ << ") | "
 			"pos(" << posX << ", " << posY << ", " << posZ << ")" << std::endl;
+
+		ltm->effectiveTransformationDataString = oss.str();
 	}
 #endif
 
