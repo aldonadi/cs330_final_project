@@ -9,7 +9,7 @@
 
 LiveTransformer* LiveTransformers::getObjectTransformer(const std::string objectName)
 {
-	return nullptr;
+	
 }
 
 void LiveTransformers::RegisterNewObject(
@@ -27,22 +27,14 @@ void LiveTransformers::RegisterNewObject(
 		throw std::runtime_error(errMsg);
 	}
 
-	LiveTransformer transformer;
-	
-	transformer.XscaleSaved = baseScaleX;
-	transformer.YscaleSaved = baseScaleY;
-	transformer.ZscaleSaved = baseScaleZ;
-
-	transformer.XrotationSaved = baseRotationX;
-	transformer.YrotationSaved = baseRotationX;
-	transformer.ZrotationSaved = baseRotationX;
-
-	transformer.XpositionSaved = basePositionX;
-	transformer.YpositionSaved = basePositionX;
-	transformer.ZpositionSaved = basePositionX;
-
-	transformer.RcolorSaved = baseColorR;
-	transformer.GcolorSaved = baseColorG;
-	transformer.BcolorSaved = baseColorB;
+	// insert a new Transformer object into the list, saving all current scale/rot/pos/color data	
+	objectTransformers.at(objectName) = 
+		LiveTransformer(
+			objectName,
+			baseScaleX,    baseScaleY,    baseScaleZ,      // scale data
+			baseRotationX, baseRotationY, baseRotationZ,   // rotation data
+			basePositionX, basePositionY, basePositionZ,   // position data
+			baseColorR,    baseColorG,    baseColorB
+		)
 
 }
