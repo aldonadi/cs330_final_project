@@ -100,9 +100,9 @@ void LiveTransformationUi::ShowTransformationUiControls() {
 
     // Labels and sliders for scale adjustments
     // Note: The "PushID" and "PopID" wrappers are because ImGui can't abide controls with duplicate label names ("X:", etc)
-    ImGui::PushID("scaleX"); ImGui::SliderFloat("X:", &ltm->XscaleAdj, -15.0f, 15.0f); ImGui::PopID();
-    ImGui::PushID("scaleY"); ImGui::SliderFloat("Y:", &ltm->YscaleAdj, -15.0f, 15.0f); ImGui::PopID();
-    ImGui::PushID("scaleZ"); ImGui::SliderFloat("Z:", &ltm->ZscaleAdj, -15.0f, 15.0f); ImGui::PopID();
+    ImGui::PushID("scaleX"); ImGui::SliderFloat("X:", &ltm->XscaleAdj, -8.0f, 8.0f); ImGui::PopID();
+    ImGui::PushID("scaleY"); ImGui::SliderFloat("Y:", &ltm->YscaleAdj, -8.0f, 8.0f); ImGui::PopID();
+    ImGui::PushID("scaleZ"); ImGui::SliderFloat("Z:", &ltm->ZscaleAdj, -8.0f, 8.0f); ImGui::PopID();
 
     // Label: "Adjust Rotation" (Bold)                                                          
     ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Rotation");
@@ -116,9 +116,9 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Position");
 
     // Labels and sliders for position adjustments
-    ImGui::PushID("positionX"); ImGui::SliderFloat("X:", &ltm->XpositionAdj, -100.0f, 100.0f); ImGui::PopID();
-    ImGui::PushID("positionY"); ImGui::SliderFloat("Y:", &ltm->YpositionAdj, -100.0f, 100.0f); ImGui::PopID();
-    ImGui::PushID("positionZ"); ImGui::SliderFloat("Z:", &ltm->ZpositionAdj, -100.0f, 100.0f); ImGui::PopID();
+    ImGui::PushID("positionX"); ImGui::SliderFloat("X:", &ltm->XpositionAdj, -30.0f, 30.0f); ImGui::PopID();
+    ImGui::PushID("positionY"); ImGui::SliderFloat("Y:", &ltm->YpositionAdj, -30.0f, 30.0f); ImGui::PopID();
+    ImGui::PushID("positionZ"); ImGui::SliderFloat("Z:", &ltm->ZpositionAdj, -30.0f, 30.0f); ImGui::PopID();
 
     ImGui::End();
 }
