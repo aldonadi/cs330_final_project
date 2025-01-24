@@ -15,24 +15,8 @@
     <ClCompile Include="..\..\Utilities\ShaderManager.cpp" />
     <ClCompile Include="LiveTranformationUi.cpp" />
     <ClCompile Include="LiveTransformationUi.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_allegro5.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_android.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_dx10.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_dx11.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_dx12.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_dx9.cpp" />
     <ClCompile Include="Source\imgui\backends\imgui_impl_glfw.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_glut.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_opengl2.cpp" />
     <ClCompile Include="Source\imgui\backends\imgui_impl_opengl3.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_sdl2.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_sdl3.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_sdlgpu3.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_sdlrenderer2.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_sdlrenderer3.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_vulkan.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_wgpu.cpp" />
-    <ClCompile Include="Source\imgui\backends\imgui_impl_win32.cpp" />
     <ClCompile Include="Source\imgui\imgui.cpp" />
     <ClCompile Include="Source\imgui\imgui_demo.cpp" />
     <ClCompile Include="Source\imgui\imgui_draw.cpp" />
@@ -45,28 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="LiveTransformationUi.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_allegro5.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_android.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_dx10.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_dx11.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_dx12.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_dx9.h" />
     <ClInclude Include="Source\imgui\backends\imgui_impl_glfw.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_glut.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_metal.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_opengl2.h" />
     <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3.h" />
     <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3_loader.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_osx.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_sdl2.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_sdl3.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlgpu3.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlgpu3_shaders.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlrenderer2.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_sdlrenderer3.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_vulkan.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_wgpu.h" />
-    <ClInclude Include="Source\imgui\backends\imgui_impl_win32.h" />
     <ClInclude Include="Source\imgui\imconfig.h" />
     <ClInclude Include="Source\imgui\imgui.h" />
     <ClInclude Include="Source\imgui\imgui_internal.h" />
@@ -76,10 +41,6 @@
     <ClInclude Include="Source\LiveTransformationManager.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\ViewManager.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Source\imgui\backends\imgui_impl_metal.mm" />
-    <None Include="Source\imgui\backends\imgui_impl_osx.mm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -120,7 +81,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;.\Source\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -138,7 +99,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;.\Source\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
