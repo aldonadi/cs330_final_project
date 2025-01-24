@@ -13,7 +13,7 @@ private:
 public:
 	LiveTransformer* getObjectTransformer(const std::string objectName);
 
-	void RegisterNewObjectTransformer(
+	void RegisterNewObject(
 		const std::string objectName,      // unique string identifying this object
 		float baseScaleX,    float baseScaleY,    float baseScaleZ,      // scale data
 		float baseRotationX, float baseRotationY, float baseRotationZ,   // rotation data

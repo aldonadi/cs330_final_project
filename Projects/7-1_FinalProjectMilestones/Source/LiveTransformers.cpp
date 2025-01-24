@@ -12,7 +12,7 @@ LiveTransformer* LiveTransformers::getObjectTransformer(const std::string object
 	return nullptr;
 }
 
-void LiveTransformers::RegisterNewObjectTransformer(
+void LiveTransformers::RegisterNewObject(
 	const std::string objectName,      // unique string identifying this object
 	float baseScaleX,    float baseScaleY,    float baseScaleZ,      // scale data
 	float baseRotationX, float baseRotationY, float baseRotationZ,   // rotation data
