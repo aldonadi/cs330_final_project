@@ -36,9 +36,6 @@
     <ClCompile Include="Source\ViewManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LiveTransformationManager.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\imgui\imgui.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
@@ -63,15 +60,18 @@
     <ClCompile Include="Source\LiveTransformationUi.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LiveTransformers.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LiveTransformer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SceneManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\ViewManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Source\LiveTransformationManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\imgui\imconfig.h">
@@ -102,6 +102,12 @@
       <Filter>Source Files\imgui\backends</Filter>
     </ClInclude>
     <ClInclude Include="Source\LiveTransformationUi.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LiveTransformers.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LiveTransformer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
