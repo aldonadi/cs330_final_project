@@ -75,10 +75,10 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     const char* initiallySelected = _strdup(this->ltm->getSelectedObject().c_str());
 
     std::vector<std::string> objects = { 
-        "open-book-left-cover", 
-        "open-book-right-cover", 
-        "open-book-left-page",
-        "open-book-right-page"
+        "open-book-cover-left", 
+        "open-book-cover-right", 
+        "open-book-page-left",
+        "open-book-page-right"
     };
 
     if (ImGui::BeginCombo("##selected_object", initiallySelected)) {
@@ -119,6 +119,10 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     ImGui::PushID("positionX"); ImGui::SliderFloat("X:", &ltm->XpositionAdj, -30.0f, 30.0f); ImGui::PopID();
     ImGui::PushID("positionY"); ImGui::SliderFloat("Y:", &ltm->YpositionAdj, -30.0f, 30.0f); ImGui::PopID();
     ImGui::PushID("positionZ"); ImGui::SliderFloat("Z:", &ltm->ZpositionAdj, -30.0f, 30.0f); ImGui::PopID();
+
+    ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Color");
+
+    
 
     ImGui::End();
 }
