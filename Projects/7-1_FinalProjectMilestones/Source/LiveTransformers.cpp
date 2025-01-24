@@ -26,4 +26,23 @@ void LiveTransformers::RegisterNewObject(
 
 		throw std::runtime_error(errMsg);
 	}
+
+	LiveTransformer transformer;
+	
+	transformer.XscaleSaved = baseScaleX;
+	transformer.YscaleSaved = baseScaleY;
+	transformer.ZscaleSaved = baseScaleZ;
+
+	transformer.XrotationSaved = baseRotationX;
+	transformer.YrotationSaved = baseRotationX;
+	transformer.ZrotationSaved = baseRotationX;
+
+	transformer.XpositionSaved = basePositionX;
+	transformer.YpositionSaved = basePositionX;
+	transformer.ZpositionSaved = basePositionX;
+
+	transformer.RcolorSaved = baseColorR;
+	transformer.GcolorSaved = baseColorG;
+	transformer.BcolorSaved = baseColorB;
+
 }
