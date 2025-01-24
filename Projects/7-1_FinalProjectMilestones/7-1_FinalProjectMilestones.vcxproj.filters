@@ -39,12 +39,6 @@
     <ClCompile Include="Source\LiveTransformationManager.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LiveTranformationUi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="LiveTransformationUi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Source\imgui\imgui.cpp">
       <Filter>Source Files\imgui</Filter>
     </ClCompile>
@@ -66,6 +60,9 @@
     <ClCompile Include="Source\imgui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files\imgui\backends</Filter>
     </ClCompile>
+    <ClCompile Include="Source\LiveTransformationUi.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SceneManager.h">
@@ -75,9 +72,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\LiveTransformationManager.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="LiveTransformationUi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Source\imgui\imconfig.h">
@@ -106,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3_loader.h">
       <Filter>Source Files\imgui\backends</Filter>
+    </ClInclude>
+    <ClInclude Include="Source\LiveTransformationUi.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -16,6 +16,7 @@
 
 #ifdef _DEBUG
 #include "LiveTransformationManager.h"
+#include "LiveTransformationUi.h"
 #endif
 
 // Namespace for declaring global variables
