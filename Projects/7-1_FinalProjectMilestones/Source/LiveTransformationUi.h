@@ -5,20 +5,22 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <memory>
 
-class LiveTranslationUi
+#include "LiveTransformationManager.h"
+
+class LiveTransformationUi
 {
 private:
 	GLFWwindow* window;
-	LiveTranslationUi* ltm;
+	LiveTransformationManager* ltm;
 
 	ImGuiIO io;
 
 	bool show_demo_window = true;
 
 public:
-	LiveTranslationUi(GLFWwindow* window, LiveTranslationUi* ltm);
+	LiveTransformationUi(GLFWwindow* window, LiveTransformationManager* ltm);
 
-	~LiveTranslationUi();
+	~LiveTransformationUi();
 
 	void ShowUi();
 

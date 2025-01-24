@@ -91,6 +91,9 @@ int main(int argc, char* argv[])
 
 	g_ViewManager->ltm = &ltm;    // needs reference to change adj amounts based on keypresses
 	g_SceneManager->ltm = &ltm;   // needs reference to access current adjustment amounts
+
+	// set up the live transformations UI
+	LiveTransformationUi ltmUi = LiveTransformationUi(g_Window, &ltm);
 #endif
 
 	// loop will keep running until the application is closed 
@@ -109,6 +112,10 @@ int main(int argc, char* argv[])
 
 		// refresh the 3D scene
 		g_SceneManager->RenderScene();
+
+#ifdef _DEBUG
+		ltmUi.ShowUi();
+#endif
 
 
 		// Flips the the back buffer with the front buffer every frame.

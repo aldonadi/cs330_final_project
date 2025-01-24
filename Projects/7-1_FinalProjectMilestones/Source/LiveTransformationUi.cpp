@@ -4,7 +4,7 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
 
-LiveTranslationUi::LiveTranslationUi(GLFWwindow* window, LiveTranslationUi* ltm)
+LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformationManager* ltm)
 {
 	this->window = window;
 	this->ltm = ltm;
@@ -22,8 +22,14 @@ LiveTranslationUi::LiveTranslationUi(GLFWwindow* window, LiveTranslationUi* ltm)
 	ImGui_ImplOpenGL3_Init("#version 330 core");
 }
 
+LiveTransformationUi::~LiveTransformationUi()
+{
+	// todo implement
+	;
+}
 
-void LiveTranslationUi::ShowUi()
+
+void LiveTransformationUi::ShowUi()
 {
 	// don't draw anything if the main window is minimized ("iconified")
 	if (glfwGetWindowAttrib(this->window, GLFW_ICONIFIED) != 0)
@@ -40,4 +46,10 @@ void LiveTranslationUi::ShowUi()
 	if (this->show_demo_window) {
 		ImGui::ShowDemoWindow(&(this->show_demo_window));
 	}
+
+	ImGui::Render();
+	int display_w, display_h;
+	glfwGetFramebufferSize(window, &display_w, &display_h);
+	glViewport(0, 0, display_w, display_h);
+	ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 }
