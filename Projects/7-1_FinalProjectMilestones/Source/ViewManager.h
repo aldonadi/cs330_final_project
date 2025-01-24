@@ -13,7 +13,7 @@
 #include "camera.h"
 
 #ifdef _DEBUG
-#include "LiveTransformationManager.h"
+#include "LiveTransformer.h"
 #endif
 
 // GLFW library
@@ -49,6 +49,6 @@ public:
 
 #ifdef _DEBUG
 	void DbgProcessTransformationKeyboardEvents();
-	LiveTransformationManager* ltm = nullptr;
+	LiveTransformer* ltm = nullptr;
 #endif
 };

@@ -1,110 +1,110 @@
-#include "LiveTransformationManager.h"
+#include "LiveTransformer.h"
 
 #include <string>
 
-void LiveTransformationManager::setSelectedObject(std::string objectName)
+void LiveTransformer::setSelectedObject(std::string objectName)
 {
 	this->selectedObject = objectName;
 }
 
-std::string LiveTransformationManager::getSelectedObject()
+std::string LiveTransformer::getSelectedObject()
 {
 	return this->selectedObject;
 }
 
-void LiveTransformationManager::reset()
+void LiveTransformer::reset()
 {
 	XscaleAdj    = YscaleAdj    = ZscaleAdj    = 0.0f;
 	XrotationAdj = YrotationAdj = ZrotationAdj = 0.0f;
 	XpositionAdj = YpositionAdj = ZpositionAdj = 0.0f;
 }
 
-void LiveTransformationManager::incScaleAdjX(bool coarseAdj)
+void LiveTransformer::incScaleAdjX(bool coarseAdj)
 {
 	XscaleAdj += (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incScaleAdjY(bool coarseAdj)
+void LiveTransformer::incScaleAdjY(bool coarseAdj)
 {
 	YscaleAdj += (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incScaleAdjZ(bool coarseAdj)
+void LiveTransformer::incScaleAdjZ(bool coarseAdj)
 {
 	ZscaleAdj += (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incRotationX(bool coarseAdj)
+void LiveTransformer::incRotationX(bool coarseAdj)
 {
 	XrotationAdj += (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incRotationY(bool coarseAdj)
+void LiveTransformer::incRotationY(bool coarseAdj)
 {
 	YrotationAdj += (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incRotationZ(bool coarseAdj)
+void LiveTransformer::incRotationZ(bool coarseAdj)
 {
 	ZrotationAdj += (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incPositionX(bool coarseAdj)
+void LiveTransformer::incPositionX(bool coarseAdj)
 {
 	XpositionAdj += (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incPositionY(bool coarseAdj)
+void LiveTransformer::incPositionY(bool coarseAdj)
 {
     YpositionAdj += (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::incPositionZ(bool coarseAdj)
+void LiveTransformer::incPositionZ(bool coarseAdj)
 {
 	ZpositionAdj += (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decScaleAdjX(bool coarseAdj)
+void LiveTransformer::decScaleAdjX(bool coarseAdj)
 {
 	XscaleAdj -= (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decScaleAdjY(bool coarseAdj)
+void LiveTransformer::decScaleAdjY(bool coarseAdj)
 {
 	YscaleAdj -= (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decScaleAdjZ(bool coarseAdj)
+void LiveTransformer::decScaleAdjZ(bool coarseAdj)
 {
 	ZscaleAdj -= (scaleAdjIncrement * (coarseAdj ? scaleCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decRotationX(bool coarseAdj)
+void LiveTransformer::decRotationX(bool coarseAdj)
 {
 	XrotationAdj -= (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decRotationY(bool coarseAdj)
+void LiveTransformer::decRotationY(bool coarseAdj)
 {
 	YrotationAdj -= (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decRotationZ(bool coarseAdj)
+void LiveTransformer::decRotationZ(bool coarseAdj)
 {
 	ZrotationAdj -= (rotationAdjIncrement * (coarseAdj ? rotCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decPositionX(bool coarseAdj)
+void LiveTransformer::decPositionX(bool coarseAdj)
 {
 	XpositionAdj -= (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decPositionY(bool coarseAdj)
+void LiveTransformer::decPositionY(bool coarseAdj)
 {
 	YpositionAdj -= (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
 }
 
-void LiveTransformationManager::decPositionZ(bool coarseAdj)
+void LiveTransformer::decPositionZ(bool coarseAdj)
 {
 	ZpositionAdj -= (positionAdjIncrement * (coarseAdj ? posCoarseAdjMultiplier : 1.0f));
 }

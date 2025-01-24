@@ -2,7 +2,7 @@
 
 #include <string>
 
-class LiveTransformationManager {
+class LiveTransformer {
 private:
 	std::string selectedObject = "";
 

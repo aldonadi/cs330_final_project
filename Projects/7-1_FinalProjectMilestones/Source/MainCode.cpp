@@ -15,7 +15,7 @@
 #include "ShaderManager.h"
 
 #ifdef _DEBUG
-#include "LiveTransformationManager.h"
+#include "LiveTransformer.h"
 #include "LiveTransformationUi.h"
 #endif
 
@@ -84,7 +84,7 @@ int main(int argc, char* argv[])
 #ifdef _DEBUG
 	// set up and wire up the transformation manager that allows the `ViewManager` to capture
 	// keypresses and send scale, translation, and rotation adjustments to the `SceneManager`
-	LiveTransformationManager ltm;
+	LiveTransformer ltm;
 
 	// choose which object is selected. String names are specified in SceneManager.cpp
 	ltm.setSelectedObject("open-book-page-right");

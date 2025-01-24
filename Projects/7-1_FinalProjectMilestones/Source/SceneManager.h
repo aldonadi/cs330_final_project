@@ -17,7 +17,7 @@
 #include <functional>
 
 #ifdef _DEBUG
-#include "LiveTransformationManager.h"
+#include "LiveTransformer.h"
 #endif
 
 /***********************************************************
@@ -127,7 +127,7 @@ public:
 #ifdef _DEBUG
 	/*** Allows adjusting the scale, rotation, and position ***/
 	/*** of a selected object while app is running          ***/
-	LiveTransformationManager* ltm = nullptr;
+	LiveTransformer* ltm = nullptr;
 #endif // DEBUG
 
 };

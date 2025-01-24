@@ -6,7 +6,7 @@
 
 #include <vector>
 
-LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformationManager* ltm)
+LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformer* ltm)
 {
 	this->window = window;
 	this->ltm = ltm;
