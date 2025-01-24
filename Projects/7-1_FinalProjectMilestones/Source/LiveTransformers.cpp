@@ -20,11 +20,17 @@ void LiveTransformers::RegisterNewObject(
 	float baseColorR,    float baseColorG,    float baseColorB)      // color data
 {
 	if (this->objectTransformers.find(objectName) != this->objectTransformers.end()) {
-	    std::ostringstream oss;
+	    // old approach: throw an error
+		/*
+		std::ostringstream oss;
 		oss << "An object with name '" << objectName << "' has already been registered.";
 		const std::string errMsg = oss.str();
 
 		throw std::runtime_error(errMsg);
+		*/
+		
+		// TODO: reevaluate: just silently ignore it?
+		return;
 	}
 
 	// insert a new Transformer object into the list, saving all current scale/rot/pos/color data	
