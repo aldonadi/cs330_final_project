@@ -494,33 +494,39 @@ void SceneManager::TransformAndRender(
 {
 
 #ifdef _DEBUG
-	/******************************************************************/
-	/*** If compiled in the Debug configuration, enable the         ***/
-	/*** keyboard-operated "live transformations" system to adjust  ***/
-	/*** scale, rotation, and position data while app is running.   ***/
-	/******************************************************************/
-	if (ltm->getSelectedObject() == objName) {
-		scaleX += ltm->XscaleAdj;
-		scaleY += ltm->YscaleAdj;
-		scaleZ += ltm->ZscaleAdj;
+	// register this object with the LiveTransformer
+	// if object has already been registered, this does nothing
+	this->xfmrs->RegisterNewObject(
+		 objName,
+		 scaleX,  scaleY,  scaleZ,
+		 rotX,    rotY,    rotZ,
+		 posX,    posY,    posZ,
+		 colorR,  colorG,  colorB);
 
-		rotX += ltm->XrotationAdj;
-		rotY += ltm->YrotationAdj;
-		rotZ += ltm->ZrotationAdj;
+	LiveTransformer* objXfmr = this->xfmrs->getObjectTransformer(objName);
 
-		posX += ltm->XpositionAdj;
-		posY += ltm->YpositionAdj;
-		posZ += ltm->ZpositionAdj;
-
-		// print out the current positions, etc
-		std::stringstream oss;
-		oss << ltm->getSelectedObject() << ": "
-			"scale(" << scaleX << ", " << scaleY << ", " << scaleZ << ") | "
-			"rot(" << rotX << ", " << rotY << ", " << rotZ << ") | "
-			"pos(" << posX << ", " << posY << ", " << posZ << ")" << std::endl;
-
-		ltm->effectiveTransformationDataString = oss.str();
+	// TODO: handle this better
+	if (objXfmr == nullptr) {
+		std::cerr << "Failed to get object transformer for '" << objName << "'" << std::endl;
+		assert(false);
 	}
+
+	scaleX = objXfmr->XscaleAdjusted;
+	scaleY = objXfmr->YscaleAdjusted;
+	scaleZ = objXfmr->ZscaleAdjusted;
+
+	rotX = objXfmr->XrotationAdjusted;
+	rotY = objXfmr->YrotationAdjusted;
+	rotZ = objXfmr->ZrotationAdjusted;
+
+	posX = objXfmr->XpositionAdjusted;
+	posY = objXfmr->YpositionAdjusted;
+	posZ = objXfmr->ZpositionAdjusted;
+
+	colorR = objXfmr->RcolorAdjusted;
+	colorG = objXfmr->GcolorAdjusted;
+	colorB = objXfmr->BcolorAdjusted;
+
 #endif
 
 	/******************************************************************/

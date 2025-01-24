@@ -13,10 +13,15 @@ public:
 		float basePositionX, float basePositionY, float basePositionZ,   // position data
 		float baseColorR, float baseColorG, float baseColorB)      // color data
 	:   objectName(objectName),                                                       // initializer list
-		XscaleSaved(baseScaleX), YscaleSaved(baseScaleY), ZscaleSaved(baseScaleZ),  
+		XscaleSaved(baseScaleX),       YscaleSaved(baseScaleY),       ZscaleSaved(baseScaleZ),  
 		XrotationSaved(baseRotationX), YrotationSaved(baseRotationY), ZrotationSaved(baseRotationZ),
 		XpositionSaved(basePositionX), YpositionSaved(basePositionY), ZpositionSaved(basePositionZ),
-		RcolorSaved(baseColorR), GcolorSaved(baseColorG), BcolorSaved(baseColorB)
+		RcolorSaved(baseColorR),       GcolorSaved(baseColorG),       BcolorSaved(baseColorB),
+
+		XscaleAdjusted(baseScaleX),       YscaleAdjusted(baseScaleY),       ZscaleAdjusted(baseScaleZ),  
+		XrotationAdjusted(baseRotationX), YrotationAdjusted(baseRotationY), ZrotationAdjusted(baseRotationZ),
+		XpositionAdjusted(basePositionX), YpositionAdjusted(basePositionY), ZpositionAdjusted(basePositionZ),
+		RcolorAdjusted(baseColorR),       GcolorAdjusted(baseColorG),       BcolorAdjusted(baseColorB)
 	{}
 
 	std::string objectName = "";
@@ -42,17 +47,17 @@ public:
 	float BcolorSaved;
 
 	// ADJUSTMENTS
-	float XscaleAdjusted = 0.0f;
-	float YscaleAdjusted = 0.0f;
-	float ZscaleAdjusted = 0.0f;
+	float XscaleAdjusted;
+	float YscaleAdjusted;
+	float ZscaleAdjusted;
 		  
-	float XrotationAdjusted = 0.0f;
-	float YrotationAdjusted = 0.0f;
-	float ZrotationAdjusted = 0.0f;
+	float XrotationAdjusted;
+	float YrotationAdjusted;
+	float ZrotationAdjusted;
 		  
-	float XpositionAdjusted = 0.0f;
-	float YpositionAdjusted = 0.0f;
-	float ZpositionAdjusted = 0.0f;
+	float XpositionAdjusted;
+	float YpositionAdjusted;
+	float ZpositionAdjusted;
 
 	float RcolorAdjusted;
 	float GcolorAdjusted;

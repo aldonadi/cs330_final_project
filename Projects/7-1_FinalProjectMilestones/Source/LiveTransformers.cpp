@@ -9,7 +9,7 @@
 
 LiveTransformer* LiveTransformers::getObjectTransformer(const std::string objectName)
 {
-	
+	return &objectTransformers.at(objectName);
 }
 
 void LiveTransformers::RegisterNewObject(
