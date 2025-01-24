@@ -24,5 +24,7 @@ public:
 
 	void ShowUi();
 
+	void ShowTransformationUiControls();
+
 
 };
