@@ -57,15 +57,9 @@
     <ClCompile Include="Source\imgui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files\imgui\backends</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LiveTransformationUi.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\LiveTransformers.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Source\LiveTransformer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+    <ClCompile Include="Source\LiveTransformations\LiveTransformationUi.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformer.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformers.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SceneManager.h">
@@ -101,13 +95,13 @@
     <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3_loader.h">
       <Filter>Source Files\imgui\backends</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LiveTransformationUi.h">
+    <ClInclude Include="Source\LiveTransformations\LiveTransformationUi.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LiveTransformers.h">
+    <ClInclude Include="Source\LiveTransformations\LiveTransformer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LiveTransformer.h">
+    <ClInclude Include="Source\LiveTransformations\LiveTransformers.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

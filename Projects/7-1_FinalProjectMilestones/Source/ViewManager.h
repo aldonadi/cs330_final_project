@@ -12,10 +12,6 @@
 #include "ShaderManager.h"
 #include "camera.h"
 
-#ifdef _DEBUG
-#include "LiveTransformations\LiveTransformer.h"
-#endif
-
 // GLFW library
 #include "GLFW/glfw3.h" 
 
@@ -49,6 +45,6 @@ public:
 
 #ifdef _DEBUG
 	void DbgProcessTransformationKeyboardEvents();
-	LiveTransformer* ltm = nullptr;
+	bool showTransformerUi = false;
 #endif
 };
