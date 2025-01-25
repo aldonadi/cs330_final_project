@@ -3,20 +3,23 @@
 #include "LiveTransformer.h"
 #include "LiveTransformationUi.h"
 
-#include <vector>
-#include <string>
 #include <unordered_map>
 
-class LiveTransformers {
+class LiveTransformationUi;
 
+class LiveTransformers
+{
+private:
 	std::unordered_map<std::string, LiveTransformer> objectTransformers;
 	LiveTransformationUi ui;
 
+	
+
 public:
-	LiveTransformers() = delete;
+
 
 	LiveTransformers(GLFWwindow* window) 
-		: ui(LiveTransformationUi(window, this)),
+		: ui(window, this),
 	      objectTransformers(std::unordered_map<std::string, LiveTransformer>()) {};
 
 	LiveTransformer* getObjectTransformer(const std::string objectName);
@@ -30,4 +33,5 @@ public:
 	);
 
 	LiveTransformationUi& getUi();
+
 };

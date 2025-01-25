@@ -2,7 +2,8 @@
 
 #include <string>
 
-class LiveTransformer {
+class LiveTransformer
+{
 public:
 
 	// huge constructor

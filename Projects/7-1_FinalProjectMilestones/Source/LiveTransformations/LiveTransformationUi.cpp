@@ -1,4 +1,6 @@
 #include "LiveTransformationUi.h"
+#include "LiveTransformer.h"
+#include "LiveTransformers.h"
 #include <imgui.h>
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
@@ -7,10 +9,8 @@
 #include <vector>
 
 LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms)
+    : window(window), xfrms(xfrms)
 {
-	this->window = window;
-	this->xfrms = xfrms;
-
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
     this->io = ImGui::GetIO(); (void)io;

@@ -6,7 +6,9 @@
 #include <memory>
 #include <string>
 
-#include "LiveTransformers.h"
+//#include "LiveTransformers.h"
+
+class LiveTransformers;
 
 class LiveTransformationUi
 {
