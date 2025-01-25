@@ -41,14 +41,21 @@ void LiveTransformers::RegisterNewObject(
 	}
 
 	// insert a new Transformer object into the list, saving all current scale/rot/pos/color data	
-	objectTransformers.at(objectName) = 
-		LiveTransformer(
-			objectName,
-			baseScaleX,    baseScaleY,    baseScaleZ,      // scale data
-			baseRotationX, baseRotationY, baseRotationZ,   // rotation data
-			basePositionX, basePositionY, basePositionZ,   // position data
-			baseColorR,    baseColorG,    baseColorB
-		);
+	// I am creating this std::pair nonsense instead of just doing
+	// objectTransformers[objectName] = LiveTransformer(args) because 
+	// unordered_map::operator[], when the key does not exist yet, first creates a 
+	// LiveTransformer object using the default constructor. Unfortunately, LiveTransformer
+	// has no default constructor.
+	// TODO: evaluate allowing a default constructor for LiveTransformer
+	std::pair<std::string, LiveTransformer> newObject(objectName, LiveTransformer(
+		objectName,
+		baseScaleX, baseScaleY, baseScaleZ,      // scale data
+		baseRotationX, baseRotationY, baseRotationZ,   // rotation data
+		basePositionX, basePositionY, basePositionZ,   // position data
+		baseColorR, baseColorG, baseColorB
+	));
+	
+	objectTransformers.insert(newObject);
 }
 
 LiveTransformationUi& LiveTransformers::getUi()
