@@ -10,7 +10,7 @@
 #include "SceneManager.h"
 
 #ifdef _DEBUG
-#include "LiveTransformer.h"
+#include "LiveTransformations/LiveTransformer.h"
 #endif
 
 #ifndef STB_IMAGE_IMPLEMENTATION

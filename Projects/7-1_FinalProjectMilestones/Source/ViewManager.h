@@ -13,7 +13,7 @@
 #include "camera.h"
 
 #ifdef _DEBUG
-#include "LiveTransformer.h"
+#include "LiveTransformations\LiveTransformer.h"
 #endif
 
 // GLFW library

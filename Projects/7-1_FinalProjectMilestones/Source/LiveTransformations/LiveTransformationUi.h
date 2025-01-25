@@ -4,21 +4,24 @@
 #include <backends/imgui_impl_glfw.h>
 #include <backends/imgui_impl_opengl3.h>
 #include <memory>
+#include <string>
 
-#include "LiveTransformer.h"
+#include "LiveTransformers.h"
 
 class LiveTransformationUi
 {
 private:
 	GLFWwindow* window;
-	LiveTransformer* ltm;
+	LiveTransformers* xfrms;
+
+	std::string selectedObjectName;
 
 	ImGuiIO io;
 
 	bool show_demo_window = true;
 
 public:
-	LiveTransformationUi(GLFWwindow* window, LiveTransformer* ltm);
+	LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms);
 
 	~LiveTransformationUi();
 
@@ -26,5 +29,7 @@ public:
 
 	void ShowTransformationUiControls();
 
+	void selectObject(std::string objectName) { selectedObjectName = objectName; }
+	const std::string getSelectedObject() { return selectedObjectName; }
 
 };

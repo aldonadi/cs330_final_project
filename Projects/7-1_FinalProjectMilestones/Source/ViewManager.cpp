@@ -10,7 +10,7 @@
 #include "ViewManager.h"
 
 #ifdef _DEBUG
-#include "LiveTransformer.h"
+#include "LiveTransformations/LiveTransformer.h"
 #endif
 
 // GLM Math Header inclusions

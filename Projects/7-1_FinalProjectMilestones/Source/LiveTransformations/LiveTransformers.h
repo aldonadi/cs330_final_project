@@ -1,16 +1,24 @@
 #pragma once
 
 #include "LiveTransformer.h"
+#include "LiveTransformationUi.h"
 
 #include <vector>
 #include <string>
-#include <map>
+#include <unordered_map>
 
 class LiveTransformers {
-private:
-	std::map<std::string, LiveTransformer> objectTransformers;
+
+	std::unordered_map<std::string, LiveTransformer> objectTransformers;
+	LiveTransformationUi ui;
 
 public:
+	LiveTransformers() = delete;
+
+	LiveTransformers(GLFWwindow* window) 
+		: ui(LiveTransformationUi(window, this)),
+	      objectTransformers(std::unordered_map<std::string, LiveTransformer>()) {};
+
 	LiveTransformer* getObjectTransformer(const std::string objectName);
 
 	void RegisterNewObject(
@@ -20,4 +28,6 @@ public:
 		float basePositionX, float basePositionY, float basePositionZ,   // position data
 		float baseColorR,    float baseColorG,    float baseColorB       // color data
 	);
+
+	LiveTransformationUi& getUi();
 };

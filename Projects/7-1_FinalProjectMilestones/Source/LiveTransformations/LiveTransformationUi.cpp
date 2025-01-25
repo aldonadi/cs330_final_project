@@ -6,10 +6,10 @@
 
 #include <vector>
 
-LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformer* ltm)
+LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms)
 {
 	this->window = window;
-	this->ltm = ltm;
+	this->xfrms = xfrms;
 
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
@@ -72,7 +72,7 @@ void LiveTransformationUi::ShowTransformationUiControls() {
         ImGui::SetTooltip("Select an object to apply transformations");
     }
     ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), "Selected Object:");
-    const char* initiallySelected = _strdup(this->ltm->getSelectedObject().c_str());
+    const char* initiallySelected = _strdup(this->getSelectedObject().c_str());
 
     std::vector<std::string> objects = { 
         "open-book-cover-left", 
@@ -84,15 +84,17 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     if (ImGui::BeginCombo("##selected_object", initiallySelected)) {
         for (const auto& object : objects) {
             if (ImGui::Selectable(object.c_str(), initiallySelected == object.c_str())) {
-                this->ltm->setSelectedObject(object);
+                this->selectObject(object);
             }
         }
         ImGui::EndCombo();
     }
 
+    LiveTransformer* selectedXfmr = this->xfrms->getObjectTransformer(this->getSelectedObject());
+
     // Button: "Reset Adjustments"
     if (ImGui::Button("Reset Adjustments")) {
-        this->ltm->reset();
+        selectedXfmr->reset();
     }
 
     // Label: "Adjust Scale" (Bold)
@@ -100,25 +102,25 @@ void LiveTransformationUi::ShowTransformationUiControls() {
 
     // Labels and sliders for scale adjustments
     // Note: The "PushID" and "PopID" wrappers are because ImGui can't abide controls with duplicate label names ("X:", etc)
-    ImGui::PushID("scaleX"); ImGui::SliderFloat("X:", &ltm->XscaleAdj, -8.0f, 8.0f); ImGui::PopID();
-    ImGui::PushID("scaleY"); ImGui::SliderFloat("Y:", &ltm->YscaleAdj, -8.0f, 8.0f); ImGui::PopID();
-    ImGui::PushID("scaleZ"); ImGui::SliderFloat("Z:", &ltm->ZscaleAdj, -8.0f, 8.0f); ImGui::PopID();
+    ImGui::PushID("scaleX"); ImGui::SliderFloat("X:", &selectedXfmr->XscaleAdjusted, -8.0f, 8.0f); ImGui::PopID();
+    ImGui::PushID("scaleY"); ImGui::SliderFloat("Y:", &selectedXfmr->YscaleAdjusted, -8.0f, 8.0f); ImGui::PopID();
+    ImGui::PushID("scaleZ"); ImGui::SliderFloat("Z:", &selectedXfmr->ZscaleAdjusted, -8.0f, 8.0f); ImGui::PopID();
 
     // Label: "Adjust Rotation" (Bold)                                                          
     ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Rotation");
 
     // Labels and sliders for rotation adjustments
-    ImGui::PushID("rotationX"); ImGui::SliderFloat("X:",  & ltm->XrotationAdj, -360.0f, 360.0f); ImGui::PopID();
-    ImGui::PushID("rotationY"); ImGui::SliderFloat("Y:",  & ltm->YrotationAdj, -360.0f, 360.0f); ImGui::PopID();
-    ImGui::PushID("rotationZ"); ImGui::SliderFloat("Z:",  & ltm->ZrotationAdj, -360.0f, 360.0f); ImGui::PopID();
+    ImGui::PushID("rotationX"); ImGui::SliderFloat("X:", &selectedXfmr->XrotationAdjusted, -360.0f, 360.0f); ImGui::PopID();
+    ImGui::PushID("rotationY"); ImGui::SliderFloat("Y:", &selectedXfmr->YrotationAdjusted, -360.0f, 360.0f); ImGui::PopID();
+    ImGui::PushID("rotationZ"); ImGui::SliderFloat("Z:", &selectedXfmr->ZrotationAdjusted, -360.0f, 360.0f); ImGui::PopID();
 
     // Label: "Adjust Position" (Bold)
     ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Position");
 
     // Labels and sliders for position adjustments
-    ImGui::PushID("positionX"); ImGui::SliderFloat("X:", &ltm->XpositionAdj, -30.0f, 30.0f); ImGui::PopID();
-    ImGui::PushID("positionY"); ImGui::SliderFloat("Y:", &ltm->YpositionAdj, -30.0f, 30.0f); ImGui::PopID();
-    ImGui::PushID("positionZ"); ImGui::SliderFloat("Z:", &ltm->ZpositionAdj, -30.0f, 30.0f); ImGui::PopID();
+    ImGui::PushID("positionX"); ImGui::SliderFloat("X:", &selectedXfmr->XpositionAdjusted, -30.0f, 30.0f); ImGui::PopID();
+    ImGui::PushID("positionY"); ImGui::SliderFloat("Y:", &selectedXfmr->YpositionAdjusted, -30.0f, 30.0f); ImGui::PopID();
+    ImGui::PushID("positionZ"); ImGui::SliderFloat("Z:", &selectedXfmr->ZpositionAdjusted, -30.0f, 30.0f); ImGui::PopID();
 
     ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Color");
 

@@ -7,6 +7,13 @@
 #include <stdexcept>
 #include <sstream>
 
+/*
+LiveTransformers::LiveTransformers(GLFWwindow* window) {
+	this->ui = LiveTransformationUi(window, this);
+	this->objectTransformers = std::unordered_map<std::string, LiveTransformer>();
+}
+*/
+
 LiveTransformer* LiveTransformers::getObjectTransformer(const std::string objectName)
 {
 	return &objectTransformers.at(objectName);
@@ -41,6 +48,10 @@ void LiveTransformers::RegisterNewObject(
 			baseRotationX, baseRotationY, baseRotationZ,   // rotation data
 			basePositionX, basePositionY, basePositionZ,   // position data
 			baseColorR,    baseColorG,    baseColorB
-		)
+		);
+}
 
+LiveTransformationUi& LiveTransformers::getUi()
+{
+	return this->ui;
 }

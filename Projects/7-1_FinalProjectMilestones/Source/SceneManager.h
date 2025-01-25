@@ -17,8 +17,8 @@
 #include <functional>
 
 #ifdef _DEBUG
-#include "LiveTransformers.h"
-#include "LiveTransformer.h"
+#include "LiveTransformations/LiveTransformers.h"
+#include "LiveTransformations/LiveTransformer.h"
 #endif
 
 /***********************************************************
