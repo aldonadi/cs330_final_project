@@ -56,6 +56,8 @@ void LiveTransformers::RegisterNewObject(
 	));
 	
 	objectTransformers.insert(newObject);
+
+	objectNames.push_back(objectName);
 }
 
 LiveTransformationUi& LiveTransformers::getUi()

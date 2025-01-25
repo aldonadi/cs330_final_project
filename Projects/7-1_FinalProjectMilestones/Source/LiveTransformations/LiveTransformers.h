@@ -4,12 +4,14 @@
 #include "LiveTransformationUi.h"
 
 #include <unordered_map>
+#include <vector>
 
 class LiveTransformationUi;
 
 class LiveTransformers
 {
 private:
+	std::vector<std::string> objectNames;
 	std::unordered_map<std::string, LiveTransformer> objectTransformers;
 	LiveTransformationUi ui;
 
