@@ -6,16 +6,16 @@
 void LiveTransformer::reset()
 {
 	XscaleAdjusted = XscaleSaved;
-	XscaleAdjusted = XscaleSaved;
-	XscaleAdjusted = XscaleSaved;
+	YscaleAdjusted = YscaleSaved;
+	ZscaleAdjusted = ZscaleSaved;
 
 	XrotationAdjusted = XrotationSaved;
-	XrotationAdjusted = XrotationSaved;
-	XrotationAdjusted = XrotationSaved;
+	YrotationAdjusted = YrotationSaved;
+	ZrotationAdjusted = ZrotationSaved;
 
 	XpositionAdjusted = XpositionSaved;
-	XpositionAdjusted = XpositionSaved;
-	XpositionAdjusted = XpositionSaved;
+	YpositionAdjusted = YpositionSaved;
+	ZpositionAdjusted = ZpositionSaved;
 
 	RcolorAdjusted = RcolorSaved;
 	GcolorAdjusted = GcolorSaved;
