@@ -15,8 +15,8 @@
 #include "ShaderManager.h"
 
 #ifdef _DEBUG
-#include "LiveTransformationManager.h"
-#include "LiveTransformationUi.h"
+#include "LiveTransformations/LiveTransformer.h"
+#include "LiveTransformations/LiveTransformationUi.h"
 #endif
 
 // Namespace for declaring global variables
@@ -84,16 +84,9 @@ int main(int argc, char* argv[])
 #ifdef _DEBUG
 	// set up and wire up the transformation manager that allows the `ViewManager` to capture
 	// keypresses and send scale, translation, and rotation adjustments to the `SceneManager`
-	LiveTransformationManager ltm;
+	LiveTransformers xfmrs(g_Window);
 
-	// choose which object is selected. String names are specified in SceneManager.cpp
-	ltm.setSelectedObject("open-book-page-right");
-
-	g_ViewManager->ltm = &ltm;    // needs reference to change adj amounts based on keypresses
-	g_SceneManager->ltm = &ltm;   // needs reference to access current adjustment amounts
-
-	// set up the live transformations UI
-	LiveTransformationUi ltmUi = LiveTransformationUi(g_Window, &ltm);
+	g_SceneManager->xfmrs = &xfmrs;   // needs reference to access current adjustment amounts
 #endif
 
 	// loop will keep running until the application is closed 
@@ -114,7 +107,7 @@ int main(int argc, char* argv[])
 		g_SceneManager->RenderScene();
 
 #ifdef _DEBUG
-		ltmUi.ShowUi();
+		xfmrs.getUi().ShowUi();
 #endif
 
 

@@ -20,8 +20,9 @@
     <ClCompile Include="Source\imgui\imgui_draw.cpp" />
     <ClCompile Include="Source\imgui\imgui_tables.cpp" />
     <ClCompile Include="Source\imgui\imgui_widgets.cpp" />
-    <ClCompile Include="Source\LiveTransformationManager.cpp" />
-    <ClCompile Include="Source\LiveTransformationUi.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformationUi.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformer.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformers.cpp" />
     <ClCompile Include="Source\MainCode.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\ViewManager.cpp" />
@@ -36,8 +37,9 @@
     <ClInclude Include="Source\imgui\imstb_rectpack.h" />
     <ClInclude Include="Source\imgui\imstb_textedit.h" />
     <ClInclude Include="Source\imgui\imstb_truetype.h" />
-    <ClInclude Include="Source\LiveTransformationManager.h" />
-    <ClInclude Include="Source\LiveTransformationUi.h" />
+    <ClInclude Include="Source\LiveTransformations\LiveTransformationUi.h" />
+    <ClInclude Include="Source\LiveTransformations\LiveTransformer.h" />
+    <ClInclude Include="Source\LiveTransformations\LiveTransformers.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\ViewManager.h" />
   </ItemGroup>
