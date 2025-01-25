@@ -64,3 +64,8 @@ LiveTransformationUi& LiveTransformers::getUi()
 {
 	return this->ui;
 }
+
+std::vector<std::string> LiveTransformers::getObjectNames()
+{
+	return this->objectNames;
+}

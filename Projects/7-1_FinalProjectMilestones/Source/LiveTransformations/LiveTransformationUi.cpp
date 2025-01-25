@@ -74,12 +74,12 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     ImGui::TextColored(ImVec4(1.0f, 1.0f, 1.0f, 1.0f), "Selected Object:");
     const char* initiallySelected = _strdup(this->getSelectedObject().c_str());
 
-    std::vector<std::string> objects = { 
-        "open-book-cover-left", 
-        "open-book-cover-right", 
-        "open-book-page-left",
-        "open-book-page-right"
-    };
+    // get the list of registered objects
+    std::vector<std::string> objects = this->xfrms->getObjectNames();
+
+    // ensure an object is selected
+    if (this->selectedObjectName == "")
+        this->selectedObjectName = objects.at(0);
 
     if (ImGui::BeginCombo("##selected_object", initiallySelected)) {
         for (const auto& object : objects) {

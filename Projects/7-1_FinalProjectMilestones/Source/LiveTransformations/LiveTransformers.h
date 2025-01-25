@@ -36,4 +36,6 @@ public:
 
 	LiveTransformationUi& getUi();
 
+	std::vector<std::string> getObjectNames();
+
 };
