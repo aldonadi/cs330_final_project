@@ -19,7 +19,7 @@ std::string LiveTransformer::getTransformAndRenderCodeString()
 		<< "        " << std::setw(7) << XscaleAdjusted    << "f,   " << std::setw(7) << YscaleAdjusted    << "f,   " << std::setw(7) << ZscaleAdjusted    << "f,      // scale" << std::endl
 	    << "        " << std::setw(7) << XrotationAdjusted << "f,   " << std::setw(7) << YrotationAdjusted << "f,   " << std::setw(7) << ZrotationAdjusted << "f,      // rotation" << std::endl
 	    << "        " << std::setw(7) << XpositionAdjusted << "f,   " << std::setw(7) << YpositionAdjusted << "f,   " << std::setw(7) << ZpositionAdjusted << "f,      // position" << std::endl
-        << "            r           g           b" << std::endl
+        << "        //  r           g           b" << std::endl
 		<< "        " << std::setw(7) << RcolorAdjusted    << "f,   " << std::setw(7) << GcolorAdjusted    << "f,   " << std::setw(7) << BcolorAdjusted    << "f       // color" << std::endl
 		<< "    );" << std::endl;
 
