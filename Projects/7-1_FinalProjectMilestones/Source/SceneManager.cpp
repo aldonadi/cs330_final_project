@@ -10,7 +10,7 @@
 #include "SceneManager.h"
 
 #ifdef _DEBUG
-#include "LiveTransformationManager.h"
+#include "LiveTransformations/LiveTransformer.h"
 #endif
 
 #ifndef STB_IMAGE_IMPLEMENTATION
@@ -414,11 +414,11 @@ void SceneManager::RenderOpenBook()
 		"open-book-cover-left",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
 		// x        y          z
-		 2.15f,      0.2f,     2.7f,   // scale
-		90.5f,      0.75f,  -43.0f,    // rotation
-		-0.5f,     2.4f,     8.3f,     // position
+		 2.15f,    0.2f,      2.7f,    // scale
+		90.5f,     0.75f,   -43.0f,    // rotation
+		-0.5f,     2.4f,      8.3f,    // position
 		// R        G          B
-		0.82,      0.17,      0.07     // color   (deep reddish)
+		0.82,      0.17,      0.07     // color
 	);
 
 	/****** The Open Book Cover (Right Side) *******/
@@ -494,30 +494,39 @@ void SceneManager::TransformAndRender(
 {
 
 #ifdef _DEBUG
-	/******************************************************************/
-	/*** If compiled in the Debug configuration, enable the         ***/
-	/*** keyboard-operated "live transformations" system to adjust  ***/
-	/*** scale, rotation, and position data while app is running.   ***/
-	/******************************************************************/
-	if (ltm->getSelectedObject() == objName) {
-		scaleX += ltm->XscaleAdj;
-		scaleY += ltm->YscaleAdj;
-		scaleZ += ltm->ZscaleAdj;
+	// register this object with the LiveTransformer
+	// if object has already been registered, this does nothing
+	this->xfmrs->RegisterNewObject(
+		 objName,
+		 scaleX,  scaleY,  scaleZ,
+		 rotX,    rotY,    rotZ,
+		 posX,    posY,    posZ,
+		 colorR,  colorG,  colorB);
 
-		rotX += ltm->XrotationAdj;
-		rotY += ltm->YrotationAdj;
-		rotZ += ltm->ZrotationAdj;
+	LiveTransformer* objXfmr = this->xfmrs->getObjectTransformer(objName);
 
-		posX += ltm->XpositionAdj;
-		posY += ltm->YpositionAdj;
-		posZ += ltm->ZpositionAdj;
-
-		// print out the current positions, etc
-		std::cout << ltm->getSelectedObject() << ": "
-			"scale(" << scaleX << ", " << scaleY << ", " << scaleZ << ") | "
-			"rot(" << rotX << ", " << rotY << ", " << rotZ << ") | "
-			"pos(" << posX << ", " << posY << ", " << posZ << ")" << std::endl;
+	// TODO: handle this better
+	if (objXfmr == nullptr) {
+		std::cerr << "Failed to get object transformer for '" << objName << "'" << std::endl;
+		assert(false);
 	}
+
+	scaleX = objXfmr->XscaleAdjusted;
+	scaleY = objXfmr->YscaleAdjusted;
+	scaleZ = objXfmr->ZscaleAdjusted;
+
+	rotX = objXfmr->XrotationAdjusted;
+	rotY = objXfmr->YrotationAdjusted;
+	rotZ = objXfmr->ZrotationAdjusted;
+
+	posX = objXfmr->XpositionAdjusted;
+	posY = objXfmr->YpositionAdjusted;
+	posZ = objXfmr->ZpositionAdjusted;
+
+	colorR = objXfmr->RcolorAdjusted;
+	colorG = objXfmr->GcolorAdjusted;
+	colorB = objXfmr->BcolorAdjusted;
+
 #endif
 
 	/******************************************************************/

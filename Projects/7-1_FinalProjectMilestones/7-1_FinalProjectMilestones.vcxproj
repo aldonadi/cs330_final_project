@@ -13,13 +13,33 @@
   <ItemGroup>
     <ClCompile Include="..\..\3DShapes\ShapeMeshes.cpp" />
     <ClCompile Include="..\..\Utilities\ShaderManager.cpp" />
-    <ClCompile Include="Source\LiveTransformationManager.cpp" />
+    <ClCompile Include="Source\imgui\backends\imgui_impl_glfw.cpp" />
+    <ClCompile Include="Source\imgui\backends\imgui_impl_opengl3.cpp" />
+    <ClCompile Include="Source\imgui\imgui.cpp" />
+    <ClCompile Include="Source\imgui\imgui_demo.cpp" />
+    <ClCompile Include="Source\imgui\imgui_draw.cpp" />
+    <ClCompile Include="Source\imgui\imgui_tables.cpp" />
+    <ClCompile Include="Source\imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformationUi.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformer.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformers.cpp" />
     <ClCompile Include="Source\MainCode.cpp" />
     <ClCompile Include="Source\SceneManager.cpp" />
     <ClCompile Include="Source\ViewManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Source\LiveTransformationManager.h" />
+    <ClInclude Include="Source\imgui\backends\imgui_impl_glfw.h" />
+    <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3.h" />
+    <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3_loader.h" />
+    <ClInclude Include="Source\imgui\imconfig.h" />
+    <ClInclude Include="Source\imgui\imgui.h" />
+    <ClInclude Include="Source\imgui\imgui_internal.h" />
+    <ClInclude Include="Source\imgui\imstb_rectpack.h" />
+    <ClInclude Include="Source\imgui\imstb_textedit.h" />
+    <ClInclude Include="Source\imgui\imstb_truetype.h" />
+    <ClInclude Include="Source\LiveTransformations\LiveTransformationUi.h" />
+    <ClInclude Include="Source\LiveTransformations\LiveTransformer.h" />
+    <ClInclude Include="Source\LiveTransformations\LiveTransformers.h" />
     <ClInclude Include="Source\SceneManager.h" />
     <ClInclude Include="Source\ViewManager.h" />
   </ItemGroup>
@@ -62,7 +82,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;.\Source\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -80,7 +100,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\Libraries\GLFW\include;..\..\Libraries\GLEW\include;..\..\Libraries\glm;..\..\Utilities;..\..\3DShapes;.\Source\imgui;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
