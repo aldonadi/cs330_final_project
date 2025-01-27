@@ -5,6 +5,7 @@
 class LiveTransformer
 {
 public:
+	std::string objectName = "";
 
 	// huge constructor
 	LiveTransformer(
@@ -13,19 +14,21 @@ public:
 		float baseRotationX, float baseRotationY, float baseRotationZ,   // rotation data
 		float basePositionX, float basePositionY, float basePositionZ,   // position data
 		float baseColorR, float baseColorG, float baseColorB)      // color data
-	:   objectName(objectName),                                                       // initializer list
-		XscaleSaved(baseScaleX),       YscaleSaved(baseScaleY),       ZscaleSaved(baseScaleZ),  
+		: objectName(objectName),                                                       // initializer list
+		XscaleSaved(baseScaleX), YscaleSaved(baseScaleY), ZscaleSaved(baseScaleZ),
 		XrotationSaved(baseRotationX), YrotationSaved(baseRotationY), ZrotationSaved(baseRotationZ),
 		XpositionSaved(basePositionX), YpositionSaved(basePositionY), ZpositionSaved(basePositionZ),
-		RcolorSaved(baseColorR),       GcolorSaved(baseColorG),       BcolorSaved(baseColorB),
+		RcolorSaved(baseColorR), GcolorSaved(baseColorG), BcolorSaved(baseColorB),
 
-		XscaleAdjusted(baseScaleX),       YscaleAdjusted(baseScaleY),       ZscaleAdjusted(baseScaleZ),  
+		XscaleAdjusted(baseScaleX), YscaleAdjusted(baseScaleY), ZscaleAdjusted(baseScaleZ),
 		XrotationAdjusted(baseRotationX), YrotationAdjusted(baseRotationY), ZrotationAdjusted(baseRotationZ),
 		XpositionAdjusted(basePositionX), YpositionAdjusted(basePositionY), ZpositionAdjusted(basePositionZ),
-		RcolorAdjusted(baseColorR),       GcolorAdjusted(baseColorG),       BcolorAdjusted(baseColorB)
-	{}
+		RcolorAdjusted(baseColorR), GcolorAdjusted(baseColorG), BcolorAdjusted(baseColorB)
+	{
+	}
 
-	std::string objectName = "";
+	// generate a block of code with the transformation data
+	std::string getTransformAndRenderCodeString();
 
 	// todo: find a better way to get the effective vertex data printout to the UI
 	std::string effectiveTransformationDataString = "";

@@ -6,6 +6,10 @@
 #include <backends/imgui_impl_opengl3.h>
 #include <GLFW/glfw3.h>
 
+#include <iostream>
+#include <sstream>
+#include <iomanip>
+
 #include <vector>
 
 LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms)
@@ -59,7 +63,9 @@ void LiveTransformationUi::ShowUi()
 
 void LiveTransformationUi::ShowTransformationUiControls() {
 
-    ImGui::Begin("Live Transformations", nullptr, ImGuiWindowFlags_NoResize);
+    ImGui::Begin("Live Transformations", nullptr);
+
+    //std::cout << "w: " << ImGui::GetWindowWidth() << ", h: " << ImGui::GetWindowHeight() << std::endl;
 
     // Label: "Live Transformations" (Bold, Underlined)
     if (ImGui::IsItemHovered()) {
@@ -78,7 +84,7 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     if (this->selectedObjectName == "")
         this->selectedObjectName = objects.at(0);
 
-    if (ImGui::BeginCombo("##selected_object", initiallySelected)) {
+    if (ImGui::BeginCombo("##selected_object", initiallySelected, ImGuiComboFlags_WidthFitPreview)) {
         for (const auto& object : objects) {
             if (ImGui::Selectable(object.c_str(), initiallySelected == object.c_str())) {
                 this->selectObject(object);
@@ -86,6 +92,7 @@ void LiveTransformationUi::ShowTransformationUiControls() {
         }
         ImGui::EndCombo();
     }
+
     // dropdown tooltip
     if (ImGui::IsItemHovered()) {
         ImGui::SetTooltip("Select which object to adjust");
@@ -101,8 +108,20 @@ void LiveTransformationUi::ShowTransformationUiControls() {
         ImGui::SetTooltip("Reset all transformations to the original, unadjusted values");
     }
 
+    if (ImGui::Button("Copy Transformation Code Block")) {
+        std::string copyString = selectedXfmr->getTransformAndRenderCodeString();
+
+        ImGui::SetClipboardText(copyString.c_str());
+    }
+    if (ImGui::IsItemHovered()) {
+        ImGui::SetTooltip("Copy the TransformAndRender code block with current transformations");
+    }
+
     // Label: "Adjust Scale" (Bold)
     ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Scale");
+
+    // make the sliders wider than default for finer-grained adjustments
+    ImGui::PushItemWidth(200.0f);
 
     // Labels and sliders for scale adjustments
     // Note: The "PushID" and "PopID" wrappers are because ImGui can't abide controls with duplicate label names ("X:", etc)
@@ -126,8 +145,26 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     ImGui::PushID("positionY"); ImGui::SliderFloat("Y", &selectedXfmr->YpositionAdjusted, -30.0f, 30.0f); ImGui::PopID();
     ImGui::PushID("positionZ"); ImGui::SliderFloat("Z", &selectedXfmr->ZpositionAdjusted, -30.0f, 30.0f); ImGui::PopID();
 
+    // done with setting slider width
+    ImGui::PopItemWidth();
+
     ImGui::TextColored(ImVec4(0.6f, 1.0f, 1.0f, 1.0f), "Adjust Color");
 
+    // create a color vector from current object color
+    ImVec4 color = ImVec4(
+        selectedXfmr->RcolorAdjusted,
+        selectedXfmr->GcolorAdjusted,
+        selectedXfmr->BcolorAdjusted,
+        1.0f);
+
+    // add the color picker control which will modify the color vector
+    ImGui::ColorPicker4("RGBA", (float*)&color);
+    
+    // apply any changes from the color picker back to the transformer object
+
+    selectedXfmr->RcolorAdjusted = color.x;
+    selectedXfmr->GcolorAdjusted = color.y;
+    selectedXfmr->BcolorAdjusted = color.z;
     
 
     ImGui::End();
