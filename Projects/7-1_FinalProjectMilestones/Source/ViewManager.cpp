@@ -207,6 +207,12 @@ void ViewManager::ProcessKeyboardEvents()
 		this->showTransformerUi = !(this->showTransformerUi);
 #endif
 
+	if (!(this->showTransformerUi)) {
+		ProcessSceneNavigationKeyboardEvents();
+	}
+}
+
+void ViewManager::ProcessSceneNavigationKeyboardEvents() {
 	// if the camera object is null, then exit this method
 	if (NULL == g_pCamera)
 	{
@@ -243,6 +249,7 @@ void ViewManager::ProcessKeyboardEvents()
 		g_pCamera->ProcessKeyboard(DOWN, gDeltaTime);
 	}
 }
+
 
 /***********************************************************
  *  PrepareSceneView()

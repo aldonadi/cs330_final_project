@@ -9,8 +9,10 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-
 #include <vector>
+
+// for printing flags in binary form
+#include <bitset>
 
 LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms)
     : window(window), xfrms(xfrms)
@@ -46,6 +48,9 @@ void LiveTransformationUi::enableUI()
     this->io.ConfigFlags &= ~ImGuiConfigFlags_NoKeyboard;
     this->io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
     
+    // print a message and binary representation of ConfigFlags
+    std::bitset<sizeof(this->io.ConfigFlags)> flagBits(this->io.ConfigFlags);
+    std::cout << "enabled UI:  flags=" << flagBits << std::endl;
 }
 
 void LiveTransformationUi::disableUI()
@@ -55,6 +60,10 @@ void LiveTransformationUi::disableUI()
     // set the mouse/keyboard disable flags
     this->io.ConfigFlags |= ImGuiConfigFlags_NoKeyboard;
     this->io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
+
+    // print a message and binary representation of ConfigFlags
+    std::bitset<sizeof(this->io.ConfigFlags)> flagBits(this->io.ConfigFlags);
+    std::cout << "disabled UI: flags=" << flagBits << std::endl;
 }
 
 bool LiveTransformationUi::isUiEnabled()

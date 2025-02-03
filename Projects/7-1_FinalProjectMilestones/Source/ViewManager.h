@@ -36,8 +36,11 @@ private:
 	// active OpenGL display window
 	GLFWwindow* m_pWindow;
 
-	// process keyboard events for interaction with the 3D scene
+	// master handler for keyboard events
 	void ProcessKeyboardEvents();
+
+	// process keyboard events for interaction with the 3D scene
+	void ProcessSceneNavigationKeyboardEvents();
 
 public:
 	// create the initial OpenGL display window
