@@ -52,6 +52,9 @@ namespace
 	bool bOrthographicProjection = false;
 
 #ifdef _DEBUG
+	// used to stop the mouse from changing the camera when the UI is displayed
+	bool disableMouseCameraMovement = false;
+
 	// used to prevent flickering the UI shown/hidden if the user holds down the SPACE key
 	bool justToggledTheUi = false;
 #endif // _DEBUG
@@ -151,6 +154,13 @@ void ViewManager::disableMouseInput(GLFWwindow* window)
  ***********************************************************/
 void ViewManager::Mouse_Position_Callback(GLFWwindow* window, double xMousePos, double yMousePos)
 {
+#ifdef _DEBUG
+	// if in the UI, then don't process changes to the camera
+	if (disableMouseCameraMovement) {
+		return;
+	}
+#endif // _DEBUG
+	
 	// when the first mouse move event is received, this needs to be recorded so that
 	// all subsequent mouse moves can correctly calculate the X position offset and Y
 	// position offset for proper operation
@@ -182,6 +192,13 @@ void ViewManager::Mouse_Position_Callback(GLFWwindow* window, double xMousePos, 
  ***********************************************************/
 void ViewManager::Mouse_Scrollwheel_Callback(GLFWwindow* window, double xOffset, double yOffset)
 {
+#ifdef _DEBUG
+	// if in the UI, then don't process changes to the camera
+	if (disableMouseCameraMovement) {
+		return;
+	}
+#endif // _DEBUG
+
 	// adjust mouse sensitivity
 	g_pCamera->MouseSensitivity += (g_pCamera->MouseSensitivity * (0.02 * yOffset));
 
@@ -226,12 +243,6 @@ void ViewManager::ProcessKeyboardEvents()
 			// toggle the "show UI" flag
 			this->showTransformerUi = !(this->showTransformerUi);
 
-			// toggle using mouse input for changing the camera
-			if (this->showTransformerUi)
-				disableMouseInput(m_pWindow);
-			else
-				enableMouseInput(m_pWindow);
-
 			// set the "don't flicker the UI when user holds down the toggle UI key" flag
 			justToggledTheUi = true;
 		}
@@ -241,12 +252,16 @@ void ViewManager::ProcessKeyboardEvents()
 		justToggledTheUi = false;
 	}
 
-		
+	// toggle whether mouse should affect camers
+	// TODO: clean up this mess
+	disableMouseCameraMovement = this->showTransformerUi;
+
+	// disable keyboard movement: return before processing the keyboard nav events
+	if (this->showTransformerUi)
+		return;
 #endif
 
-	if (!(this->showTransformerUi)) {
-		ProcessSceneNavigationKeyboardEvents();
-	}
+	ProcessSceneNavigationKeyboardEvents();
 }
 
 void ViewManager::ProcessSceneNavigationKeyboardEvents() {

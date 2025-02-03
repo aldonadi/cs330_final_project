@@ -42,28 +42,32 @@ LiveTransformationUi::~LiveTransformationUi()
 
 void LiveTransformationUi::enableUi()
 {
+ 
     this->shouldShowUi = true;
 
+    /*
     // clear the mouse/keyboard disable flags
     this->io.ConfigFlags &= ~ImGuiConfigFlags_NoKeyboard;
     this->io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
     
     // print a message and binary representation of ConfigFlags
     std::bitset<sizeof(this->io.ConfigFlags) * 8> flagBits(this->io.ConfigFlags);
-    std::cout << "enabled UI:  flags=" << flagBits << std::endl;
+    std::cout << "enabled UI:  NoMouse=" << ((this->io.ConfigFlags) & ImGuiConfigFlags_NoMouse) << std::endl;
+    */
 }
 
 void LiveTransformationUi::disableUi()
 {
     this->shouldShowUi = false;
-
+    /*
     // set the mouse/keyboard disable flags
     this->io.ConfigFlags |= ImGuiConfigFlags_NoKeyboard;
     this->io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
 
     // print a message and binary representation of ConfigFlags
     std::bitset<sizeof(this->io.ConfigFlags) * 8> flagBits(this->io.ConfigFlags);
-    std::cout << "disabled UI: flags=" << flagBits << std::endl;
+    std::cout << "disabled UI: NoMouse=" << ((this->io.ConfigFlags) & ImGuiConfigFlags_NoMouse) << std::endl;
+    */
 }
 
 bool LiveTransformationUi::isUiEnabled()
