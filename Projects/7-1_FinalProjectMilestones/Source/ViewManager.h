@@ -27,6 +27,9 @@ public:
 	// mouse position callback for mouse interaction with the 3D scene
 	static void Mouse_Position_Callback(GLFWwindow* window, double xMousePos, double yMousePos);
 
+	// mouse scrollwheel callback for changing mouse sensitivity
+	static void Mouse_Scrollwheel_Callback(GLFWwindow* window, double xOffset, double yOffset);
+
 private:
 	// pointer to shader manager object
 	ShaderManager* m_pShaderManager;

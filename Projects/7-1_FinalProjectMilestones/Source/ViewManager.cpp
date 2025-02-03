@@ -36,6 +36,13 @@ namespace
 	float gLastY = WINDOW_HEIGHT / 2.0f;
 	bool gFirstMouse = true;
 
+	// movement and mouse sensitivity sanity checks (experimentally derived)
+	float MAX_MOUSE_SENSITIVITY = 0.4f;
+	float MIN_MOUSE_SENSITIVITY = 0.002f;
+
+	float MAX_MOVEMENT_SPEED = 10.0f; //0.4;
+	float MIN_MOVEMENT_SPEED = 0.5f;     //0.002;
+
 	// time between current frame and last frame
 	float gDeltaTime = 0.0f; 
 	float gLastFrame = 0.0f;
@@ -127,6 +134,58 @@ GLFWwindow* ViewManager::CreateDisplayWindow(const char* windowTitle)
  ***********************************************************/
 void ViewManager::Mouse_Position_Callback(GLFWwindow* window, double xMousePos, double yMousePos)
 {
+	// when the first mouse move event is received, this needs to be recorded so that
+	// all subsequent mouse moves can correctly calculate the X position offset and Y
+	// position offset for proper operation
+	if (gFirstMouse)
+	{
+		gLastX = xMousePos;
+		gLastY = yMousePos;
+		gFirstMouse = false;
+	}
+
+	// calculate the X offset and Y offset values for moving the 3D camera accordingly
+	float xOffset = xMousePos - gLastX;
+	float yOffset = gLastY - yMousePos; // reversed since y-coordinates go from bottom to top
+
+	// set the current positions into the last position variables
+	gLastX = xMousePos;
+	gLastY = yMousePos;
+
+	// move the 3D camera according to the calculated offsets
+	g_pCamera->ProcessMouseMovement(xOffset, yOffset);
+}
+
+/***********************************************************
+ *  Mouse_Scrollwheel_Callback()
+ *
+ *  This method is automatically called from GLFW whenever
+ *  the mouse scrollwheel is scrolled. Amount of scroll is
+ *  given in the `yOffset` argument. `xOffset` is usually unused.
+ ***********************************************************/
+void ViewManager::Mouse_Scrollwheel_Callback(GLFWwindow* window, double xOffset, double yOffset)
+{
+	// adjust mouse sensitivity
+	g_pCamera->MouseSensitivity += (g_pCamera->MouseSensitivity * (0.02 * yOffset));
+
+	// adjust movement speed
+	g_pCamera->MovementSpeed += (g_pCamera->MovementSpeed * (0.02 * yOffset));
+
+	// sanity checks: mouse sensitivity
+	if (g_pCamera->MouseSensitivity > MAX_MOUSE_SENSITIVITY) {
+		g_pCamera->MouseSensitivity = MAX_MOUSE_SENSITIVITY;
+	}
+	else if (g_pCamera->MouseSensitivity < MIN_MOUSE_SENSITIVITY) {
+		g_pCamera->MouseSensitivity = MIN_MOUSE_SENSITIVITY;
+	}
+
+	// sanity checks: movement speed
+	if (g_pCamera->MovementSpeed > MAX_MOVEMENT_SPEED) {
+		g_pCamera->MovementSpeed = MAX_MOVEMENT_SPEED;
+	}
+	else if (g_pCamera->MovementSpeed < MIN_MOVEMENT_SPEED) {
+		g_pCamera->MovementSpeed = MIN_MOVEMENT_SPEED;
+	}
 }
 
 /***********************************************************
@@ -146,6 +205,42 @@ void ViewManager::ProcessKeyboardEvents()
 #ifdef _DEBUG
 	DbgProcessTransformationKeyboardEvents();
 #endif
+
+	// if the camera object is null, then exit this method
+	if (NULL == g_pCamera)
+	{
+		return;
+	}
+
+	// process camera zooming in and out
+	if (glfwGetKey(m_pWindow, GLFW_KEY_W) == GLFW_PRESS)
+	{
+		g_pCamera->ProcessKeyboard(FORWARD, gDeltaTime);
+	}
+	if (glfwGetKey(m_pWindow, GLFW_KEY_S) == GLFW_PRESS)
+	{
+		g_pCamera->ProcessKeyboard(BACKWARD, gDeltaTime);
+	}
+
+	// process camera panning left and right
+	if (glfwGetKey(m_pWindow, GLFW_KEY_A) == GLFW_PRESS)
+	{
+		g_pCamera->ProcessKeyboard(LEFT, gDeltaTime);
+	}
+	if (glfwGetKey(m_pWindow, GLFW_KEY_D) == GLFW_PRESS)
+	{
+		g_pCamera->ProcessKeyboard(RIGHT, gDeltaTime);
+	}
+
+	// process camera panning up and down
+	if (glfwGetKey(m_pWindow, GLFW_KEY_Q) == GLFW_PRESS)
+	{
+		g_pCamera->ProcessKeyboard(UP, gDeltaTime);
+	}
+	if (glfwGetKey(m_pWindow, GLFW_KEY_E) == GLFW_PRESS)
+	{
+		g_pCamera->ProcessKeyboard(DOWN, gDeltaTime);
+	}
 }
 
 /***********************************************************
