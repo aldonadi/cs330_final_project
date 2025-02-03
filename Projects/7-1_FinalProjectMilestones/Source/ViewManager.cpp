@@ -117,10 +117,7 @@ GLFWwindow* ViewManager::CreateDisplayWindow(const char* windowTitle)
 	glfwMakeContextCurrent(window);
 
 	// tell GLFW to capture all mouse events
-	//glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-
-	// this callback is used to receive mouse moving events
-	glfwSetCursorPosCallback(window, &ViewManager::Mouse_Position_Callback);
+	enableMouseInput(window);
 
 	// enable blending for supporting tranparent rendering
 	glEnable(GL_BLEND);
@@ -130,6 +127,21 @@ GLFWwindow* ViewManager::CreateDisplayWindow(const char* windowTitle)
 
 	return(window);
 }
+
+void ViewManager::enableMouseInput(GLFWwindow* window)
+{
+	// this callback is used to receive mouse moving events
+	glfwSetCursorPosCallback(window, &ViewManager::Mouse_Position_Callback);
+	glfwSetScrollCallback(window, &ViewManager::Mouse_Scrollwheel_Callback);
+}
+
+void ViewManager::disableMouseInput(GLFWwindow* window)
+{	
+	// this callback is used to receive mouse moving events
+	glfwSetCursorPosCallback(window, nullptr);
+	glfwSetScrollCallback(window, nullptr);
+}
+
 
 /***********************************************************
  *  Mouse_Position_Callback()
@@ -211,7 +223,16 @@ void ViewManager::ProcessKeyboardEvents()
 	if (glfwGetKey(m_pWindow, GLFW_KEY_SPACE) == GLFW_PRESS)
 	{
 		if (!justToggledTheUi) {
+			// toggle the "show UI" flag
 			this->showTransformerUi = !(this->showTransformerUi);
+
+			// toggle using mouse input for changing the camera
+			if (this->showTransformerUi)
+				disableMouseInput(m_pWindow);
+			else
+				enableMouseInput(m_pWindow);
+
+			// set the "don't flicker the UI when user holds down the toggle UI key" flag
 			justToggledTheUi = true;
 		}
 	}
@@ -265,7 +286,6 @@ void ViewManager::ProcessSceneNavigationKeyboardEvents() {
 		g_pCamera->ProcessKeyboard(DOWN, gDeltaTime);
 	}
 }
-
 
 /***********************************************************
  *  PrepareSceneView()

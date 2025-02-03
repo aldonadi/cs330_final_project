@@ -42,6 +42,10 @@ private:
 	// process keyboard events for interaction with the 3D scene
 	void ProcessSceneNavigationKeyboardEvents();
 
+	// enable/disable mouse input
+	void enableMouseInput(GLFWwindow* window);
+	void disableMouseInput(GLFWwindow* window);
+
 public:
 	// create the initial OpenGL display window
 	GLFWwindow* CreateDisplayWindow(const char* windowTitle);
