@@ -30,7 +30,7 @@ LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers*
 	ImGui_ImplOpenGL3_Init("#version 330 core");
 
     // start with UI hidden
-    this->disableUI();
+    this->disableUi();
 }
 
 LiveTransformationUi::~LiveTransformationUi()
@@ -40,7 +40,7 @@ LiveTransformationUi::~LiveTransformationUi()
 	ImGui::DestroyContext();
 }
 
-void LiveTransformationUi::enableUI()
+void LiveTransformationUi::enableUi()
 {
     this->shouldShowUi = true;
 
@@ -53,7 +53,7 @@ void LiveTransformationUi::enableUI()
     std::cout << "enabled UI:  flags=" << flagBits << std::endl;
 }
 
-void LiveTransformationUi::disableUI()
+void LiveTransformationUi::disableUi()
 {
     this->shouldShowUi = false;
 

@@ -29,10 +29,10 @@ public:
 	~LiveTransformationUi();
 
 	// allow the UI to be shown (and capture keybd/mouse)
-	void enableUI();
+	void enableUi();
 
 	// do not allow the UI to be shown (and prevent capturing keyb/mouse)
-	void disableUI();
+	void disableUi();
 
 	// Returns true if enabled, otherwise false
 	bool isUiEnabled();
