@@ -38,6 +38,11 @@ LiveTransformationUi::~LiveTransformationUi()
 
 void LiveTransformationUi::ShowUi()
 {
+    // don't draw anything if we shouldn't show the UI right now
+    if (!this->shouldShowUi) {
+        return;
+    }
+
 	// don't draw anything if the main window is minimized ("iconified")
 	if (glfwGetWindowAttrib(this->window, GLFW_ICONIFIED) != 0)
 	{

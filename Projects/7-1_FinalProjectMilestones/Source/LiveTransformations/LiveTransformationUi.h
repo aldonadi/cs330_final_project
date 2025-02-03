@@ -21,6 +21,9 @@ private:
 	ImGuiIO io;
 
 public:
+	// set this to True to show the UI next render
+	bool shouldShowUi = false;
+
 	LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms);
 
 	~LiveTransformationUi();
