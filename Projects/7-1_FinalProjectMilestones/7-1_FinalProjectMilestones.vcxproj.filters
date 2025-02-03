@@ -19,6 +19,12 @@
     <Filter Include="Source Files\imgui\backends">
       <UniqueIdentifier>{42012d1b-10a1-49ef-8405-1ae7e1e501f2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\LiveTransformations">
+      <UniqueIdentifier>{ccc549e0-2d22-47f4-8105-56e8ed24ca37}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\LiveTransformations">
+      <UniqueIdentifier>{9256d502-234c-4dfe-b5e4-6bec6a187ab4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\3DShapes\ShapeMeshes.cpp">
@@ -57,9 +63,15 @@
     <ClCompile Include="Source\imgui\backends\imgui_impl_opengl3.cpp">
       <Filter>Source Files\imgui\backends</Filter>
     </ClCompile>
-    <ClCompile Include="Source\LiveTransformations\LiveTransformationUi.cpp" />
-    <ClCompile Include="Source\LiveTransformations\LiveTransformer.cpp" />
-    <ClCompile Include="Source\LiveTransformations\LiveTransformers.cpp" />
+    <ClCompile Include="Source\LiveTransformations\LiveTransformationUi.cpp">
+      <Filter>Source Files\LiveTransformations</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LiveTransformations\LiveTransformers.cpp">
+      <Filter>Source Files\LiveTransformations</Filter>
+    </ClCompile>
+    <ClCompile Include="Source\LiveTransformations\LiveTransformer.cpp">
+      <Filter>Source Files\LiveTransformations</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Source\SceneManager.h">
@@ -95,14 +107,14 @@
     <ClInclude Include="Source\imgui\backends\imgui_impl_opengl3_loader.h">
       <Filter>Source Files\imgui\backends</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LiveTransformations\LiveTransformationUi.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\LiveTransformations\LiveTransformers.h">
+      <Filter>Header Files\LiveTransformations</Filter>
     </ClInclude>
     <ClInclude Include="Source\LiveTransformations\LiveTransformer.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\LiveTransformations</Filter>
     </ClInclude>
-    <ClInclude Include="Source\LiveTransformations\LiveTransformers.h">
-      <Filter>Header Files</Filter>
+    <ClInclude Include="Source\LiveTransformations\LiveTransformationUi.h">
+      <Filter>Header Files\LiveTransformations</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
