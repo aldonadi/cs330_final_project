@@ -47,7 +47,6 @@ public:
 	void PrepareSceneView();
 
 #ifdef _DEBUG
-	void DbgProcessTransformationKeyboardEvents();
 	bool showTransformerUi = false;
 #endif
 };

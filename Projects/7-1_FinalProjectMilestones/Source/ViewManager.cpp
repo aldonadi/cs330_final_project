@@ -203,7 +203,8 @@ void ViewManager::ProcessKeyboardEvents()
 	}
 
 #ifdef _DEBUG
-	DbgProcessTransformationKeyboardEvents();
+	if (glfwGetKey(m_pWindow, GLFW_KEY_SPACE) == GLFW_PRESS)
+		this->showTransformerUi = !(this->showTransformerUi);
 #endif
 
 	// if the camera object is null, then exit this method
@@ -281,10 +282,3 @@ void ViewManager::PrepareSceneView()
 		m_pShaderManager->setVec3Value("viewPosition", g_pCamera->Position);
 	}
 }
-
-#ifdef _DEBUG
-void ViewManager::DbgProcessTransformationKeyboardEvents() {
-	if (glfwGetKey(m_pWindow, GLFW_KEY_SPACE) == GLFW_PRESS)
-		this->showTransformerUi = !(this->showTransformerUi);
-}
-#endif
