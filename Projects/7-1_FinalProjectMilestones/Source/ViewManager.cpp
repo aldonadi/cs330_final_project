@@ -50,6 +50,11 @@ namespace
 	// the following variable is false when orthographic projection
 	// is off and true when it is on
 	bool bOrthographicProjection = false;
+
+#ifdef _DEBUG
+	// used to prevent flickering the UI shown/hidden if the user holds down the SPACE key
+	bool justToggledTheUi = false;
+#endif // _DEBUG
 }
 
 /***********************************************************
@@ -204,7 +209,18 @@ void ViewManager::ProcessKeyboardEvents()
 
 #ifdef _DEBUG
 	if (glfwGetKey(m_pWindow, GLFW_KEY_SPACE) == GLFW_PRESS)
-		this->showTransformerUi = !(this->showTransformerUi);
+	{
+		if (!justToggledTheUi) {
+			this->showTransformerUi = !(this->showTransformerUi);
+			justToggledTheUi = true;
+		}
+	}
+	else  // no longer pressing SPACE; clear the flag
+	{
+		justToggledTheUi = false;
+	}
+
+		
 #endif
 
 	if (!(this->showTransformerUi)) {
