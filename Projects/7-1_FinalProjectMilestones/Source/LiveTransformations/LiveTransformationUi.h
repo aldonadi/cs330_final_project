@@ -20,13 +20,23 @@ private:
 
 	ImGuiIO io;
 
-public:
 	// set this to True to show the UI next render
 	bool shouldShowUi = false;
+public:
 
 	LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms);
 
 	~LiveTransformationUi();
+
+	// allow the UI to be shown (and capture keybd/mouse)
+	void enableUI();
+
+	// do not allow the UI to be shown (and prevent capturing keyb/mouse)
+	void disableUI();
+
+	// Returns true if enabled, otherwise false
+	bool isUiEnabled();
+
 
 	void ShowUi();
 

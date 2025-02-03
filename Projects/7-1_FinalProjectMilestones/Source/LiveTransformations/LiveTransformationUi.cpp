@@ -35,6 +35,21 @@ LiveTransformationUi::~LiveTransformationUi()
 	ImGui::DestroyContext();
 }
 
+void LiveTransformationUi::enableUI()
+{
+    this->shouldShowUi = true;
+}
+
+void LiveTransformationUi::disableUI()
+{
+    this->shouldShowUi = false;
+}
+
+bool LiveTransformationUi::isUiEnabled()
+{
+    return this->shouldShowUi;
+}
+
 
 void LiveTransformationUi::ShowUi()
 {
