@@ -18,7 +18,7 @@ LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers*
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
     this->io = ImGui::GetIO(); (void)io;
-	this->io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    this->io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
 	ImGui::StyleColorsDark();
 
@@ -26,6 +26,9 @@ LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers*
 	ImGui_ImplGlfw_InitForOpenGL(this->window, install_callbacks);
 
 	ImGui_ImplOpenGL3_Init("#version 330 core");
+
+    // start with UI hidden
+    this->disableUI();
 }
 
 LiveTransformationUi::~LiveTransformationUi()
@@ -38,11 +41,20 @@ LiveTransformationUi::~LiveTransformationUi()
 void LiveTransformationUi::enableUI()
 {
     this->shouldShowUi = true;
+
+    // clear the mouse/keyboard disable flags
+    this->io.ConfigFlags &= ~ImGuiConfigFlags_NoKeyboard;
+    this->io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
+    
 }
 
 void LiveTransformationUi::disableUI()
 {
     this->shouldShowUi = false;
+
+    // set the mouse/keyboard disable flags
+    this->io.ConfigFlags |= ImGuiConfigFlags_NoKeyboard;
+    this->io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
 }
 
 bool LiveTransformationUi::isUiEnabled()
