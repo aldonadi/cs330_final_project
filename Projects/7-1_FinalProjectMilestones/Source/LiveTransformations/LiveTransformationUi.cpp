@@ -82,10 +82,10 @@ void LiveTransformationUi::ShowUi()
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	if (this->show_demo_window) {
-		ShowTransformationUiControls();
-	}
+    // set up the UI controls
+	ShowTransformationUiControls();
 
+    // render the UI
 	ImGui::Render();
 	int display_w, display_h;
 	glfwGetFramebufferSize(window, &display_w, &display_h);
