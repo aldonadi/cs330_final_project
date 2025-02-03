@@ -20,8 +20,6 @@ private:
 
 	ImGuiIO io;
 
-	bool show_demo_window = true;
-
 public:
 	LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms);
 
