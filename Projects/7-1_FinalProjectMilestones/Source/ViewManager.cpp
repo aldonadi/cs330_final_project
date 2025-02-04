@@ -344,11 +344,11 @@ void ViewManager::PrepareSceneView()
 	{
 		projection = 
 			glm::ortho(
-				-WINDOW_WIDTH  / 2.0f,
-				 WINDOW_WIDTH  / 2.0f,
-				-WINDOW_HEIGHT / 2.0f,
-				 WINDOW_HEIGHT / 2.0f,
-				0.1f, 100.0f);
+				(GLfloat)( -WINDOW_WIDTH / 2.0f),
+				(GLfloat)(  WINDOW_WIDTH  / 2.0f),
+				(GLfloat)(  WINDOW_HEIGHT / 2.0f),
+				(GLfloat)( -WINDOW_HEIGHT / 2.0f),
+				0.0f, 100.0f);
 	}
 
 	// if the shader manager object is valid
