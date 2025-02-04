@@ -300,6 +300,16 @@ void ViewManager::ProcessSceneNavigationKeyboardEvents() {
 	{
 		g_pCamera->ProcessKeyboard(DOWN, gDeltaTime);
 	}
+
+	// process camera projection type (perspective or orthographic)
+	if (glfwGetKey(m_pWindow, GLFW_KEY_O) == GLFW_PRESS)
+	{
+		bOrthographicProjection = true;
+	}
+	if (glfwGetKey(m_pWindow, GLFW_KEY_P) == GLFW_PRESS)
+	{
+		bOrthographicProjection = false;
+	}
 }
 
 /***********************************************************
@@ -327,7 +337,19 @@ void ViewManager::PrepareSceneView()
 	view = g_pCamera->GetViewMatrix();
 
 	// define the current projection matrix
-	projection = glm::perspective(glm::radians(g_pCamera->Zoom), (GLfloat)WINDOW_WIDTH / (GLfloat)WINDOW_HEIGHT, 0.1f, 100.0f);
+	if (!bOrthographicProjection) {    // perspective projection
+		projection = glm::perspective(glm::radians(g_pCamera->Zoom), (GLfloat)WINDOW_WIDTH / (GLfloat)WINDOW_HEIGHT, 0.1f, 100.0f);
+	}
+	else    // orthographic projection
+	{
+		projection = 
+			glm::ortho(
+				-WINDOW_WIDTH  / 2.0f,
+				 WINDOW_WIDTH  / 2.0f,
+				-WINDOW_HEIGHT / 2.0f,
+				 WINDOW_HEIGHT / 2.0f,
+				0.1f, 100.0f);
+	}
 
 	// if the shader manager object is valid
 	if (NULL != m_pShaderManager)
