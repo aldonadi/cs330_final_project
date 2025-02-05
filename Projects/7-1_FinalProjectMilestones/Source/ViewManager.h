@@ -27,14 +27,24 @@ public:
 	// mouse position callback for mouse interaction with the 3D scene
 	static void Mouse_Position_Callback(GLFWwindow* window, double xMousePos, double yMousePos);
 
+	// mouse scrollwheel callback for changing mouse sensitivity
+	static void Mouse_Scrollwheel_Callback(GLFWwindow* window, double xOffset, double yOffset);
+
 private:
 	// pointer to shader manager object
 	ShaderManager* m_pShaderManager;
 	// active OpenGL display window
 	GLFWwindow* m_pWindow;
 
-	// process keyboard events for interaction with the 3D scene
+	// master handler for keyboard events
 	void ProcessKeyboardEvents();
+
+	// process keyboard events for interaction with the 3D scene
+	void ProcessSceneNavigationKeyboardEvents();
+
+	// enable/disable mouse input
+	void enableMouseInput(GLFWwindow* window);
+	void disableMouseInput(GLFWwindow* window);
 
 public:
 	// create the initial OpenGL display window
@@ -44,7 +54,6 @@ public:
 	void PrepareSceneView();
 
 #ifdef _DEBUG
-	void DbgProcessTransformationKeyboardEvents();
 	bool showTransformerUi = false;
 #endif
 };

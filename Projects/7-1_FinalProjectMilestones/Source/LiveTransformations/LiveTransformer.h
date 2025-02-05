@@ -30,9 +30,6 @@ public:
 	// generate a block of code with the transformation data
 	std::string getTransformAndRenderCodeString();
 
-	// todo: find a better way to get the effective vertex data printout to the UI
-	std::string effectiveTransformationDataString = "";
-
 	// SAVED VALUES, for resetting back to orig
 	float XscaleSaved;
 	float YscaleSaved;

@@ -107,6 +107,14 @@ int main(int argc, char* argv[])
 		g_SceneManager->RenderScene();
 
 #ifdef _DEBUG
+		// TODO: clean this mess up
+		if (g_ViewManager->showTransformerUi) {
+			xfmrs.getUi().enableUi();
+		}
+		else {
+			xfmrs.getUi().disableUi();
+		}
+
 		xfmrs.getUi().ShowUi();
 #endif
 

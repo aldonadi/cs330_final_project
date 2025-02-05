@@ -9,8 +9,10 @@
 #include <iostream>
 #include <sstream>
 #include <iomanip>
-
 #include <vector>
+
+// for printing flags in binary form
+#include <bitset>
 
 LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers* xfrms)
     : window(window), xfrms(xfrms)
@@ -18,7 +20,7 @@ LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers*
 	IMGUI_CHECKVERSION();
 	ImGui::CreateContext();
     this->io = ImGui::GetIO(); (void)io;
-	this->io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
+    this->io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
 
 	ImGui::StyleColorsDark();
 
@@ -26,6 +28,9 @@ LiveTransformationUi::LiveTransformationUi(GLFWwindow* window, LiveTransformers*
 	ImGui_ImplGlfw_InitForOpenGL(this->window, install_callbacks);
 
 	ImGui_ImplOpenGL3_Init("#version 330 core");
+
+    // start with UI hidden
+    this->disableUi();
 }
 
 LiveTransformationUi::~LiveTransformationUi()
@@ -35,9 +40,49 @@ LiveTransformationUi::~LiveTransformationUi()
 	ImGui::DestroyContext();
 }
 
+void LiveTransformationUi::enableUi()
+{
+ 
+    this->shouldShowUi = true;
+
+    /*
+    // clear the mouse/keyboard disable flags
+    this->io.ConfigFlags &= ~ImGuiConfigFlags_NoKeyboard;
+    this->io.ConfigFlags &= ~ImGuiConfigFlags_NoMouse;
+    
+    // print a message and binary representation of ConfigFlags
+    std::bitset<sizeof(this->io.ConfigFlags) * 8> flagBits(this->io.ConfigFlags);
+    std::cout << "enabled UI:  NoMouse=" << ((this->io.ConfigFlags) & ImGuiConfigFlags_NoMouse) << std::endl;
+    */
+}
+
+void LiveTransformationUi::disableUi()
+{
+    this->shouldShowUi = false;
+    /*
+    // set the mouse/keyboard disable flags
+    this->io.ConfigFlags |= ImGuiConfigFlags_NoKeyboard;
+    this->io.ConfigFlags |= ImGuiConfigFlags_NoMouse;
+
+    // print a message and binary representation of ConfigFlags
+    std::bitset<sizeof(this->io.ConfigFlags) * 8> flagBits(this->io.ConfigFlags);
+    std::cout << "disabled UI: NoMouse=" << ((this->io.ConfigFlags) & ImGuiConfigFlags_NoMouse) << std::endl;
+    */
+}
+
+bool LiveTransformationUi::isUiEnabled()
+{
+    return this->shouldShowUi;
+}
+
 
 void LiveTransformationUi::ShowUi()
 {
+    // don't draw anything if we shouldn't show the UI right now
+    if (!this->shouldShowUi) {
+        return;
+    }
+
 	// don't draw anything if the main window is minimized ("iconified")
 	if (glfwGetWindowAttrib(this->window, GLFW_ICONIFIED) != 0)
 	{
@@ -50,10 +95,10 @@ void LiveTransformationUi::ShowUi()
 	ImGui_ImplGlfw_NewFrame();
 	ImGui::NewFrame();
 
-	if (this->show_demo_window) {
-		ShowTransformationUiControls();
-	}
+    // set up the UI controls
+	ShowTransformationUiControls();
 
+    // render the UI
 	ImGui::Render();
 	int display_w, display_h;
 	glfwGetFramebufferSize(window, &display_w, &display_h);
