@@ -336,9 +336,15 @@ void ViewManager::PrepareSceneView()
 	// get the current view matrix from the camera
 	view = g_pCamera->GetViewMatrix();
 
+	// Thanks to https://stackoverflow.com/a/38266620 for helping me understand
+	// matching up the relative sizes on screen between perspective and ortho
+
+	// calculate the aspect ratio
+	const float aspectRatio = (GLfloat)WINDOW_WIDTH / (GLfloat)WINDOW_HEIGHT;
+
 	// define the current projection matrix
 	if (!bOrthographicProjection) {    // perspective projection
-		projection = glm::perspective(glm::radians(g_pCamera->Zoom), (GLfloat)WINDOW_WIDTH / (GLfloat)WINDOW_HEIGHT, 0.1f, 100.0f);
+		projection = glm::perspective(glm::radians(g_pCamera->Zoom), aspectRatio, 0.1f, 100.0f);
 	}
 	else    // orthographic projection
 	{
