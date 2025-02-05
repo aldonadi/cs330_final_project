@@ -40,8 +40,8 @@ namespace
 	float MAX_MOUSE_SENSITIVITY = 0.4f;
 	float MIN_MOUSE_SENSITIVITY = 0.002f;
 
-	float MAX_MOVEMENT_SPEED = 10.0f; //0.4;
-	float MIN_MOVEMENT_SPEED = 0.5f;     //0.002;
+	float MAX_MOVEMENT_SPEED = 10.0f;
+	float MIN_MOVEMENT_SPEED = 0.5f;
 
 	// time between current frame and last frame
 	float gDeltaTime = 0.0f; 
