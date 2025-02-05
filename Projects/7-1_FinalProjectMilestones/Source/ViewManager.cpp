@@ -336,9 +336,6 @@ void ViewManager::PrepareSceneView()
 	// get the current view matrix from the camera
 	view = g_pCamera->GetViewMatrix();
 
-	// Thanks to https://stackoverflow.com/a/38266620 for helping me understand
-	// matching up the relative sizes on screen between perspective and ortho
-
 	// calculate the aspect ratio
 	const float aspectRatio = (GLfloat)WINDOW_WIDTH / (GLfloat)WINDOW_HEIGHT;
 
@@ -351,13 +348,17 @@ void ViewManager::PrepareSceneView()
 		// TODO: determine this programmatically or somehow that isn't a magic number
 		float viewDistance = aspectRatio * 4.0f;
 
+		// Thanks to https://stackoverflow.com/a/38266620 for helping me understand
+        // matching up the relative sizes on screen between perspective and ortho
+		// so that the book's visual width doesn't change drastically when switching
+		// between perspective and orthographic
 		projection = 
 			glm::ortho(
 				-aspectRatio * viewDistance,
 				 aspectRatio * viewDistance,
-				 -viewDistance,
+				-viewDistance,
 				 viewDistance,
-				 -100.0f, 100.0f);
+				 0.1f, 100.0f);
 	}
 
 	// if the shader manager object is valid
