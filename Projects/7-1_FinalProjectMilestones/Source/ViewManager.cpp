@@ -348,13 +348,16 @@ void ViewManager::PrepareSceneView()
 	}
 	else    // orthographic projection
 	{
+		// TODO: determine this programmatically or somehow that isn't a magic number
+		float viewDistance = aspectRatio * 4.0f;
+
 		projection = 
 			glm::ortho(
-				(GLfloat)( -WINDOW_WIDTH / 2.0f),
-				(GLfloat)(  WINDOW_WIDTH  / 2.0f),
-				(GLfloat)(  WINDOW_HEIGHT / 2.0f),
-				(GLfloat)( -WINDOW_HEIGHT / 2.0f),
-				0.0f, 100.0f);
+				-aspectRatio * viewDistance,
+				 aspectRatio * viewDistance,
+				 -viewDistance,
+				 viewDistance,
+				 -100.0f, 100.0f);
 	}
 
 	// if the shader manager object is valid

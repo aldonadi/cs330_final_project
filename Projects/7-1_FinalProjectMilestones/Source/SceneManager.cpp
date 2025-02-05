@@ -415,7 +415,7 @@ void SceneManager::RenderOpenBook()
         //  x           y           z
            2.15f,      0.20f,      2.70f,      // scale
           90.50f,      0.75f,    -43.00f,      // rotation
-          -0.50f,      1.36f,      8.30f,      // position
+          -0.50f,      1.36f,      6.00f,      // position
         //  r           g           b
            0.82f,      0.17f,      0.07f       // color
     );
@@ -426,7 +426,7 @@ void SceneManager::RenderOpenBook()
         //  x           y           z
            2.00f,      0.20f,      2.70f,      // scale
           90.00f,      0.00f,   -141.00f,      // rotation
-           0.95f,      1.36f,      8.26f,      // position
+           0.95f,      1.36f,      5.96f,      // position
         //  r           g           b
            0.82f,      0.17f,      0.07f       // color
     );
@@ -439,7 +439,7 @@ void SceneManager::RenderOpenBook()
         //  x           y           z
            0.91f,      1.34f,      1.22f,      // scale
           90.50f,      0.75f,    -43.00f,      // rotation
-          -0.50f,      1.36f,      8.44f,      // position
+          -0.50f,      1.36f,      6.14f,      // position
         //  r           g           b
            1.00f,      1.00f,      1.00f       // color
     );
@@ -451,7 +451,7 @@ void SceneManager::RenderOpenBook()
         //  x           y           z
            0.91f,      1.34f,      1.22f,      // scale
           90.00f,      0.00f,   -141.00f,      // rotation
-           0.85f,      1.36f,      8.31f,      // position
+           0.85f,      1.36f,      6.01f,      // position
         //  r           g           b
            1.00f,      1.00f,      1.00f       // color
     );
