@@ -123,7 +123,8 @@ public:
 		float rotX,   float rotY,   float rotZ,
 		float posX,   float posY,   float posZ,
 		float colorR, float colorG, float colorB,
-		const std::string textureName = ""
+		const std::string textureName = "", 
+		const std::string overlayTextureName = ""
 	);
 
 	// loads textures from image files

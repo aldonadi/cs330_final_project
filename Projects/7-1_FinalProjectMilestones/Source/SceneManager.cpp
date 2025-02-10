@@ -577,7 +577,8 @@ void SceneManager::TransformAndRender(
 	float rotX,   float rotY,   float rotZ,
 	float posX,   float posY,   float posZ,
 	float colorR, float colorG, float colorB,
-	const std::string textureName)
+	const std::string textureName,
+	const std::string overlayTextureName)
 {
 
 #ifdef _DEBUG
@@ -659,6 +660,14 @@ void SceneManager::TransformAndRender(
 	{
 		// set the color values into the shader
 		SetShaderColor(colorR, colorG, colorB, 1);
+	}
+
+	// set the overlay texture, if specified
+	bool useOverlayTexture = (overlayTextureName != "");
+
+	if (useOverlayTexture) {
+		// set the overlay texture name into the shader
+		SetShaderTextureOverlay(overlayTextureName);
 	}
 
 	// draw the mesh with transformation values
