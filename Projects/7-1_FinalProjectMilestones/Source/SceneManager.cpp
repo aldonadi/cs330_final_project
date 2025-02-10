@@ -302,6 +302,7 @@ void SceneManager::SetTransformations(
  *
  *  This method is used for setting the passed in color
  *  into the shader for the next draw command
+ *  This also resets (toggles off) using an overlay texture
  ***********************************************************/
 void SceneManager::SetShaderColor(
 	float redColorValue,
@@ -320,6 +321,8 @@ void SceneManager::SetShaderColor(
 	if (NULL != m_pShaderManager)
 	{
 		m_pShaderManager->setIntValue(g_UseTextureName, false);
+		m_pShaderManager->setIntValue(g_UseTextureOverlayName, false);
+
 		m_pShaderManager->setVec4Value(g_ColorValueName, currentColor);
 	}
 }
@@ -329,12 +332,15 @@ void SceneManager::SetShaderColor(
  *
  *  This method is used for setting the texture data
  *  associated with the passed in ID into the shader.
+ *  This also resets (toggles off) using an overlay texture
  ***********************************************************/
 void SceneManager::SetShaderTexture(
 	std::string textureTag)
 {
 	if (NULL != m_pShaderManager)
 	{
+		m_pShaderManager->setIntValue(g_UseTextureOverlayName, false);
+
 		m_pShaderManager->setIntValue(g_UseTextureName, true);
 
 		int textureID = -1;
