@@ -397,7 +397,7 @@ void SceneManager::LoadSceneTextures()
 
 	bool bReturn = false;
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/from-my-ai/texture-red-woven-fabric.png",
+		"../../Utilities/textures/from-web/seamless_red_leather_by_fotogrph_d4zjmc2-pre_DeviantArt.jpg",
 		"open-book-cover");
 	assert(bReturn);
 
@@ -479,7 +479,8 @@ void SceneManager::RenderOpenBook()
           90.50f,      0.75f,    -43.00f,      // rotation
           -0.50f,      1.36f,      6.00f,      // position
         //  r           g           b
-           0.82f,      0.17f,      0.07f       // color
+           0.82f,      0.17f,      0.07f,       // color
+		  "open-book-cover"                     // texture
     );
 
     TransformAndRender(
@@ -490,7 +491,8 @@ void SceneManager::RenderOpenBook()
           90.00f,      0.00f,   -141.00f,      // rotation
            0.95f,      1.36f,      5.96f,      // position
         //  r           g           b
-           0.82f,      0.17f,      0.07f       // color
+           0.82f,      0.17f,      0.07f,       // color
+		"open-book-cover"                     // texture
     );
 
 
@@ -545,7 +547,10 @@ void SceneManager::RenderBackdrop()
  *  TransformAndRender()
  *
  *  This method is used for rendering a single Shape with given
- *  scale, rotation, translation, and color data.
+ *  scale, rotation, translation, and color or texture data.
+ *  If textureName is not empty, the texture is selected by name from
+ *  the textures loaded in SceneManager::LoadSceneTextures.
+ *  If textureName is empty, then the color data is used instead.
  *  It takes the draw function that should be called to draw the object.
  *  If the draw func is a member method, it must be properly bound by std::bind.
  ***********************************************************/
@@ -555,7 +560,8 @@ void SceneManager::TransformAndRender(
 	float scaleX, float scaleY, float scaleZ,
 	float rotX,   float rotY,   float rotZ,
 	float posX,   float posY,   float posZ,
-	float colorR, float colorG, float colorB)
+	float colorR, float colorG, float colorB,
+	const std::string textureName)
 {
 
 #ifdef _DEBUG
@@ -626,8 +632,18 @@ void SceneManager::TransformAndRender(
 		ZrotationDegrees,
 		positionXYZ);
 
-	// set the color values into the shader
-	SetShaderColor(colorR, colorG, colorB, 1);
+	// texture is assumed if textureName is not blank
+	bool useTexture = (textureName != "");
+
+	if (useTexture) {
+		// set the texture name into the shader
+		SetShaderTexture(textureName);
+	}
+	else
+	{
+		// set the color values into the shader
+		SetShaderColor(colorR, colorG, colorB, 1);
+	}
 
 	// draw the mesh with transformation values
 	ShapeDrawFunc();

@@ -113,14 +113,15 @@ public:
 	void RenderBackdrop();
 	void RenderOpenBook();
 
-	// draw the specified shape with given scale, rotation, position, and color
+	// draw the specified shape with given scale, rotation, position, and color or texture
 	void TransformAndRender(
 		std::string objName,
 		std::function<void()> ShapeDrawFunc,
 		float scaleX, float scaleY, float scaleZ,
 		float rotX,   float rotY,   float rotZ,
 		float posX,   float posY,   float posZ,
-		float colorR, float colorG, float colorB
+		float colorR, float colorG, float colorB,
+		const std::string textureName = ""
 	);
 
 	// loads textures from image files
