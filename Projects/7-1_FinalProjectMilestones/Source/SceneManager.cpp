@@ -397,38 +397,23 @@ void SceneManager::LoadSceneTextures()
 
 	bool bReturn = false;
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/from-web/seamless_red_leather_by_fotogrph_d4zjmc2-pre_DeviantArt.jpg",
+		"../../Utilities/textures/from-my-gimp/book-cover-red-leather.png",
 		"open-book-cover");
 	assert(bReturn);
 
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/gold-seamless-texture.jpg",
-		"cylinder");
+		"../../Utilities/textures/from-my-gimp/open-book-left-page.png",
+		"open-book-left-page");
 	assert(bReturn);
 
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/circular-brushed-gold-texture.jpg",
-		"cylinder_top");
+		"../../Utilities/textures/from-my-gimp/open-book-right-page.png",
+		"open-book-right-page");
 	assert(bReturn);
 
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/rusticwood.jpg",
-		"plank");
-	assert(bReturn);
-
-	bReturn = CreateGLTexture(
-		"../../Utilities/textures/tilesf2.jpg",
-		"box");
-	assert(bReturn);
-
-	bReturn = CreateGLTexture(
-		"../../Utilities/textures/stainedglass.jpg",
-		"ball");
-	assert(bReturn);
-
-	bReturn = CreateGLTexture(
-		"../../Utilities/textures/abstract.jpg",
-		"cone");
+		"../../Utilities/textures/from-my-gimp/open-book-page-crinkle-effect.png",
+		"open-book-page-crinkle-effect");
 	assert(bReturn);
 
 	// after the texture image data is loaded into memory, the
@@ -505,7 +490,8 @@ void SceneManager::RenderOpenBook()
           90.50f,      0.75f,    -43.00f,      // rotation
           -0.50f,      1.36f,      6.14f,      // position
         //  r           g           b
-           1.00f,      1.00f,      1.00f       // color
+           1.00f,      1.00f,      1.00f,      // color
+		  "open-book-left-page"
     );
 
 
@@ -517,7 +503,8 @@ void SceneManager::RenderOpenBook()
           90.00f,      0.00f,   -141.00f,      // rotation
            0.85f,      1.36f,      6.01f,      // position
         //  r           g           b
-           1.00f,      1.00f,      1.00f       // color
+           1.00f,      1.00f,      1.00f,       // color
+		  "open-book-right-page"
     );
 
 
