@@ -44,13 +44,25 @@ vec3 CalcLightSource(LightSource light, vec3 lightNormal, vec3 vertexPosition, v
 void main()
 {
    vec4 effectiveObjectColor;
+   vec4 effectiveTextureColor;
    
    if ((bUseTexture == false) && (bUseTextureOverlay == true))
    {
 		vec4 textureOverlayColor = texture(objectTextureOverlay, fragmentTextureCoordinate * UVscale);
 		effectiveObjectColor = mix(objectColor, textureOverlayColor, 0.5);
    }
-   else {
+   else if ((bUseTexture == true) && (bUseTextureOverlay == true))
+   {
+      vec4 textureColor = texture(objectTexture, fragmentTextureCoordinate * UVscale);
+	  vec4 textureOverlayColor = texture(objectTextureOverlay, fragmentTextureCoordinate * UVscale);
+	  effectiveTextureColor = mix(textureColor, textureOverlayColor, 0.5);
+   }
+   else if ((bUseTexture == true) && (bUseTextureOverlay == false))
+   {
+      effectiveTextureColor = texture(objectTexture, fragmentTextureCoordinate * UVscale);
+   }
+   else
+   {
       effectiveObjectColor = objectColor;
    }
 
@@ -68,13 +80,7 @@ void main()
     
       if(bUseTexture == true)
       {
-         vec4 textureColor = texture(objectTexture, fragmentTextureCoordinate * UVscale);
-		 if (bUseTextureOverlay)
-		 {
-		    vec4 textureOverlayColor = texture(objectTextureOverlay, fragmentTextureCoordinate * UVscale);
-			textureColor = mix(textureColor, textureOverlayColor, 0.5);
-		 }
-         outFragmentColor = vec4(phongResult * textureColor.xyz, 1.0);
+         outFragmentColor = vec4(phongResult * effectiveTextureColor.xyz, 1.0);
       }
       else
       {
@@ -85,17 +91,12 @@ void main()
    {
       if(bUseTexture == true)
       {
-         outFragmentColor = texture(objectTexture, fragmentTextureCoordinate * UVscale);
+         outFragmentColor = effectiveTextureColor;
       }
       else
       {
          outFragmentColor = effectiveObjectColor;
       }
-   }
-   
-   if (bUseTextureOverlay)
-   {
-      
    }
 }
 
