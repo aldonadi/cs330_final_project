@@ -426,22 +426,22 @@ void SceneManager::LoadSceneTextures()
 
 	bool bReturn = false;
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/from-my-gimp/book-cover-red-leather.png",
+		"../../Utilities/textures/from-my-ai/book-cover-red-leather.png",
 		"open-book-cover");
 	assert(bReturn);
 
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/from-my-gimp/open-book-left-page.png",
+		"../../Utilities/textures/from-my-ai/open-book-left-page.png",
 		"open-book-left-page");
 	assert(bReturn);
 
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/from-my-gimp/open-book-right-page.png",
+		"../../Utilities/textures/from-my-ai/open-book-right-page.png",
 		"open-book-right-page");
 	assert(bReturn);
 
 	bReturn = CreateGLTexture(
-		"../../Utilities/textures/from-my-gimp/open-book-page-crinkle-effect.png",
+		"../../Utilities/textures/from-my-ai/open-book-page-crinkle-effect.png",
 		"open-book-page-crinkle-effect");
 	assert(bReturn);
 
