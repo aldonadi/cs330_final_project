@@ -203,7 +203,7 @@ void ViewManager::Mouse_Scrollwheel_Callback(GLFWwindow* window, double xOffset,
 	g_pCamera->MouseSensitivity += (g_pCamera->MouseSensitivity * (0.02 * yOffset));
 
 	// adjust movement speed
-	g_pCamera->MovementSpeed += (g_pCamera->MovementSpeed * (0.02 * yOffset));
+	g_pCamera->MovementSpeed += (g_pCamera->MovementSpeed * (0.04 * yOffset));
 
 	// sanity checks: mouse sensitivity
 	if (g_pCamera->MouseSensitivity > MAX_MOUSE_SENSITIVITY) {
