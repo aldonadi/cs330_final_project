@@ -28,7 +28,9 @@ namespace
 	const char* g_ModelName = "model";
 	const char* g_ColorValueName = "objectColor";
 	const char* g_TextureValueName = "objectTexture";
+	const char* g_TextureOverlayValueName = "objectTextureOverlay";
 	const char* g_UseTextureName = "bUseTexture";
+	const char* g_UseTextureOverlayName = "bUseTextureOverlay";
 	const char* g_UseLightingName = "bUseLighting";
 }
 
@@ -338,6 +340,27 @@ void SceneManager::SetShaderTexture(
 		int textureID = -1;
 		textureID = FindTextureSlot(textureTag);
 		m_pShaderManager->setSampler2DValue(g_TextureValueName, textureID);
+	}
+}
+
+/***********************************************************
+ *  SetShaderTextureOverlay()
+ *
+ *  This method is used for setting a second texture overlay
+ *  associated with the passed in ID into the shader.
+ *  This texture should have transparency if the "underneath"
+ *  texture should be visible.
+ ***********************************************************/
+void SceneManager::SetShaderTextureOverlay(
+	std::string textureTag)
+{
+	if (NULL != m_pShaderManager)
+	{
+		m_pShaderManager->setIntValue(g_UseTextureOverlayName, true);
+
+		int textureID = -1;
+		textureID = FindTextureSlot(textureTag);
+		m_pShaderManager->setSampler2DValue(g_TextureOverlayValueName, textureID);
 	}
 }
 

@@ -95,6 +95,8 @@ private:
 	void SetShaderTexture(
 		std::string textureTag);
 
+	void SetShaderTextureOverlay(std::string textureTag);
+
 	// set the UV scale for the texture mapping
 	void SetTextureUVScale(
 		float u, float v);
