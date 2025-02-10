@@ -534,7 +534,8 @@ void SceneManager::RenderOpenBook()
            0.85f,      1.36f,      6.01f,      // position
         //  r           g           b
            1.00f,      1.00f,      1.00f,       // color
-		  "open-book-right-page"
+		  "open-book-right-page",
+		  "open-book-page-crinkle-effect"
     );
 
 
