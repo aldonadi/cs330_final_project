@@ -41,6 +41,14 @@ SceneManager::SceneManager(ShaderManager *pShaderManager)
 {
 	m_pShaderManager = pShaderManager;
 	m_basicMeshes = new ShapeMeshes();
+
+	// initialize the texture collection
+	for (int i = 0; i < 16; i++)
+	{
+		m_textureIDs[i].tag = "/0";
+		m_textureIDs[i].ID = -1;
+	}
+	m_loadedTextures = 0;
 }
 
 /***********************************************************
@@ -53,6 +61,9 @@ SceneManager::~SceneManager()
 	m_pShaderManager = NULL;
 	delete m_basicMeshes;
 	m_basicMeshes = NULL;
+
+	// destroy the created OpenGL textures
+	DestroyGLTextures();
 }
 
 /***********************************************************
@@ -377,6 +388,54 @@ void SceneManager::SetShaderMaterial(
 /*** for assistance.                                        ***/
 /**************************************************************/
 
+void SceneManager::LoadSceneTextures()
+{
+	/*** STUDENTS - add the code BELOW for loading the textures that ***/
+	/*** will be used for mapping to objects in the 3D scene. Up to  ***/
+	/*** 16 textures can be loaded per scene. Refer to the code in   ***/
+	/*** the OpenGL Sample for help.                                 ***/
+
+	bool bReturn = false;
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-ai/texture-red-woven-fabric.png",
+		"open-book-cover");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/gold-seamless-texture.jpg",
+		"cylinder");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/circular-brushed-gold-texture.jpg",
+		"cylinder_top");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/rusticwood.jpg",
+		"plank");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/tilesf2.jpg",
+		"box");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/stainedglass.jpg",
+		"ball");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/abstract.jpg",
+		"cone");
+	assert(bReturn);
+
+	// after the texture image data is loaded into memory, the
+	// loaded textures need to be bound to texture slots - there
+	// are a total of 16 available slots for scene textures
+	BindGLTextures();
+}
 
 /***********************************************************
  *  PrepareScene()
@@ -386,7 +445,10 @@ void SceneManager::SetShaderMaterial(
  *  rendering
  ***********************************************************/
 void SceneManager::PrepareScene()
-{
+{ 
+	// load the textures for the 3D scene
+	LoadSceneTextures();
+
 	// only one instance of a particular mesh needs to be
 	// loaded in memory no matter how many times it is drawn
 	// in the rendered 3D scene

@@ -123,6 +123,9 @@ public:
 		float colorR, float colorG, float colorB
 	);
 
+	// loads textures from image files
+	void LoadSceneTextures();
+
 	
 
 #ifdef _DEBUG
