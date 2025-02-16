@@ -38,6 +38,9 @@ uniform vec2 UVscale = vec2(1.0f, 1.0f);
 uniform LightSource lightSources[TOTAL_LIGHTS];
 uniform Material material;
 
+// TODO: remove
+uniform bool bUseLightDiffuseColor=false;
+
 // function prototypes
 vec3 CalcLightSource(LightSource light, vec3 lightNormal, vec3 vertexPosition, vec3 viewDirection);
 
@@ -118,7 +121,8 @@ vec3 CalcLightSource(LightSource light, vec3 lightNormal, vec3 vertexPosition, v
    // Calculate diffuse impact by generating dot product of normal and light
    float impact = max(dot(lightNormal, lightDirection), 0.0);
    // Generate diffuse material color   
-   diffuse = impact * material.diffuseColor; 
+   diffuse = impact * material.diffuseColor * light.diffuseColor; 
+   
 
    //**Calculate Specular lighting**
 
