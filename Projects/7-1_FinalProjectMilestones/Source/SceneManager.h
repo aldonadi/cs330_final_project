@@ -125,7 +125,8 @@ public:
 		float posX,   float posY,   float posZ,
 		float colorR, float colorG, float colorB,
 		const std::string textureName = "", 
-		const std::string overlayTextureName = ""
+		const std::string overlayTextureName = "",
+		const std::string materialName = ""
 	);
 
 	// configures the different materials for 3D objects

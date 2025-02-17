@@ -440,6 +440,19 @@ void SceneManager::DefineObjectMaterials()
 	 ** **tag** is a special string that is used to identify the material in the collection.
 	 **/
 
+	// default material is an adaptation of "white rubber" from
+	//  http://www.it.hiof.no/~borres/j3d/explain/light/p-materials.html
+
+	OBJECT_MATERIAL defaultMaterial;
+	defaultMaterial.ambientColor = glm::vec3(0.05f, 0.05f, 0.05f);
+	defaultMaterial.ambientStrength = 1.0f;
+	defaultMaterial.diffuseColor = glm::vec3(0.5f, 0.5f, 0.5f);
+	defaultMaterial.specularColor = glm::vec3(0.7f, 0.7f, 0.7f);
+	defaultMaterial.shininess = 10.0;
+	defaultMaterial.tag = "default";
+
+	m_objectMaterials.push_back(defaultMaterial);
+	
 	OBJECT_MATERIAL goldMaterial;
 	goldMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
 	goldMaterial.ambientStrength = 0.1f;
@@ -537,7 +550,7 @@ void SceneManager::SetupSceneLights()
 	 ** **specularIntensity** is a float value that defines the intensity of the emited specular lighting.
 	 **/
 
-	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 14.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 24.0f, 0.0f);
 	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 1.0f, 1.0f, 1.0f);
 	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.74f, 0.38f, 0.45f);
 	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 1.0f, 1.0f, 1.0f);
@@ -724,7 +737,8 @@ void SceneManager::TransformAndRender(
 	float posX,   float posY,   float posZ,
 	float colorR, float colorG, float colorB,
 	const std::string textureName,
-	const std::string overlayTextureName)
+	const std::string overlayTextureName,
+	const std::string materialName)
 {
 
 #ifdef _DEBUG
@@ -814,6 +828,15 @@ void SceneManager::TransformAndRender(
 	if (useOverlayTexture) {
 		// set the overlay texture name into the shader
 		SetShaderTextureOverlay(overlayTextureName);
+	}
+
+	// set the material if specified, otherwise set the default material
+	if (materialName != "") {
+		SetShaderMaterial(materialName);
+	}
+	else
+	{
+		SetShaderMaterial("default");
 	}
 
 	// draw the mesh with transformation values
