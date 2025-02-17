@@ -654,19 +654,19 @@ void ShapeMeshes::LoadTilingPlaneMesh(double xTileCount, double yTileCount)
 	};
 
 	// store vertex and index count
-	m_PlaneMesh.nVertices = sizeof(verts) / (sizeof(verts[0]) * (g_FloatsPerVertex + g_FloatsPerNormal + g_FloatsPerUV));
-	m_PlaneMesh.nIndices = sizeof(indices) / sizeof(indices[0]);
+	m_TilingPlaneMesh.nVertices = sizeof(verts) / (sizeof(verts[0]) * (g_FloatsPerVertex + g_FloatsPerNormal + g_FloatsPerUV));
+	m_TilingPlaneMesh.nIndices = sizeof(indices) / sizeof(indices[0]);
 
 	// Generate the VAO for the mesh
-	glGenVertexArrays(1, &m_PlaneMesh.vao);
-	glBindVertexArray(m_PlaneMesh.vao);	// activate the VAO
+	glGenVertexArrays(1, &m_TilingPlaneMesh.vao);
+	glBindVertexArray(m_TilingPlaneMesh.vao);	// activate the VAO
 
 	// Create VBOs for the mesh
-	glGenBuffers(2, m_PlaneMesh.vbos);
-	glBindBuffer(GL_ARRAY_BUFFER, m_PlaneMesh.vbos[0]); // Activates the buffer
+	glGenBuffers(2, m_TilingPlaneMesh.vbos);
+	glBindBuffer(GL_ARRAY_BUFFER, m_TilingPlaneMesh.vbos[0]); // Activates the buffer
 	glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW); // Sends data to the GPU
 
-	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_PlaneMesh.vbos[1]); // Activates the buffer
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TilingPlaneMesh.vbos[1]); // Activates the buffer
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
 
 	if (m_bMemoryLayoutDone == false)
@@ -2317,6 +2317,21 @@ void ShapeMeshes::DrawPlaneMesh()
 
 	glDrawElements(GL_TRIANGLES, m_PlaneMesh.nIndices, GL_UNSIGNED_INT, (void*)0);
 	
+	glBindVertexArray(0);
+}
+
+///////////////////////////////////////////////////
+//	DrawTilingPlaneMesh()
+//
+//	Transform and draw the plane mesh to the window.
+// 
+///////////////////////////////////////////////////
+void ShapeMeshes::DrawTilingPlaneMesh()
+{
+	glBindVertexArray(m_PlaneMesh.vao);
+
+	glDrawElements(GL_TRIANGLES, m_PlaneMesh.nIndices, GL_UNSIGNED_INT, (void*)0);
+
 	glBindVertexArray(0);
 }
 

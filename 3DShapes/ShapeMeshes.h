@@ -42,6 +42,7 @@ private:
 	GLMesh m_ConeMesh;
 	GLMesh m_CylinderMesh;
 	GLMesh m_PlaneMesh;
+	GLMesh m_TilingPlaneMesh;
 	GLMesh m_PrismMesh;
 	GLMesh m_Pyramid3Mesh;
 	GLMesh m_Pyramid4Mesh;
@@ -76,6 +77,7 @@ public:
 		bool bDrawBottom=true,
 		bool bDrawSides = true);
 	void DrawPlaneMesh();
+	void DrawTilingPlaneMesh();
 	void DrawPrismMesh();
 	void DrawPyramid3Mesh();
 	void DrawPyramid4Mesh();
