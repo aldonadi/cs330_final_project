@@ -51,6 +51,7 @@ public:
 		std::string tag;
 	};
 
+
 private:
 	// pointer to shader manager object
 	ShaderManager* m_pShaderManager;
@@ -64,7 +65,7 @@ private:
 	std::vector<OBJECT_MATERIAL> m_objectMaterials;
 
 	// load texture images and convert to OpenGL texture data
-	bool CreateGLTexture(const char* filename, std::string tag);
+	bool CreateGLTexture(const char* filename, std::string tagT);
 	// bind loaded OpenGL textures to slots in memory
 	void BindGLTextures();
 	// free the loaded OpenGL textures
@@ -124,8 +125,15 @@ public:
 		float posX,   float posY,   float posZ,
 		float colorR, float colorG, float colorB,
 		const std::string textureName = "", 
-		const std::string overlayTextureName = ""
+		const std::string overlayTextureName = "",
+		const std::string materialName = ""
 	);
+
+	// configures the different materials for 3D objects
+	void DefineObjectMaterials();
+
+	// configures light sources for the scene
+	void SetupSceneLights();
 
 	// loads textures from image files
 	void LoadSceneTextures();

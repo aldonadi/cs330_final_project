@@ -621,6 +621,61 @@ void ShapeMeshes::LoadPlaneMesh()
 }
 
 ///////////////////////////////////////////////////
+//	LoadTilingPlaneMesh(xTileCount, yTileCount)
+//
+//	Create a plane mesh with configuriable texture tiling
+//  You can specify how 
+// 
+//  by specifying the vertices and 
+//  store it in a VAO/VBO.  The normals and texture
+//  coordinates are also set.
+// 
+//  Correct triangle drawing command:
+//
+//	glDrawElements(GL_TRIANGLES, meshes.gPlaneMesh.nIndices, GL_UNSIGNED_INT, (void*)0);
+///////////////////////////////////////////////////
+void ShapeMeshes::LoadTilingPlaneMesh(double xTileCount, double yTileCount)
+{
+	// Vertex data
+	// With texture wrapping set to GL_REPEAT, any texture coordinate > 1.0 will be
+	// will choose a color from the texture using a wrapped/module coordinate
+	GLfloat verts[] = {
+		// Vertex Positions		// Normals			// Texture coords	      // Index
+		-1.0f, 0.0f, 1.0f,		0.0f, 1.0f, 0.0f,	0.0f,       0.0f,			//0
+		1.0f, 0.0f, 1.0f,		0.0f, 1.0f, 0.0f,	xTileCount, 0.0f,			//1
+		1.0f,  0.0f, -1.0f,		0.0f, 1.0f, 0.0f,	xTileCount, yTileCount,		//2
+		-1.0f, 0.0f, -1.0f,		0.0f, 1.0f, 0.0f,	0.0f,       yTileCount,		//3
+	};
+
+	// Index data
+	GLuint indices[] = {
+		0,1,2,
+		0,3,2
+	};
+
+	// store vertex and index count
+	m_TilingPlaneMesh.nVertices = sizeof(verts) / (sizeof(verts[0]) * (g_FloatsPerVertex + g_FloatsPerNormal + g_FloatsPerUV));
+	m_TilingPlaneMesh.nIndices = sizeof(indices) / sizeof(indices[0]);
+
+	// Generate the VAO for the mesh
+	glGenVertexArrays(1, &m_TilingPlaneMesh.vao);
+	glBindVertexArray(m_TilingPlaneMesh.vao);	// activate the VAO
+
+	// Create VBOs for the mesh
+	glGenBuffers(2, m_TilingPlaneMesh.vbos);
+	glBindBuffer(GL_ARRAY_BUFFER, m_TilingPlaneMesh.vbos[0]); // Activates the buffer
+	glBufferData(GL_ARRAY_BUFFER, sizeof(verts), verts, GL_STATIC_DRAW); // Sends data to the GPU
+
+	glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_TilingPlaneMesh.vbos[1]); // Activates the buffer
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+
+	if (m_bMemoryLayoutDone == false)
+	{
+		SetShaderMemoryLayout();
+	}
+}
+
+///////////////////////////////////////////////////
 //	LoadPrismMesh()
 //
 //	Create a prism mesh by specifying the vertices and 
@@ -2262,6 +2317,21 @@ void ShapeMeshes::DrawPlaneMesh()
 
 	glDrawElements(GL_TRIANGLES, m_PlaneMesh.nIndices, GL_UNSIGNED_INT, (void*)0);
 	
+	glBindVertexArray(0);
+}
+
+///////////////////////////////////////////////////
+//	DrawTilingPlaneMesh()
+//
+//	Transform and draw the plane mesh to the window.
+// 
+///////////////////////////////////////////////////
+void ShapeMeshes::DrawTilingPlaneMesh()
+{
+	glBindVertexArray(m_TilingPlaneMesh.vao);
+
+	glDrawElements(GL_TRIANGLES, m_TilingPlaneMesh.nIndices, GL_UNSIGNED_INT, (void*)0);
+
 	glBindVertexArray(0);
 }
 

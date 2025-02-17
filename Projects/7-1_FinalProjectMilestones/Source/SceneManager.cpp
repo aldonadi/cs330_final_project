@@ -19,6 +19,7 @@
 #endif
 
 #include <glm/gtx/transform.hpp>
+#include <GLFW/glfw3.h>
 
 #include <functional>
 
@@ -106,8 +107,10 @@ bool SceneManager::CreateGLTexture(const char* filename, std::string tag)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		// set texture filtering parameters
+
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 
 		// if the loaded image is in RGB format
 		if (colorChannels == 3)
@@ -258,6 +261,9 @@ bool SceneManager::FindMaterial(std::string tag, OBJECT_MATERIAL& material)
 
 	return(true);
 }
+
+
+
 
 /***********************************************************
  *  SetTransformations()
@@ -417,6 +423,154 @@ void SceneManager::SetShaderMaterial(
 /*** for assistance.                                        ***/
 /**************************************************************/
 
+ /***********************************************************
+  *  DefineObjectMaterials()
+  *
+  *  This method is used for configuring the various material
+  *  settings for all of the objects within the 3D scene.
+  ***********************************************************/
+void SceneManager::DefineObjectMaterials()
+{
+	/**
+	 ** Material Properties
+	 **
+	 ** **ambientColor** is a vec3 color value that can be used to set the ambient emission color.
+	 ** **ambientStrength** is a float value that defines how much ambient light is emited.
+	 ** **diffuseColor** is a vec3 color value that defines the diffuse light emission color.
+	 ** **specularColor** is a vec3 color value that defines the specular light reflection color.
+	 ** **shininess** is a float value that tells how shiny the material is and how much specular light will be
+	 **   reflected off the surface.
+	 ** **tag** is a special string that is used to identify the material in the collection.
+	 **/
+
+	// default material is an adaptation of "white rubber" from
+	//  http://www.it.hiof.no/~borres/j3d/explain/light/p-materials.html
+
+	OBJECT_MATERIAL defaultMaterial;
+	defaultMaterial.ambientColor = glm::vec3(0.5f, 0.5f, 0.5f);
+	defaultMaterial.ambientStrength = 0.1f;
+	defaultMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	defaultMaterial.specularColor = glm::vec3(0.7f, 0.7f, 0.7f);
+	defaultMaterial.shininess = 10.0;
+	defaultMaterial.tag = "default";
+
+	m_objectMaterials.push_back(defaultMaterial);
+	
+	OBJECT_MATERIAL goldMaterial;
+	goldMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
+	goldMaterial.ambientStrength = 0.1f;
+	goldMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	goldMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	goldMaterial.shininess = 22.0;
+	goldMaterial.tag = "gold";
+
+	m_objectMaterials.push_back(goldMaterial);
+
+	OBJECT_MATERIAL cementMaterial;
+	cementMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.2f);
+	cementMaterial.ambientStrength = 0.1f;
+	cementMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	cementMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	cementMaterial.shininess = 0.5;
+	cementMaterial.tag = "cement";
+
+	m_objectMaterials.push_back(cementMaterial);
+
+	OBJECT_MATERIAL woodMaterial;
+	woodMaterial.ambientColor = glm::vec3(0.4f, 0.3f, 0.1f);
+	woodMaterial.ambientStrength = 0.1;
+	woodMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	woodMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	woodMaterial.shininess = 0.3;
+	woodMaterial.tag = "wood";
+
+	m_objectMaterials.push_back(woodMaterial);
+
+	OBJECT_MATERIAL tileMaterial;
+	tileMaterial.ambientColor = glm::vec3(0.2f, 0.3f, 0.4f);
+	tileMaterial.ambientStrength = 0.1f;
+	tileMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	tileMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	tileMaterial.shininess = 25.0;
+	tileMaterial.tag = "tile";
+
+	m_objectMaterials.push_back(tileMaterial);
+
+	OBJECT_MATERIAL glassMaterial;
+	glassMaterial.ambientColor = glm::vec3(0.4f, 0.4f, 0.4f);
+	glassMaterial.ambientStrength = 0.1f;
+	glassMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	glassMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	glassMaterial.shininess = 85.0;
+	glassMaterial.tag = "glass";
+
+	m_objectMaterials.push_back(glassMaterial);
+
+	OBJECT_MATERIAL clayMaterial;
+	clayMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.3f);
+	clayMaterial.ambientStrength = 0.1f;
+	clayMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	clayMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	clayMaterial.shininess = 0.5;
+	clayMaterial.tag = "clay";
+
+	m_objectMaterials.push_back(clayMaterial);
+
+	OBJECT_MATERIAL tutorialMaterial;
+	tutorialMaterial.ambientColor = glm::vec3(0.74f, 0.38f, 0.45f);
+	tutorialMaterial.ambientStrength = 0.5f;
+	tutorialMaterial.diffuseColor = glm::vec3(0.74f, 0.38f, 0.45f);
+	tutorialMaterial.specularColor = glm::vec3(0.5f, 0.5f, 0.5f);
+	tutorialMaterial.shininess = 32.0f;
+	tutorialMaterial.tag = "light";
+
+	m_objectMaterials.push_back(tutorialMaterial);
+
+}
+
+/***********************************************************
+ *  SetupSceneLights()
+ *
+ *  This method is called to add and configure the light
+ *  sources for the 3D scene.  There are up to 4 light sources.
+ ***********************************************************/
+void SceneManager::SetupSceneLights()
+{
+	// this line of code is NEEDED for telling the shaders to render 
+	// the 3D scene with custom lighting, if no light sources have
+	// been added then the display window will be black - to use the 
+	// default OpenGL lighting then comment out the following line
+	m_pShaderManager->setBoolValue(g_UseLightingName, true);
+
+	/**
+	 ** Light Properties
+	 **
+	 ** **position** is a vec3 value that sets the position of the light source in 3D space.
+	 ** **ambientColor** is a vec3 value that defines the color of the ambient light being emited.
+	 ** **diffuseColor** is a vec3 value that defines the color of the diffuse light being emited.
+	 ** **specularColor** is a vec3 value that defines the color of the specular light being emited.
+	 ** **focalStrength** is a float value that defines the focus of the light beam being emited.
+	 ** **specularIntensity** is a float value that defines the intensity of the emited specular lighting.
+	 **/
+
+	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 14.0f, 3.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.3f, 0.3f, 0.3f);
+	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 1.0f, 1.0f, 1.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 1.0f, 1.0f, 1.0f);
+	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 32.0f);
+	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.05f);
+
+	/*
+	m_pShaderManager->setVec3Value("lightSources[1].position", -5.0f, 3.0f, 5.0f);
+	m_pShaderManager->setVec3Value("lightSources[1].ambientColor", 0.1f, 0.1f, 0.1f);
+	m_pShaderManager->setVec3Value("lightSources[1].diffuseColor", 0.3f, 0.3f, 0.3f);
+	m_pShaderManager->setVec3Value("lightSources[1].specularColor", 1.0f, 1.0f, 1.0f);
+	m_pShaderManager->setFloatValue("lightSources[1].focalStrength", 32.0f);
+	m_pShaderManager->setFloatValue("lightSources[1].specularIntensity", 0.05f);
+	*/
+
+}
+
 void SceneManager::LoadSceneTextures()
 {
 	/*** STUDENTS - add the code BELOW for loading the textures that ***/
@@ -445,6 +599,11 @@ void SceneManager::LoadSceneTextures()
 		"open-book-page-crinkle-effect");
 	assert(bReturn);
 
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-ai/wood_paneling.png",
+		"wood-paneling");
+	assert(bReturn);
+
 	// after the texture image data is loaded into memory, the
 	// loaded textures need to be bound to texture slots - there
 	// are a total of 16 available slots for scene textures
@@ -463,11 +622,18 @@ void SceneManager::PrepareScene()
 	// load the textures for the 3D scene
 	LoadSceneTextures();
 
+	// load the materials for scene objects
+	DefineObjectMaterials();
+
+	// load the light sources for the scene
+	SetupSceneLights();
+
 	// only one instance of a particular mesh needs to be
 	// loaded in memory no matter how many times it is drawn
 	// in the rendered 3D scene
 
-	m_basicMeshes->LoadPlaneMesh();    // floor, pages
+	m_basicMeshes->LoadTilingPlaneMesh(10.0, 5.0);    // floor
+	m_basicMeshes->LoadPlaneMesh();    // pages
 	m_basicMeshes->LoadBoxMesh();      // books
 }
 
@@ -494,7 +660,9 @@ void SceneManager::RenderOpenBook()
           -0.50f,      1.36f,      6.00f,      // position
         //  r           g           b
            0.82f,      0.17f,      0.07f,       // color
-		  "open-book-cover"                     // texture
+		  "open-book-cover",                     // texture
+		  "",                                   // texture overlay
+		  "glass"                               // material
     );
 
     TransformAndRender(
@@ -506,7 +674,9 @@ void SceneManager::RenderOpenBook()
            0.95f,      1.36f,      5.96f,      // position
         //  r           g           b
            0.82f,      0.17f,      0.07f,       // color
-		"open-book-cover"                     // texture
+		"open-book-cover",                     // texture
+		"",                                   // texture overlay
+		"glass"                               // material
     );
 
 
@@ -538,27 +708,28 @@ void SceneManager::RenderOpenBook()
 		  "open-book-page-crinkle-effect"
     );
 
-
-
-
-
-
 }
 
 void SceneManager::RenderBackdrop()
 {
+
+	
+	const std::string material = ((int)glfwGetTime() % 2 == 0) ? "" : "wood";
+
 	/****** The Floor *******/
 	TransformAndRender(
 		"floor",
-		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		std::bind(&ShapeMeshes::DrawTilingPlaneMesh, m_basicMeshes),
 		// x        y        z
 		20.0f,     1.0f,   10.0f,    // scale
 		0.0f,      0.0f,   0.0f,    // rotation
 		0.0f,      0.0f,   0.0f,   // position
 		// R        G        B
-		0.68,      0.41,    0.17     // color   ("wood-floor brown")
+		0.68,      0.41,    0.17,     // color   ("wood-floor brown")
+		"wood-paneling",    // texture
+		"",                 // texture overlay
+		material              // material
 	);
-	
 }
 
 /***********************************************************
@@ -580,7 +751,8 @@ void SceneManager::TransformAndRender(
 	float posX,   float posY,   float posZ,
 	float colorR, float colorG, float colorB,
 	const std::string textureName,
-	const std::string overlayTextureName)
+	const std::string overlayTextureName,
+	const std::string materialName)
 {
 
 #ifdef _DEBUG
@@ -670,6 +842,15 @@ void SceneManager::TransformAndRender(
 	if (useOverlayTexture) {
 		// set the overlay texture name into the shader
 		SetShaderTextureOverlay(overlayTextureName);
+	}
+
+	// set the material if specified, otherwise set the default material
+	if (materialName != "") {
+		SetShaderMaterial(materialName);
+	}
+	else
+	{
+		SetShaderMaterial("default");
 	}
 
 	// draw the mesh with transformation values
