@@ -65,7 +65,7 @@ private:
 	std::vector<OBJECT_MATERIAL> m_objectMaterials;
 
 	// load texture images and convert to OpenGL texture data
-	bool CreateGLTexture(const char* filename, std::string tag);
+	bool CreateGLTexture(const char* filename, std::string tagT);
 	// bind loaded OpenGL textures to slots in memory
 	void BindGLTextures();
 	// free the loaded OpenGL textures

@@ -58,6 +58,7 @@ public:
 	void LoadConeMesh();
 	void LoadCylinderMesh();
 	void LoadPlaneMesh();
+	void LoadTilingPlaneMesh(double xTileCount, double yTileCount);
 	void LoadPrismMesh();
 	void LoadPyramid3Mesh();
 	void LoadPyramid4Mesh();

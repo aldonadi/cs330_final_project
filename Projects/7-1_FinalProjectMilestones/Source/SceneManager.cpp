@@ -106,8 +106,10 @@ bool SceneManager::CreateGLTexture(const char* filename, std::string tag)
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		// set texture filtering parameters
+
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+
 
 		// if the loaded image is in RGB format
 		if (colorChannels == 3)
@@ -596,6 +598,11 @@ void SceneManager::LoadSceneTextures()
 		"open-book-page-crinkle-effect");
 	assert(bReturn);
 
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-ai/wood_paneling.png",
+		"wood-paneling");
+	assert(bReturn);
+
 	// after the texture image data is loaded into memory, the
 	// loaded textures need to be bound to texture slots - there
 	// are a total of 16 available slots for scene textures
@@ -713,7 +720,8 @@ void SceneManager::RenderBackdrop()
 		0.0f,      0.0f,   0.0f,    // rotation
 		0.0f,      0.0f,   0.0f,   // position
 		// R        G        B
-		0.68,      0.41,    0.17     // color   ("wood-floor brown")
+		0.68,      0.41,    0.17,     // color   ("wood-floor brown")
+		"wood-paneling"
 	);
 	
 }
