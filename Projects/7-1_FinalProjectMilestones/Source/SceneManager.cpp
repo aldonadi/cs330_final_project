@@ -553,9 +553,9 @@ void SceneManager::SetupSceneLights()
 	 ** **specularIntensity** is a float value that defines the intensity of the emited specular lighting.
 	 **/
 
-	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 24.0f, 3.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 14.0f, 3.0f);
 	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.3f, 0.3f, 0.3f);
-	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.8f, 0.8f, 0.8f);
+	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 1.0f, 1.0f, 1.0f);
 	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 1.0f, 1.0f, 1.0f);
 	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 32.0f);
 	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.05f);
