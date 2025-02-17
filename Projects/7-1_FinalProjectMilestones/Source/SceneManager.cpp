@@ -19,6 +19,7 @@
 #endif
 
 #include <glm/gtx/transform.hpp>
+#include <GLFW/glfw3.h>
 
 #include <functional>
 
@@ -552,7 +553,7 @@ void SceneManager::SetupSceneLights()
 	 ** **specularIntensity** is a float value that defines the intensity of the emited specular lighting.
 	 **/
 
-	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 24.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 24.0f, 3.0f);
 	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.3f, 0.3f, 0.3f);
 	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.8f, 0.8f, 0.8f);
 	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 1.0f, 1.0f, 1.0f);
@@ -631,7 +632,7 @@ void SceneManager::PrepareScene()
 	// loaded in memory no matter how many times it is drawn
 	// in the rendered 3D scene
 
-	m_basicMeshes->LoadTilingPlaneMesh(20.0, 10.0);    // floor
+	m_basicMeshes->LoadTilingPlaneMesh(10.0, 5.0);    // floor
 	m_basicMeshes->LoadPlaneMesh();    // pages
 	m_basicMeshes->LoadBoxMesh();      // books
 }
@@ -659,7 +660,9 @@ void SceneManager::RenderOpenBook()
           -0.50f,      1.36f,      6.00f,      // position
         //  r           g           b
            0.82f,      0.17f,      0.07f,       // color
-		  "open-book-cover"                     // texture
+		  "open-book-cover",                     // texture
+		  "",                                   // texture overlay
+		  "glass"                               // material
     );
 
     TransformAndRender(
@@ -671,7 +674,9 @@ void SceneManager::RenderOpenBook()
            0.95f,      1.36f,      5.96f,      // position
         //  r           g           b
            0.82f,      0.17f,      0.07f,       // color
-		"open-book-cover"                     // texture
+		"open-book-cover",                     // texture
+		"",                                   // texture overlay
+		"glass"                               // material
     );
 
 
@@ -703,15 +708,14 @@ void SceneManager::RenderOpenBook()
 		  "open-book-page-crinkle-effect"
     );
 
-
-
-
-
-
 }
 
 void SceneManager::RenderBackdrop()
 {
+
+	
+	const std::string material = ((int)glfwGetTime() % 2 == 0) ? "" : "wood";
+
 	/****** The Floor *******/
 	TransformAndRender(
 		"floor",
@@ -722,7 +726,9 @@ void SceneManager::RenderBackdrop()
 		0.0f,      0.0f,   0.0f,   // position
 		// R        G        B
 		0.68,      0.41,    0.17,     // color   ("wood-floor brown")
-		"wood-paneling"
+		"wood-paneling",    // texture
+		"",                 // texture overlay
+		material              // material
 	);
 }
 
