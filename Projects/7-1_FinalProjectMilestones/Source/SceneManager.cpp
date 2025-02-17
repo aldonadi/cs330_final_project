@@ -444,9 +444,9 @@ void SceneManager::DefineObjectMaterials()
 	//  http://www.it.hiof.no/~borres/j3d/explain/light/p-materials.html
 
 	OBJECT_MATERIAL defaultMaterial;
-	defaultMaterial.ambientColor = glm::vec3(0.05f, 0.05f, 0.05f);
-	defaultMaterial.ambientStrength = 1.0f;
-	defaultMaterial.diffuseColor = glm::vec3(0.5f, 0.5f, 0.5f);
+	defaultMaterial.ambientColor = glm::vec3(0.5f, 0.5f, 0.5f);
+	defaultMaterial.ambientStrength = 0.1f;
+	defaultMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	defaultMaterial.specularColor = glm::vec3(0.7f, 0.7f, 0.7f);
 	defaultMaterial.shininess = 10.0;
 	defaultMaterial.tag = "default";
@@ -551,8 +551,8 @@ void SceneManager::SetupSceneLights()
 	 **/
 
 	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 24.0f, 0.0f);
-	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 1.0f, 1.0f, 1.0f);
-	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.74f, 0.38f, 0.45f);
+	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 0.3f, 0.3f, 0.3f);
+	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.8f, 0.8f, 0.8f);
 	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 1.0f, 1.0f, 1.0f);
 	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 32.0f);
 	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.05f);
