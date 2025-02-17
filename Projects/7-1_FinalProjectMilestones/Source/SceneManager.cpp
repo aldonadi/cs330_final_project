@@ -631,7 +631,8 @@ void SceneManager::PrepareScene()
 	// loaded in memory no matter how many times it is drawn
 	// in the rendered 3D scene
 
-	m_basicMeshes->LoadPlaneMesh();    // floor, pages
+	m_basicMeshes->LoadTilingPlaneMesh(20.0, 10.0);    // floor
+	m_basicMeshes->LoadPlaneMesh();    // pages
 	m_basicMeshes->LoadBoxMesh();      // books
 }
 
@@ -714,7 +715,7 @@ void SceneManager::RenderBackdrop()
 	/****** The Floor *******/
 	TransformAndRender(
 		"floor",
-		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		std::bind(&ShapeMeshes::DrawTilingPlaneMesh, m_basicMeshes),
 		// x        y        z
 		20.0f,     1.0f,   10.0f,    // scale
 		0.0f,      0.0f,   0.0f,    // rotation
@@ -723,7 +724,6 @@ void SceneManager::RenderBackdrop()
 		0.68,      0.41,    0.17,     // color   ("wood-floor brown")
 		"wood-paneling"
 	);
-	
 }
 
 /***********************************************************

@@ -2328,9 +2328,9 @@ void ShapeMeshes::DrawPlaneMesh()
 ///////////////////////////////////////////////////
 void ShapeMeshes::DrawTilingPlaneMesh()
 {
-	glBindVertexArray(m_PlaneMesh.vao);
+	glBindVertexArray(m_TilingPlaneMesh.vao);
 
-	glDrawElements(GL_TRIANGLES, m_PlaneMesh.nIndices, GL_UNSIGNED_INT, (void*)0);
+	glDrawElements(GL_TRIANGLES, m_TilingPlaneMesh.nIndices, GL_UNSIGNED_INT, (void*)0);
 
 	glBindVertexArray(0);
 }
