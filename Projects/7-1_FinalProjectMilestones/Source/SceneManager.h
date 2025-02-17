@@ -51,6 +51,7 @@ public:
 		std::string tag;
 	};
 
+
 private:
 	// pointer to shader manager object
 	ShaderManager* m_pShaderManager;
@@ -126,6 +127,12 @@ public:
 		const std::string textureName = "", 
 		const std::string overlayTextureName = ""
 	);
+
+	// configures the different materials for 3D objects
+	void DefineObjectMaterials();
+
+	// configures light sources for the scene
+	void SetupSceneLights();
 
 	// loads textures from image files
 	void LoadSceneTextures();

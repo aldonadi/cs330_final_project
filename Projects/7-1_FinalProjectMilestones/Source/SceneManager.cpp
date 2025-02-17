@@ -259,6 +259,9 @@ bool SceneManager::FindMaterial(std::string tag, OBJECT_MATERIAL& material)
 	return(true);
 }
 
+
+
+
 /***********************************************************
  *  SetTransformations()
  *
@@ -417,6 +420,141 @@ void SceneManager::SetShaderMaterial(
 /*** for assistance.                                        ***/
 /**************************************************************/
 
+ /***********************************************************
+  *  DefineObjectMaterials()
+  *
+  *  This method is used for configuring the various material
+  *  settings for all of the objects within the 3D scene.
+  ***********************************************************/
+void SceneManager::DefineObjectMaterials()
+{
+	/**
+	 ** Material Properties
+	 **
+	 ** **ambientColor** is a vec3 color value that can be used to set the ambient emission color.
+	 ** **ambientStrength** is a float value that defines how much ambient light is emited.
+	 ** **diffuseColor** is a vec3 color value that defines the diffuse light emission color.
+	 ** **specularColor** is a vec3 color value that defines the specular light reflection color.
+	 ** **shininess** is a float value that tells how shiny the material is and how much specular light will be
+	 **   reflected off the surface.
+	 ** **tag** is a special string that is used to identify the material in the collection.
+	 **/
+
+	OBJECT_MATERIAL goldMaterial;
+	goldMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.1f);
+	goldMaterial.ambientStrength = 0.1f;
+	goldMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	goldMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	goldMaterial.shininess = 22.0;
+	goldMaterial.tag = "gold";
+
+	m_objectMaterials.push_back(goldMaterial);
+
+	OBJECT_MATERIAL cementMaterial;
+	cementMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.2f);
+	cementMaterial.ambientStrength = 0.1f;
+	cementMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	cementMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	cementMaterial.shininess = 0.5;
+	cementMaterial.tag = "cement";
+
+	m_objectMaterials.push_back(cementMaterial);
+
+	OBJECT_MATERIAL woodMaterial;
+	woodMaterial.ambientColor = glm::vec3(0.4f, 0.3f, 0.1f);
+	woodMaterial.ambientStrength = 0.1;
+	woodMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	woodMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	woodMaterial.shininess = 0.3;
+	woodMaterial.tag = "wood";
+
+	m_objectMaterials.push_back(woodMaterial);
+
+	OBJECT_MATERIAL tileMaterial;
+	tileMaterial.ambientColor = glm::vec3(0.2f, 0.3f, 0.4f);
+	tileMaterial.ambientStrength = 0.1f;
+	tileMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	tileMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	tileMaterial.shininess = 25.0;
+	tileMaterial.tag = "tile";
+
+	m_objectMaterials.push_back(tileMaterial);
+
+	OBJECT_MATERIAL glassMaterial;
+	glassMaterial.ambientColor = glm::vec3(0.4f, 0.4f, 0.4f);
+	glassMaterial.ambientStrength = 0.1f;
+	glassMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	glassMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	glassMaterial.shininess = 85.0;
+	glassMaterial.tag = "glass";
+
+	m_objectMaterials.push_back(glassMaterial);
+
+	OBJECT_MATERIAL clayMaterial;
+	clayMaterial.ambientColor = glm::vec3(0.2f, 0.2f, 0.3f);
+	clayMaterial.ambientStrength = 0.1f;
+	clayMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	clayMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
+	clayMaterial.shininess = 0.5;
+	clayMaterial.tag = "clay";
+
+	m_objectMaterials.push_back(clayMaterial);
+
+	OBJECT_MATERIAL tutorialMaterial;
+	tutorialMaterial.ambientColor = glm::vec3(0.74f, 0.38f, 0.45f);
+	tutorialMaterial.ambientStrength = 0.5f;
+	tutorialMaterial.diffuseColor = glm::vec3(0.74f, 0.38f, 0.45f);
+	tutorialMaterial.specularColor = glm::vec3(0.5f, 0.5f, 0.5f);
+	tutorialMaterial.shininess = 32.0f;
+	tutorialMaterial.tag = "light";
+
+	m_objectMaterials.push_back(tutorialMaterial);
+
+}
+
+/***********************************************************
+ *  SetupSceneLights()
+ *
+ *  This method is called to add and configure the light
+ *  sources for the 3D scene.  There are up to 4 light sources.
+ ***********************************************************/
+void SceneManager::SetupSceneLights()
+{
+	// this line of code is NEEDED for telling the shaders to render 
+	// the 3D scene with custom lighting, if no light sources have
+	// been added then the display window will be black - to use the 
+	// default OpenGL lighting then comment out the following line
+	m_pShaderManager->setBoolValue(g_UseLightingName, true);
+
+	/**
+	 ** Light Properties
+	 **
+	 ** **position** is a vec3 value that sets the position of the light source in 3D space.
+	 ** **ambientColor** is a vec3 value that defines the color of the ambient light being emited.
+	 ** **diffuseColor** is a vec3 value that defines the color of the diffuse light being emited.
+	 ** **specularColor** is a vec3 value that defines the color of the specular light being emited.
+	 ** **focalStrength** is a float value that defines the focus of the light beam being emited.
+	 ** **specularIntensity** is a float value that defines the intensity of the emited specular lighting.
+	 **/
+
+	m_pShaderManager->setVec3Value("lightSources[0].position", 3.0f, 14.0f, 0.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].ambientColor", 1.0f, 1.0f, 1.0f);
+	m_pShaderManager->setVec3Value("lightSources[0].diffuseColor", 0.74f, 0.38f, 0.45f);
+	m_pShaderManager->setVec3Value("lightSources[0].specularColor", 1.0f, 1.0f, 1.0f);
+	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 32.0f);
+	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.05f);
+
+	/*
+	m_pShaderManager->setVec3Value("lightSources[1].position", -5.0f, 3.0f, 5.0f);
+	m_pShaderManager->setVec3Value("lightSources[1].ambientColor", 0.1f, 0.1f, 0.1f);
+	m_pShaderManager->setVec3Value("lightSources[1].diffuseColor", 0.3f, 0.3f, 0.3f);
+	m_pShaderManager->setVec3Value("lightSources[1].specularColor", 1.0f, 1.0f, 1.0f);
+	m_pShaderManager->setFloatValue("lightSources[1].focalStrength", 32.0f);
+	m_pShaderManager->setFloatValue("lightSources[1].specularIntensity", 0.05f);
+	*/
+
+}
+
 void SceneManager::LoadSceneTextures()
 {
 	/*** STUDENTS - add the code BELOW for loading the textures that ***/
@@ -462,6 +600,12 @@ void SceneManager::PrepareScene()
 { 
 	// load the textures for the 3D scene
 	LoadSceneTextures();
+
+	// load the materials for scene objects
+	DefineObjectMaterials();
+
+	// load the light sources for the scene
+	SetupSceneLights();
 
 	// only one instance of a particular mesh needs to be
 	// loaded in memory no matter how many times it is drawn
