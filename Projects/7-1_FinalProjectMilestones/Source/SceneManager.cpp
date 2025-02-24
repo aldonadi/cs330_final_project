@@ -656,22 +656,20 @@ void SceneManager::RenderScene()
 }
 
 void SceneManager::RenderBackdrop()
-{
-	const std::string material = ((int)glfwGetTime() % 2 == 0) ? "" : "wood";
-
+{	
 	/****** The Floor *******/
 	TransformAndRender(
 		"floor",
 		std::bind(&ShapeMeshes::DrawTilingPlaneMesh, m_basicMeshes),
 		//  x           y           z
-		20.0f, 1.0f, 10.0f,       // scale
-		0.65f, 0.46f, 0.65f,      // rotation
-		0.0f, 0.0f, 0.0f,       // position
+		20.0f,         1.0f,      10.0f,       // scale
+		0.65f,         0.46f,      0.65f,      // rotation
+		0.0f,          0.0f,       0.0f,       // position
 		//  r           g           b
-		0.68, 0.41, 0.17,       // color   ("wood-floor brown")
+		0.68,          0.41,       0.17,       // color   ("wood-floor brown")
 		"wood-paneling",                       // texture
 		"",                                    // texture overlay
-		material                               // material
+		"wood"                                 // material
 	);
 }
 
