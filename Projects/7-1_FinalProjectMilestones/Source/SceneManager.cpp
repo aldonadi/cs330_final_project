@@ -633,8 +633,10 @@ void SceneManager::PrepareScene()
 	// in the rendered 3D scene
 
 	m_basicMeshes->LoadTilingPlaneMesh(10.0, 5.0);    // floor
-	m_basicMeshes->LoadPlaneMesh();    // pages
-	m_basicMeshes->LoadBoxMesh();      // books
+	m_basicMeshes->LoadPlaneMesh();     // pages
+	m_basicMeshes->LoadBoxMesh();       // books
+	m_basicMeshes->LoadCylinderMesh();  // tambourine and rattles
+
 }
 
 /***********************************************************
@@ -703,7 +705,7 @@ void SceneManager::RenderOpenBook()
           90.00f,      0.00f,   -141.00f,      // rotation
            0.85f,      1.36f,      6.01f,      // position
         //  r           g           b
-           1.00f,      1.00f,      1.00f,       // color
+           1.00f,      1.00f,      1.00f,      // color
 		  "open-book-right-page",
 		  "open-book-page-crinkle-effect"
     );
@@ -716,10 +718,24 @@ void SceneManager::RenderOpenBook()
            0.00f,     90.00f,      0.00f,      // rotation
            0.43f,      2.77f,      6.09f,      // position
         //  r           g           b
-           0.82f,      0.17f,      0.07f,       // color
+           0.82f,      0.17f,      0.07f,      // color
 		"open-book-cover",                     // texture   
-		"",                                   // texture overlay
-		"glass"                               // material
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
+
+    TransformAndRender(
+        "tambourine",
+        std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.65f,      0.46f,      0.65f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.03f,      2.87f,      6.42f,      // position
+        //  r           g           b
+           0.73f,      0.59f,      0.44f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"wood"                                 // material
 	);
 
 }
