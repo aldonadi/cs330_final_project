@@ -708,15 +708,15 @@ void SceneManager::RenderOpenBook()
 		  "open-book-page-crinkle-effect"
     );
 
-	TransformAndRender(   // TODO: Pick a new texture
-		"closed-book",
-		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
-		//  x           y           z
-		2.00f, 0.20f, 2.70f,      // scale
-		90.00f, 0.00f, -141.00f,      // rotation
-		1.95f, 1.36f, 1.96f,      // position
-		//  r           g           b
-		0.82f, 0.17f, 0.07f,       // color
+    TransformAndRender(
+        "closed-book",
+        std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+        //  x           y           z
+           2.00f,      0.20f,      2.60f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           0.43f,      2.77f,      6.09f,      // position
+        //  r           g           b
+           0.82f,      0.17f,      0.07f,       // color
 		"open-book-cover",                     // texture   
 		"",                                   // texture overlay
 		"glass"                               // material
