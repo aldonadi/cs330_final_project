@@ -653,6 +653,7 @@ void SceneManager::RenderScene()
 	RenderClosedBook();
 	RenderTambourine();
 	RenderUpturnedBowl();
+	RenderAquarium();
 }
 
 void SceneManager::RenderBackdrop()
@@ -866,6 +867,10 @@ void SceneManager::RenderUpturnedBowl()
 		"",                                    // texture overlay
 		"clay"                                 // material
 	);
+}
+
+void SceneManager::RenderAquarium() {
+
 }
 
 /***********************************************************
