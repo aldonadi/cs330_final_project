@@ -636,6 +636,7 @@ void SceneManager::PrepareScene()
 	m_basicMeshes->LoadPlaneMesh();     // pages
 	m_basicMeshes->LoadBoxMesh();       // books
 	m_basicMeshes->LoadCylinderMesh();  // tambourine and rattles
+	m_basicMeshes->LoadTaperedCylinderMesh(); // upturned bowl
 
 }
 
@@ -651,6 +652,7 @@ void SceneManager::RenderScene()
 	RenderOpenBook();
 	RenderClosedBook();
 	RenderTambourine();
+	RenderUpturnedBowl();
 }
 
 void SceneManager::RenderOpenBook()
@@ -848,6 +850,23 @@ void SceneManager::RenderTambourine()
 		"",                                    // texture   
 		"",                                    // texture overlay
 		"metal"                                // material
+	);
+}
+
+void SceneManager::RenderUpturnedBowl()
+{
+		TransformAndRender(
+		"bowl",
+		std::bind(&ShapeMeshes::DrawTaperedCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.50f,      0.46f,      0.50f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+          -0.22f,      2.87f,      5.66f,      // position
+        //  r           g           b
+           0.28f,      0.28f,      0.40f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"clay"                                 // material
 	);
 }
 

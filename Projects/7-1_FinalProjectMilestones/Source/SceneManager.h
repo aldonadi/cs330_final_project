@@ -117,6 +117,7 @@ public:
 	void RenderOpenBook();
 	void RenderClosedBook();
 	void RenderTambourine();
+	void RenderUpturnedBowl();
 
 
 	// draw the specified shape with given scale, rotation, position, and color or texture
