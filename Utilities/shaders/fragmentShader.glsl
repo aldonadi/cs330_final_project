@@ -19,7 +19,7 @@ struct LightSource
     float specularIntensity;
 };
 
-#define TOTAL_LIGHTS 1
+#define TOTAL_LIGHTS 2
 
 in vec3 fragmentPosition;
 in vec3 fragmentVertexNormal;

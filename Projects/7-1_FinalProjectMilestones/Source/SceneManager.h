@@ -115,8 +115,24 @@ public:
 
 	void RenderBackdrop();
 	void RenderOpenBook();
+	void RenderClosedBook();
+	void RenderTambourine();
+	void RenderUpturnedBowl();
+	void RenderAquarium();
 
 	// draw the specified shape with given scale, rotation, position, and color or texture
+	void TransformAndRender(
+		std::string objName,
+		std::function<void()> ShapeDrawFunc,
+		glm::vec3 scale,
+		glm::vec3 rot,
+		glm::vec3 pos,
+		glm::vec4 color,
+		const std::string textureName,
+		const std::string overlayTextureName,
+		const std::string materialName);
+
+	// commonly-used overload version
 	void TransformAndRender(
 		std::string objName,
 		std::function<void()> ShapeDrawFunc,

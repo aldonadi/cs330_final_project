@@ -462,7 +462,7 @@ void SceneManager::DefineObjectMaterials()
 	goldMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	goldMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	goldMaterial.shininess = 22.0;
-	goldMaterial.tag = "gold";
+	goldMaterial.tag = "metal";
 
 	m_objectMaterials.push_back(goldMaterial);
 
@@ -560,14 +560,14 @@ void SceneManager::SetupSceneLights()
 	m_pShaderManager->setFloatValue("lightSources[0].focalStrength", 32.0f);
 	m_pShaderManager->setFloatValue("lightSources[0].specularIntensity", 0.05f);
 
-	/*
-	m_pShaderManager->setVec3Value("lightSources[1].position", -5.0f, 3.0f, 5.0f);
+	
+	m_pShaderManager->setVec3Value("lightSources[1].position", -5.0f, 3.0f, 8.0f);
 	m_pShaderManager->setVec3Value("lightSources[1].ambientColor", 0.1f, 0.1f, 0.1f);
-	m_pShaderManager->setVec3Value("lightSources[1].diffuseColor", 0.3f, 0.3f, 0.3f);
+	m_pShaderManager->setVec3Value("lightSources[1].diffuseColor", 0.68f, 0.23f, 0.0f);
 	m_pShaderManager->setVec3Value("lightSources[1].specularColor", 1.0f, 1.0f, 1.0f);
 	m_pShaderManager->setFloatValue("lightSources[1].focalStrength", 32.0f);
 	m_pShaderManager->setFloatValue("lightSources[1].specularIntensity", 0.05f);
-	*/
+	
 
 }
 
@@ -604,6 +604,21 @@ void SceneManager::LoadSceneTextures()
 		"wood-paneling");
 	assert(bReturn);
 
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-camera/hay-bales.png",
+		"hay-bales");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-ai/book-cover-image-1.png",
+		"book-cover-image-1");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-ai/book-cover-image-2.png",
+		"book-cover-image-2");
+	assert(bReturn);
+
 	// after the texture image data is loaded into memory, the
 	// loaded textures need to be bound to texture slots - there
 	// are a total of 16 available slots for scene textures
@@ -633,8 +648,11 @@ void SceneManager::PrepareScene()
 	// in the rendered 3D scene
 
 	m_basicMeshes->LoadTilingPlaneMesh(10.0, 5.0);    // floor
-	m_basicMeshes->LoadPlaneMesh();    // pages
-	m_basicMeshes->LoadBoxMesh();      // books
+	m_basicMeshes->LoadPlaneMesh();     // pages
+	m_basicMeshes->LoadBoxMesh();       // books
+	m_basicMeshes->LoadCylinderMesh();  // tambourine and rattles
+	m_basicMeshes->LoadTaperedCylinderMesh(); // upturned bowl
+
 }
 
 /***********************************************************
@@ -647,6 +665,28 @@ void SceneManager::RenderScene()
 {
 	RenderBackdrop();
 	RenderOpenBook();
+	RenderClosedBook();
+	RenderTambourine();
+	RenderUpturnedBowl();
+	RenderAquarium();
+}
+
+void SceneManager::RenderBackdrop()
+{	
+	/****** The Floor *******/
+	TransformAndRender(
+		"floor",
+		std::bind(&ShapeMeshes::DrawTilingPlaneMesh, m_basicMeshes),
+		//  x           y           z
+		20.0f,         1.0f,      10.0f,       // scale
+		0.65f,         0.46f,      0.65f,      // rotation
+		0.0f,          0.0f,       0.0f,       // position
+		//  r           g           b
+		0.68,          0.41,       0.17,       // color   ("wood-floor brown")
+		"wood-paneling",                       // texture
+		"",                                    // texture overlay
+		"wood"                                 // material
+	);
 }
 
 void SceneManager::RenderOpenBook()
@@ -703,32 +743,233 @@ void SceneManager::RenderOpenBook()
           90.00f,      0.00f,   -141.00f,      // rotation
            0.85f,      1.36f,      6.01f,      // position
         //  r           g           b
-           1.00f,      1.00f,      1.00f,       // color
+           1.00f,      1.00f,      1.00f,      // color
 		  "open-book-right-page",
 		  "open-book-page-crinkle-effect"
     );
 
+
+	TransformAndRender(
+		"open-book-front-cover",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		//  x           y           z
+           0.91f,      1.34f,      1.22f,      // scale
+          89.80f,      0.00f,    137.00f,      // rotation
+          -0.543f,     1.36f,      5.901f,     // position
+        //  r           g           b
+           1.00f,      1.00f,      1.00f,      // color
+		"book-cover-image-2",                  // texture
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
 }
 
-void SceneManager::RenderBackdrop()
+void SceneManager::RenderClosedBook()
 {
-
-	
-	const std::string material = ((int)glfwGetTime() % 2 == 0) ? "" : "wood";
-
-	/****** The Floor *******/
 	TransformAndRender(
-		"floor",
-		std::bind(&ShapeMeshes::DrawTilingPlaneMesh, m_basicMeshes),
-		// x        y        z
-		20.0f,     1.0f,   10.0f,    // scale
-		0.0f,      0.0f,   0.0f,    // rotation
-		0.0f,      0.0f,   0.0f,   // position
-		// R        G        B
-		0.68,      0.41,    0.17,     // color   ("wood-floor brown")
-		"wood-paneling",    // texture
-		"",                 // texture overlay
-		material              // material
+		"closed-book",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+		//  x           y           z
+		   2.00f,      0.20f,      2.60f,      // scale
+		   0.00f,     90.00f,      0.00f,      // rotation
+		   0.43f,      2.77f,      6.09f,      // position
+		//  r           g           b
+		0.82f,         0.17f,      0.07f,      // color
+		"open-book-cover",                     // texture   
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
+
+		TransformAndRender(
+		"closed-book-illustration",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+        //  x           y           z
+           0.97f,      0.00f,      1.26f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           0.43f,      2.875f,     6.09f,      // position
+		//  r           g           b
+		0.82f,         0.17f,      0.07f,      // color
+		"book-cover-image-1",                  // texture   
+		"",                                    // texture overlay
+		"cement"                                // material
+	);
+}
+
+void SceneManager::RenderTambourine()
+{
+	TransformAndRender(
+		"tambourine",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.65f,         0.46f,      0.65f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		1.03f,         2.87f,      6.42f,      // position
+		//  r           g           b
+		0.73f,         0.59f,      0.44f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"wood"                                 // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-1",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.17f,         0.04f,      0.17f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		0.60f,         3.05f,      6.91f,      // position
+		//  r           g           b
+		0.38f,         0.38f,      0.38f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"metal"                                // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-2",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+//  x           y           z
+           0.17f,      0.04f,      0.17f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.31f,      3.05f,      7.00f,      // position
+        //  r           g           b
+           0.38f,      0.38f,      0.38f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"metal"                                // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-3",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.17f,      0.04f,      0.17f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.69f,      3.05f,      6.42f,      // position
+        //  r           g           b
+           0.38f,      0.38f,      0.38f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"metal"                                // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-4",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.17f,      0.04f,      0.17f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.36f,      3.05f,      5.82f,      // position
+        //  r           g           b
+           0.38f,      0.38f,      0.38f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"metal"                                // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-5",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.17f,      0.04f,      0.17f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           0.71f,      3.05f,      5.82f,      // position
+        //  r           g           b
+           0.38f,      0.38f,      0.38f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"metal"                                // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-6",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.17f,      0.04f,      0.17f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           0.38f,      3.05f,      6.37f,      // position
+        //  r           g           b
+           0.38f,      0.38f,      0.38f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"metal"                                // material
+	);
+}
+
+void SceneManager::RenderUpturnedBowl()
+{
+		TransformAndRender(
+		"bowl",
+		std::bind(&ShapeMeshes::DrawTaperedCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.50f,      0.46f,      0.50f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+          -0.22f,      2.87f,      5.66f,      // position
+        //  r           g           b
+           0.28f,      0.28f,      0.40f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"clay"                                 // material
+	);
+
+		
+	TransformAndRender(
+		"hay",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.25f,      0.03f,      0.25f,      // scale
+           0.00f,     78.261f,     0.00f,      // rotation
+          -0.111f,     3.342f,     5.606f,     // position
+        //  r           g           b
+           0.28f,      0.28f,      0.40f,      // color
+		"hay-bales",                           // texture   
+		"",                                    // texture overlay
+		"clay"                                 // material
+	);
+}
+
+void SceneManager::RenderAquarium() {
+	TransformAndRender(
+		"aquarium-bottom",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+        //  x           y           z
+           0.40f,      0.29f,      0.40f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.03f,      3.01f,      5.28f,      // position
+        //  r           g           b
+           0.24f,      0.56f,      0.71f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
+	
+	// uses the new overload of TransformAndRender that allows color alpha
+	TransformAndRender(
+		"aquarium-middle",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+               //  x           y           z
+        glm::vec3(0.40f,      0.90f,      0.40f),      // scale
+        glm::vec3(0.00f,     90.00f,      0.00f),      // rotation
+        glm::vec3(1.03f,      3.58f,      5.28f),      // position
+               //  r           g            b            a
+        glm::vec4(0.24f,      0.56f,      0.71f,        0.5f),    // color with alpha
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
+	
+	TransformAndRender(
+		"aquarium-top",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+        //  x           y           z
+           0.40f,      0.29f,      0.40f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.03f,      4.175f,     5.28f,      // position
+        //  r           g           b
+           0.24f,      0.56f,      0.71f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"glass"                                // material
 	);
 }
 
@@ -746,10 +987,10 @@ void SceneManager::RenderBackdrop()
 void SceneManager::TransformAndRender(
 	std::string objName,
 	std::function<void()> ShapeDrawFunc,
-	float scaleX, float scaleY, float scaleZ,
-	float rotX,   float rotY,   float rotZ,
-	float posX,   float posY,   float posZ,
-	float colorR, float colorG, float colorB,
+	glm::vec3 scale,
+	glm::vec3 rot,
+	glm::vec3 pos,
+	glm::vec4 color,
 	const std::string textureName,
 	const std::string overlayTextureName,
 	const std::string materialName)
@@ -760,10 +1001,10 @@ void SceneManager::TransformAndRender(
 	// if object has already been registered, this does nothing
 	this->xfmrs->RegisterNewObject(
 		 objName,
-		 scaleX,  scaleY,  scaleZ,
-		 rotX,    rotY,    rotZ,
-		 posX,    posY,    posZ,
-		 colorR,  colorG,  colorB);
+		 scale.x,  scale.y,  scale.z,
+		 rot.x,    rot.y,    rot.z,
+		 pos.x,    pos.y,    pos.z,
+		 color.x,  color.y,  color.z);
 
 	LiveTransformer* objXfmr = this->xfmrs->getObjectTransformer(objName);
 
@@ -773,21 +1014,21 @@ void SceneManager::TransformAndRender(
 		assert(false);
 	}
 
-	scaleX = objXfmr->XscaleAdjusted;
-	scaleY = objXfmr->YscaleAdjusted;
-	scaleZ = objXfmr->ZscaleAdjusted;
+	scale.x = objXfmr->XscaleAdjusted;
+	scale.y = objXfmr->YscaleAdjusted;
+	scale.z = objXfmr->ZscaleAdjusted;
 
-	rotX = objXfmr->XrotationAdjusted;
-	rotY = objXfmr->YrotationAdjusted;
-	rotZ = objXfmr->ZrotationAdjusted;
+	rot.x = objXfmr->XrotationAdjusted;
+	rot.y = objXfmr->YrotationAdjusted;
+	rot.z = objXfmr->ZrotationAdjusted;
 
-	posX = objXfmr->XpositionAdjusted;
-	posY = objXfmr->YpositionAdjusted;
-	posZ = objXfmr->ZpositionAdjusted;
+	pos.x = objXfmr->XpositionAdjusted;
+	pos.y = objXfmr->YpositionAdjusted;
+	pos.z = objXfmr->ZpositionAdjusted;
 
-	colorR = objXfmr->RcolorAdjusted;
-	colorG = objXfmr->GcolorAdjusted;
-	colorB = objXfmr->BcolorAdjusted;
+	color.x = objXfmr->RcolorAdjusted;
+	color.y = objXfmr->GcolorAdjusted;
+	color.z = objXfmr->BcolorAdjusted;
 
 #endif
 
@@ -805,15 +1046,15 @@ void SceneManager::TransformAndRender(
 	glm::vec3 positionXYZ;
 
 	// set the XYZ scale for the mesh
-	scaleXYZ = glm::vec3(scaleX, scaleY, scaleZ);
+	scaleXYZ = glm::vec3(scale.x, scale.y, scale.z);
 
 	// set the XYZ rotation for the mesh
-	XrotationDegrees = rotX;
-	YrotationDegrees = rotY;
-	ZrotationDegrees = rotZ;
+	XrotationDegrees = rot.x;
+	YrotationDegrees = rot.y;
+	ZrotationDegrees = rot.z;
 
 	// set the XYZ position for the mesh
-	positionXYZ = glm::vec3(posX, posY, posZ);
+	positionXYZ = glm::vec3(pos.x, pos.y, pos.z);
 
 	// set the transformations into memory to be used on the drawn meshes
 	SetTransformations(
@@ -833,7 +1074,7 @@ void SceneManager::TransformAndRender(
 	else
 	{
 		// set the color values into the shader
-		SetShaderColor(colorR, colorG, colorB, 1);
+		SetShaderColor(color.x, color.y, color.z, color.w);
 	}
 
 	// set the overlay texture, if specified
@@ -855,4 +1096,29 @@ void SceneManager::TransformAndRender(
 
 	// draw the mesh with transformation values
 	ShapeDrawFunc();
+}
+
+// Overload that is commonly used for non-alpha colored objects
+void SceneManager::TransformAndRender(
+	std::string objName,
+	std::function<void()> ShapeDrawFunc,
+	float scaleX, float scaleY, float scaleZ,
+	float rotX,   float rotY,   float rotZ,
+	float posX,   float posY,   float posZ,
+	float colorR, float colorG, float colorB,
+	const std::string textureName,
+	const std::string overlayTextureName,
+	const std::string materialName)
+{
+	TransformAndRender(
+		objName,
+		ShapeDrawFunc,
+		glm::vec3(scaleX,  scaleY,  scaleZ),
+		glm::vec3(rotX,    rotY,    rotZ),
+		glm::vec3(posX,    posY,    posZ),
+		glm::vec4(colorR,  colorG,  colorB,  1.0f),      // this overload assumes no transparency
+		textureName,
+		overlayTextureName,
+		materialName
+	);
 }
