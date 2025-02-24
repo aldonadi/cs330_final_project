@@ -905,7 +905,7 @@ void SceneManager::RenderAquarium() {
         //  x           y           z
            0.40f,      0.29f,      0.40f,      // scale
            0.00f,     90.00f,      0.00f,      // rotation
-           1.03f,      4.15f,      5.28f,      // position
+           1.03f,      4.175f,     5.28f,      // position
         //  r           g           b
            0.24f,      0.56f,      0.71f,      // color
 		"",                                    // texture   
@@ -1015,7 +1015,7 @@ void SceneManager::TransformAndRender(
 	else
 	{
 		// set the color values into the shader
-		SetShaderColor(color.x, color.y, color.z, 0.5f);
+		SetShaderColor(color.x, color.y, color.z, color.w);
 	}
 
 	// set the overlay texture, if specified
