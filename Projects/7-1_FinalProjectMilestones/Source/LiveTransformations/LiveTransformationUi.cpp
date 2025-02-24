@@ -188,7 +188,7 @@ void LiveTransformationUi::ShowTransformationUiControls() {
     // Labels and sliders for position adjustments
     ImGui::PushID("positionX"); ImGui::SliderFloat("X", &selectedXfmr->XpositionAdjusted, -5.0f, 5.0f); ImGui::PopID();
     ImGui::PushID("positionY"); ImGui::SliderFloat("Y", &selectedXfmr->YpositionAdjusted, -5.0f, 5.0f); ImGui::PopID();
-    ImGui::PushID("positionZ"); ImGui::SliderFloat("Z", &selectedXfmr->ZpositionAdjusted, -5.0f, 5.0f); ImGui::PopID();
+    ImGui::PushID("positionZ"); ImGui::SliderFloat("Z", &selectedXfmr->ZpositionAdjusted, -1.0f, 9.0f); ImGui::PopID();
 
     // done with setting slider width
     ImGui::PopItemWidth();
