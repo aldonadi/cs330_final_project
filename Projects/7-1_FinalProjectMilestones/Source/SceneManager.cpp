@@ -870,13 +870,41 @@ void SceneManager::RenderUpturnedBowl()
 }
 
 void SceneManager::RenderAquarium() {
-		TransformAndRender(
+	TransformAndRender(
 		"aquarium-bottom",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
         //  x           y           z
            0.40f,      0.29f,      0.40f,      // scale
            0.00f,     90.00f,      0.00f,      // rotation
            1.03f,      3.01f,      5.28f,      // position
+        //  r           g           b
+           0.24f,      0.56f,      0.71f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
+
+	TransformAndRender(
+		"aquarium-middle",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+        //  x           y           z
+           0.40f,      0.90f,      0.40f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.03f,      3.58f,      5.28f,      // position
+                    //  r           g           b           a
+           glm::vec4(0.24f,      0.56f,      0.71f,        0.5f)    // color with alpha
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
+
+	TransformAndRender(
+		"aquarium-top",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+        //  x           y           z
+           0.40f,      0.29f,      0.40f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           1.03f,      4.15f,      5.28f,      // position
         //  r           g           b
            0.24f,      0.56f,      0.71f,      // color
 		"",                                    // texture   
