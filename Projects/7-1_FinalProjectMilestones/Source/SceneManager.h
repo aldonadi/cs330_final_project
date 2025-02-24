@@ -115,6 +115,9 @@ public:
 
 	void RenderBackdrop();
 	void RenderOpenBook();
+	void RenderClosedBook();
+	void RenderTambourine();
+
 
 	// draw the specified shape with given scale, rotation, position, and color or texture
 	void TransformAndRender(

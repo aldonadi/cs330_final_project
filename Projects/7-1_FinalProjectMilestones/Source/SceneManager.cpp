@@ -462,7 +462,7 @@ void SceneManager::DefineObjectMaterials()
 	goldMaterial.diffuseColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	goldMaterial.specularColor = glm::vec3(1.0f, 1.0f, 1.0f);
 	goldMaterial.shininess = 22.0;
-	goldMaterial.tag = "gold";
+	goldMaterial.tag = "metal";
 
 	m_objectMaterials.push_back(goldMaterial);
 
@@ -649,6 +649,8 @@ void SceneManager::RenderScene()
 {
 	RenderBackdrop();
 	RenderOpenBook();
+	RenderClosedBook();
+	RenderTambourine();
 }
 
 void SceneManager::RenderOpenBook()
@@ -709,41 +711,27 @@ void SceneManager::RenderOpenBook()
 		  "open-book-right-page",
 		  "open-book-page-crinkle-effect"
     );
+}
 
-    TransformAndRender(
-        "closed-book",
-        std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
-        //  x           y           z
-           2.00f,      0.20f,      2.60f,      // scale
-           0.00f,     90.00f,      0.00f,      // rotation
-           0.43f,      2.77f,      6.09f,      // position
-        //  r           g           b
-           0.82f,      0.17f,      0.07f,      // color
+void SceneManager::RenderClosedBook()
+{
+	TransformAndRender(
+		"closed-book",
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
+		//  x           y           z
+		   2.00f,      0.20f,      2.60f,      // scale
+		   0.00f,     90.00f,      0.00f,      // rotation
+		   0.43f,      2.77f,      6.09f,      // position
+		//  r           g           b
+		0.82f,         0.17f,      0.07f,      // color
 		"open-book-cover",                     // texture   
 		"",                                    // texture overlay
 		"glass"                                // material
 	);
-
-    TransformAndRender(
-        "tambourine",
-        std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
-        //  x           y           z
-           0.65f,      0.46f,      0.65f,      // scale
-           0.00f,     90.00f,      0.00f,      // rotation
-           1.03f,      2.87f,      6.42f,      // position
-        //  r           g           b
-           0.73f,      0.59f,      0.44f,      // color
-		"",                     // texture   
-		"",                                    // texture overlay
-		"wood"                                 // material
-	);
-
 }
 
 void SceneManager::RenderBackdrop()
-{
-
-	
+{	
 	const std::string material = ((int)glfwGetTime() % 2 == 0) ? "" : "wood";
 
 	/****** The Floor *******/
@@ -759,6 +747,107 @@ void SceneManager::RenderBackdrop()
 		"wood-paneling",    // texture
 		"",                 // texture overlay
 		material              // material
+	);
+}
+
+void SceneManager::RenderTambourine()
+{
+	TransformAndRender(
+		"tambourine",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.65f,         0.46f,      0.65f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		1.03f,         2.87f,      6.42f,      // position
+		//  r           g           b
+		0.73f,         0.59f,      0.44f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"wood"                                 // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-1",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.17f,         0.04f,      0.17f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		0.60f,         3.05f,      6.91f,      // position
+		//  r           g           b
+		0.38f,         0.38f,      0.38f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"metal"                                 // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-2",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.17f,         0.04f,      0.17f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		0.60f,         3.05f,      6.91f,      // position
+		//  r           g           b
+		0.38f,         0.38f,      0.38f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"metal"                                 // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-3",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.17f,         0.04f,      0.17f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		0.60f,         3.05f,      6.91f,      // position
+		//  r           g           b
+		0.38f,         0.38f,      0.38f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"metal"                                 // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-4",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.17f,         0.04f,      0.17f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		0.60f,         3.05f,      6.91f,      // position
+		//  r           g           b
+		0.38f,         0.38f,      0.38f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"metal"                                 // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-5",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.17f,         0.04f,      0.17f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		0.60f,         3.05f,      6.91f,      // position
+		//  r           g           b
+		0.38f,         0.38f,      0.38f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"metal"                                 // material
+	);
+
+	TransformAndRender(
+		"tambourine-rattle-6",
+		std::bind(&ShapeMeshes::DrawCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		//  x           y           z
+		0.17f,         0.04f,      0.17f,      // scale
+		0.00f,        90.00f,      0.00f,      // rotation
+		0.60f,         3.05f,      6.91f,      // position
+		//  r           g           b
+		0.38f,         0.38f,      0.38f,      // color
+		"",                     // texture   
+		"",                                    // texture overlay
+		"metal"                                 // material
 	);
 }
 
