@@ -915,14 +915,14 @@ void SceneManager::RenderUpturnedBowl()
 		
 	TransformAndRender(
 		"hay",
-		std::bind(&ShapeMeshes::DrawTaperedCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),  // drawTop, drawBottom, drawSides
         //  x           y           z
-           0.50f,      0.46f,      0.50f,      // scale
-           0.00f,     90.00f,      0.00f,      // rotation
-          -0.22f,      2.87f,      5.66f,      // position
+           0.25f,      0.03f,      0.25f,      // scale
+           0.00f,     78.261f,     0.00f,      // rotation
+          -0.111f,     3.342f,     5.606f,     // position
         //  r           g           b
            0.28f,      0.28f,      0.40f,      // color
-		"",                                    // texture   
+		"hay-bales",                           // texture   
 		"",                                    // texture overlay
 		"clay"                                 // material
 	);
