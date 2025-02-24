@@ -605,6 +605,11 @@ void SceneManager::LoadSceneTextures()
 	assert(bReturn);
 
 	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-camera/hay-bales.png",
+		"hay-bales");
+	assert(bReturn);
+
+	bReturn = CreateGLTexture(
 		"../../Utilities/textures/from-my-ai/book-cover-image-1.png",
 		"book-cover-image-1");
 	assert(bReturn);
@@ -895,6 +900,21 @@ void SceneManager::RenderUpturnedBowl()
 {
 		TransformAndRender(
 		"bowl",
+		std::bind(&ShapeMeshes::DrawTaperedCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
+        //  x           y           z
+           0.50f,      0.46f,      0.50f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+          -0.22f,      2.87f,      5.66f,      // position
+        //  r           g           b
+           0.28f,      0.28f,      0.40f,      // color
+		"",                                    // texture   
+		"",                                    // texture overlay
+		"clay"                                 // material
+	);
+
+		
+	TransformAndRender(
+		"hay",
 		std::bind(&ShapeMeshes::DrawTaperedCylinderMesh, m_basicMeshes, true, true, true),  // drawTop, drawBottom, drawSides
         //  x           y           z
            0.50f,      0.46f,      0.50f,      // scale
