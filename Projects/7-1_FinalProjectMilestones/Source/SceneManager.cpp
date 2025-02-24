@@ -609,6 +609,11 @@ void SceneManager::LoadSceneTextures()
 		"book-cover-image-1");
 	assert(bReturn);
 
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-ai/book-cover-image-2.png",
+		"book-cover-image-2");
+	assert(bReturn);
+
 	// after the texture image data is loaded into memory, the
 	// loaded textures need to be bound to texture slots - there
 	// are a total of 16 available slots for scene textures
@@ -737,6 +742,21 @@ void SceneManager::RenderOpenBook()
 		  "open-book-right-page",
 		  "open-book-page-crinkle-effect"
     );
+
+
+	TransformAndRender(
+		"open-book-front-cover",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+		//  x           y           z
+           0.91f,      1.34f,      1.22f,      // scale
+          89.80f,      0.00f,    137.00f,      // rotation
+          -0.543f,     1.36f,      5.901f,     // position
+        //  r           g           b
+           1.00f,      1.00f,      1.00f,      // color
+		"book-cover-image-2",                  // texture
+		"",                                    // texture overlay
+		"glass"                                // material
+	);
 }
 
 void SceneManager::RenderClosedBook()
@@ -753,6 +773,20 @@ void SceneManager::RenderClosedBook()
 		"open-book-cover",                     // texture   
 		"",                                    // texture overlay
 		"glass"                                // material
+	);
+
+		TransformAndRender(
+		"closed-book-illustration",
+		std::bind(&ShapeMeshes::DrawPlaneMesh, m_basicMeshes),
+        //  x           y           z
+           0.97f,      0.00f,      1.26f,      // scale
+           0.00f,     90.00f,      0.00f,      // rotation
+           0.43f,      2.875f,     6.09f,      // position
+		//  r           g           b
+		0.82f,         0.17f,      0.07f,      // color
+		"book-cover-image-1",                  // texture   
+		"",                                    // texture overlay
+		"cement"                                // material
 	);
 }
 
