@@ -604,6 +604,11 @@ void SceneManager::LoadSceneTextures()
 		"wood-paneling");
 	assert(bReturn);
 
+	bReturn = CreateGLTexture(
+		"../../Utilities/textures/from-my-ai/book-cover-image-1.png",
+		"book-cover-image-1");
+	assert(bReturn);
+
 	// after the texture image data is loaded into memory, the
 	// loaded textures need to be bound to texture slots - there
 	// are a total of 16 available slots for scene textures
