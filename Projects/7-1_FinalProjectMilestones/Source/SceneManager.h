@@ -124,6 +124,18 @@ public:
 	void TransformAndRender(
 		std::string objName,
 		std::function<void()> ShapeDrawFunc,
+		glm::vec3 scale,
+		glm::vec3 rot,
+		glm::vec3 pos,
+		glm::vec4 color,
+		const std::string textureName,
+		const std::string overlayTextureName,
+		const std::string materialName);
+
+	// commonly-used overload version
+	void TransformAndRender(
+		std::string objName,
+		std::function<void()> ShapeDrawFunc,
 		float scaleX, float scaleY, float scaleZ,
 		float rotX,   float rotY,   float rotZ,
 		float posX,   float posY,   float posZ,

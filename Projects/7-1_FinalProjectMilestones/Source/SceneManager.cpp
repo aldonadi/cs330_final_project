@@ -883,7 +883,7 @@ void SceneManager::RenderAquarium() {
 		"",                                    // texture overlay
 		"glass"                                // material
 	);
-
+	/*
 	TransformAndRender(
 		"aquarium-middle",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
@@ -897,7 +897,7 @@ void SceneManager::RenderAquarium() {
 		"",                                    // texture overlay
 		"glass"                                // material
 	);
-
+	*/
 	TransformAndRender(
 		"aquarium-top",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
@@ -927,10 +927,10 @@ void SceneManager::RenderAquarium() {
 void SceneManager::TransformAndRender(
 	std::string objName,
 	std::function<void()> ShapeDrawFunc,
-	float scaleX, float scaleY, float scaleZ,
-	float rotX,   float rotY,   float rotZ,
-	float posX,   float posY,   float posZ,
-	float colorR, float colorG, float colorB,
+	glm::vec3 scale,
+	glm::vec3 rot,
+	glm::vec3 pos,
+	glm::vec4 color,
 	const std::string textureName,
 	const std::string overlayTextureName,
 	const std::string materialName)
@@ -941,10 +941,10 @@ void SceneManager::TransformAndRender(
 	// if object has already been registered, this does nothing
 	this->xfmrs->RegisterNewObject(
 		 objName,
-		 scaleX,  scaleY,  scaleZ,
-		 rotX,    rotY,    rotZ,
-		 posX,    posY,    posZ,
-		 colorR,  colorG,  colorB);
+		 scale.x,  scale.y,  scale.z,
+		 rot.x,    rot.y,    rot.z,
+		 pos.x,    pos.y,    pos.z,
+		 color.x,  color.y,  color.z);
 
 	LiveTransformer* objXfmr = this->xfmrs->getObjectTransformer(objName);
 
@@ -954,21 +954,21 @@ void SceneManager::TransformAndRender(
 		assert(false);
 	}
 
-	scaleX = objXfmr->XscaleAdjusted;
-	scaleY = objXfmr->YscaleAdjusted;
-	scaleZ = objXfmr->ZscaleAdjusted;
+	scale.x = objXfmr->XscaleAdjusted;
+	scale.y = objXfmr->YscaleAdjusted;
+	scale.z = objXfmr->ZscaleAdjusted;
 
-	rotX = objXfmr->XrotationAdjusted;
-	rotY = objXfmr->YrotationAdjusted;
-	rotZ = objXfmr->ZrotationAdjusted;
+	rot.x = objXfmr->XrotationAdjusted;
+	rot.y = objXfmr->YrotationAdjusted;
+	rot.z = objXfmr->ZrotationAdjusted;
 
-	posX = objXfmr->XpositionAdjusted;
-	posY = objXfmr->YpositionAdjusted;
-	posZ = objXfmr->ZpositionAdjusted;
+	pos.x = objXfmr->XpositionAdjusted;
+	pos.y = objXfmr->YpositionAdjusted;
+	pos.z = objXfmr->ZpositionAdjusted;
 
-	colorR = objXfmr->RcolorAdjusted;
-	colorG = objXfmr->GcolorAdjusted;
-	colorB = objXfmr->BcolorAdjusted;
+	color.x = objXfmr->RcolorAdjusted;
+	color.y = objXfmr->GcolorAdjusted;
+	color.z = objXfmr->BcolorAdjusted;
 
 #endif
 
@@ -986,15 +986,15 @@ void SceneManager::TransformAndRender(
 	glm::vec3 positionXYZ;
 
 	// set the XYZ scale for the mesh
-	scaleXYZ = glm::vec3(scaleX, scaleY, scaleZ);
+	scaleXYZ = glm::vec3(scale.x, scale.y, scale.z);
 
 	// set the XYZ rotation for the mesh
-	XrotationDegrees = rotX;
-	YrotationDegrees = rotY;
-	ZrotationDegrees = rotZ;
+	XrotationDegrees = rot.x;
+	YrotationDegrees = rot.y;
+	ZrotationDegrees = rot.z;
 
 	// set the XYZ position for the mesh
-	positionXYZ = glm::vec3(posX, posY, posZ);
+	positionXYZ = glm::vec3(pos.x, pos.y, pos.z);
 
 	// set the transformations into memory to be used on the drawn meshes
 	SetTransformations(
@@ -1014,7 +1014,7 @@ void SceneManager::TransformAndRender(
 	else
 	{
 		// set the color values into the shader
-		SetShaderColor(colorR, colorG, colorB, 1);
+		SetShaderColor(color.x, color.y, color.z, 0.5f);
 	}
 
 	// set the overlay texture, if specified
@@ -1036,4 +1036,29 @@ void SceneManager::TransformAndRender(
 
 	// draw the mesh with transformation values
 	ShapeDrawFunc();
+}
+
+// Overload that is commonly used for non-alpha colored objects
+void SceneManager::TransformAndRender(
+	std::string objName,
+	std::function<void()> ShapeDrawFunc,
+	float scaleX, float scaleY, float scaleZ,
+	float rotX,   float rotY,   float rotZ,
+	float posX,   float posY,   float posZ,
+	float colorR, float colorG, float colorB,
+	const std::string textureName,
+	const std::string overlayTextureName,
+	const std::string materialName)
+{
+	TransformAndRender(
+		objName,
+		ShapeDrawFunc,
+		glm::vec3(scaleX,  scaleY,  scaleZ),
+		glm::vec3(rotX,    rotY,    rotZ),
+		glm::vec3(posX,    posY,    posZ),
+		glm::vec4(colorR,  colorG,  colorB,  1.0f),      // this overload assumes no transparency
+		textureName,
+		overlayTextureName,
+		materialName
+	);
 }
