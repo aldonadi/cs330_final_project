@@ -883,21 +883,22 @@ void SceneManager::RenderAquarium() {
 		"",                                    // texture overlay
 		"glass"                                // material
 	);
-	/*
+	
+	// uses the new overload of TransformAndRender that allows color alpha
 	TransformAndRender(
 		"aquarium-middle",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
-        //  x           y           z
-           0.40f,      0.90f,      0.40f,      // scale
-           0.00f,     90.00f,      0.00f,      // rotation
-           1.03f,      3.58f,      5.28f,      // position
-                    //  r           g           b           a
-           glm::vec4(0.24f,      0.56f,      0.71f,        0.5f)    // color with alpha
+               //  x           y           z
+        glm::vec3(0.40f,      0.90f,      0.40f),      // scale
+        glm::vec3(0.00f,     90.00f,      0.00f),      // rotation
+        glm::vec3(1.03f,      3.58f,      5.28f),      // position
+               //  r           g            b            a
+        glm::vec4(0.24f,      0.56f,      0.71f,        0.5f),    // color with alpha
 		"",                                    // texture   
 		"",                                    // texture overlay
 		"glass"                                // material
 	);
-	*/
+	
 	TransformAndRender(
 		"aquarium-top",
 		std::bind(&ShapeMeshes::DrawBoxMesh, m_basicMeshes),
