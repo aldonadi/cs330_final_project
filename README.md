@@ -1,7 +1,6 @@
 # CS330 - Computational Graphics and Visualization
-SNHU CS330 Module 8 Journal
+## SNHU CS330 Module 8 Journal
 
-## Design approach
 I came to this class with almost no computer graphics programming experience.
 I spent a lot of time reading OpenGL docs and referring to other OpenGL
 projects and YouTube videos. I took a very iterative approach, using a git
